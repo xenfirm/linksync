@@ -148,7 +148,7 @@ export default function AuthPage() {
                 <input
                   id="auth-password" type={showPassword ? 'text' : 'password'} className="input-dark"
                   placeholder="Minimum 6 characters" value={password}
-                  onChange={e => setPassword(e.target.value)} required={mode !== 'reset'} minLength={6}
+                  onChange={e => setPassword(e.target.value)} required minLength={6}
                   style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
