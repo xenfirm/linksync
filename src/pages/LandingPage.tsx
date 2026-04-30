@@ -82,7 +82,7 @@ export default function LandingPage() {
       <section
         style={{
           background: 'linear-gradient(135deg, #faf5ff 0%, #f0f9ff 50%, #faf5ff 100%)',
-          padding: 'clamp(3rem, 8vw, 6rem) 1.25rem',
+          padding: 'calc(64px + clamp(2rem, 5vw, 4rem)) 1.25rem clamp(3rem, 8vw, 6rem)',
           overflow: 'hidden',
         }}
       >

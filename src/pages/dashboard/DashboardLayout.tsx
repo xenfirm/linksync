@@ -61,7 +61,7 @@ export default function DashboardLayout() {
   )
 
   return (
-    <div style={{ background: '#f8fafc', minHeight: '100vh' }}>
+    <div style={{ background: '#f8fafc', minHeight: '100vh', paddingTop: '64px' }}>
       <Navbar variant="dashboard" />
 
       {/* Mobile sidebar toggle */}

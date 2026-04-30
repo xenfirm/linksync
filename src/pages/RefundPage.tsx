@@ -5,7 +5,7 @@ export default function RefundPage() {
   const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 
   return (
-    <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+    <div style={{ background: '#ffffff', minHeight: '100vh', paddingTop: '64px' }}>
       <Navbar variant="landing" />
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 1.25rem' }}>
         <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2.5rem', marginBottom: '1rem', color: '#0f172a' }}>

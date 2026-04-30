@@ -23,10 +23,15 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
     <>
       <nav
         style={{
-          background: '#ffffff',
+          background: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
           borderBottom: '1px solid #f1f5f9',
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
           zIndex: 100,
           boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
         }}

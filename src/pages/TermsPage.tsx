@@ -4,7 +4,7 @@ import Logo from '../components/Logo'
 
 export default function TermsPage() {
   return (
-    <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+    <div style={{ background: '#ffffff', minHeight: '100vh', paddingTop: '64px' }}>
       <Navbar variant="landing" />
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 1.25rem' }}>
         <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2.5rem', marginBottom: '2rem', color: '#0f172a' }}>
