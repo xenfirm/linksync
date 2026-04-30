@@ -1,25 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="LinkSync — Turn your bio link into a lead machine. Capture leads and convert via WhatsApp with your personalized bio link page." />
-    <meta name="keywords" content="bio link, lead capture, WhatsApp, linktree alternative, SaaS" />
-    <meta property="og:title" content="LinkSync — Bio Link Lead Machine" />
-    <meta property="og:description" content="Turn your bio link into a lead capture + WhatsApp conversion system." />
+    
+    <title>LinkSync | Turn Your Instagram Bio Into a Lead Machine</title>
+    <meta name="description" content="LinkSync helps you capture leads and start WhatsApp conversations instantly from your bio link. Perfect for creators, freelancers, and small businesses." />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <title>LinkSync — Bio Link Lead Machine</title>
+    <meta property="og:title" content="LinkSync | High-Conversion Bio Links" />
+    <meta property="og:description" content="Turn your profile visits into paying customers with LinkSync lead-generating bio links." />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="root">
-      <div style="background: white; color: black; padding: 20px;">
-        LinkSync is loading... if you see this, JavaScript has not initialized React.
+    <div id="root"></div>
+    <!-- Fallback if JS fails -->
+    <noscript>
+      <div style="padding: 20px; text-align: center; color: white; background: #0b0f19; height: 100vh;">
+        <h1>LinkSync</h1>
+        <p>Please enable JavaScript to run this app.</p>
       </div>
-    </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

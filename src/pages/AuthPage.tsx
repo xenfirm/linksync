@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle2, ChevronLeft } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import Logo from '../components/Logo'
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams()
-  const [mode, setMode] = useState<'signin' | 'signup'>(
+  const [mode, setMode] = useState<'signin' | 'signup' | 'reset'>(
     searchParams.get('mode') === 'signup' ? 'signup' : 'signin'
   )
   const [email, setEmail] = useState('')
@@ -16,12 +16,12 @@ export default function AuthPage() {
   const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
-  const { signIn, signUp, user } = useAuth()
+  const { signIn, signUp, sendPasswordResetEmail, user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user) navigate('/dashboard', { replace: true })
-  }, [user, navigate])
+    if (user && mode !== 'reset') navigate('/dashboard', { replace: true })
+  }, [user, navigate, mode])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,302 +29,152 @@ export default function AuthPage() {
     setSuccessMsg(null)
     setLoading(true)
 
-    if (mode === 'signup') {
-      const { error } = await signUp(email, password)
-      if (error) {
-        setError(error.message)
-      } else {
-        setSuccessMsg('Account created! Check your email to confirm, then sign in.')
-        setMode('signin')
+    try {
+      if (mode === 'signup') {
+        const { error } = await signUp(email, password)
+        if (error) setError(error.message)
+        else {
+          setSuccessMsg('Account created! Check your email to confirm, then sign in.')
+          setMode('signin')
+        }
+      } else if (mode === 'signin') {
+        const { error } = await signIn(email, password)
+        if (error) setError(error.message)
+        else navigate('/dashboard', { replace: true })
+      } else if (mode === 'reset') {
+        const { error } = await sendPasswordResetEmail(email)
+        if (error) setError(error.message)
+        else setSuccessMsg('Password reset link sent! Check your inbox.')
       }
-    } else {
-      const { error } = await signIn(email, password)
-      if (error) {
-        setError(error.message)
-      } else {
-        navigate('/dashboard', { replace: true })
-      }
+    } catch (err: any) {
+      setError(err.message || 'An unexpected error occurred')
     }
+    
     setLoading(false)
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1rem',
-        background: '#0f172a',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Background blobs */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '10%',
-          left: '15%',
-          width: '400px',
-          height: '400px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '15%',
-          right: '10%',
-          width: '350px',
-          height: '350px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-          pointerEvents: 'none',
-        }}
-      />
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #faf5ff, #f0f9ff)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem' }}>
+      {/* Logo */}
+      <Link to="/" style={{ textDecoration: 'none', marginBottom: '2rem' }}>
+        <Logo size={34} />
+      </Link>
 
-      <div style={{ width: '100%', maxWidth: '420px', position: 'relative', zIndex: 1 }}>
-        {/* Logo */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <Logo size={40} />
-          </Link>
-        </div>
-
-        {/* Card */}
-        <div
-          className="glass-card glow-blue"
-          style={{
-            borderRadius: '20px',
-            padding: '2.5rem',
-            background: 'rgba(30, 41, 59, 0.6)',
-          }}
-        >
-          <h1
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: '1.6rem',
-              color: '#f8fafc',
-              marginBottom: '0.5rem',
-              textAlign: 'center',
-            }}
+      {/* Card */}
+      <div style={{ width: '100%', maxWidth: '420px', background: '#fff', borderRadius: '24px', padding: 'clamp(1.75rem, 5vw, 2.5rem)', boxShadow: '0 8px 40px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
+        {mode === 'reset' && (
+          <button 
+            onClick={() => { setMode('signin'); setError(null); setSuccessMsg(null); }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'none', border: 'none', color: '#6d28d9', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', marginBottom: '1rem', padding: 0 }}
           >
-            {mode === 'signup' ? 'Create your account' : 'Welcome back'}
-          </h1>
-          <p style={{ color: '#94a3b8', textAlign: 'center', fontSize: '0.9rem', marginBottom: '2rem' }}>
-            {mode === 'signup'
-              ? 'Start turning your bio link into a lead machine'
-              : 'Sign in to access your dashboard'}
-          </p>
+            <ChevronLeft size={16} /> Back to Sign In
+          </button>
+        )}
 
-          {/* Mode toggle */}
-          <div
-            style={{
-              display: 'flex',
-              background: 'rgba(15, 23, 42, 0.8)',
-              borderRadius: '10px',
-              padding: '4px',
-              marginBottom: '1.75rem',
-              border: '1px solid #334155',
-            }}
-          >
-            <button
-              id="btn-signin-tab"
-              onClick={() => { setMode('signin'); setError(null) }}
-              style={{
-                flex: 1,
-                padding: '0.55rem',
-                borderRadius: '8px',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                transition: 'all 0.2s',
-                background: mode === 'signin'
-                  ? 'linear-gradient(135deg, #0ea5e9, #f97316)'
-                  : 'transparent',
-                color: mode === 'signin' ? 'white' : '#94a3b8',
-              }}
-            >
-              Sign In
-            </button>
-            <button
-              id="btn-signup-tab"
-              onClick={() => { setMode('signup'); setError(null) }}
-              style={{
-                flex: 1,
-                padding: '0.55rem',
-                borderRadius: '8px',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                transition: 'all 0.2s',
-                background: mode === 'signup'
-                  ? 'linear-gradient(135deg, #0ea5e9, #f97316)'
-                  : 'transparent',
-                color: mode === 'signup' ? 'white' : '#94a3b8',
-              }}
-            >
-              Sign Up
-            </button>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', color: '#0f172a', marginBottom: '0.4rem', textAlign: 'center' }}>
+          {mode === 'signup' ? 'Create your account' : mode === 'reset' ? 'Reset Password' : 'Welcome back'}
+        </h1>
+        <p style={{ color: '#64748b', textAlign: 'center', fontSize: '0.9rem', marginBottom: '2rem' }}>
+          {mode === 'signup' ? 'Start capturing leads from your bio link' : mode === 'reset' ? 'Enter your email to receive a reset link' : 'Sign in to access your dashboard'}
+        </p>
+
+        {/* Toggle (hidden in reset mode) */}
+        {mode !== 'reset' && (
+          <div style={{ display: 'flex', background: '#f8fafc', borderRadius: '12px', padding: '4px', marginBottom: '1.75rem', border: '1px solid #e2e8f0' }}>
+            {(['signin', 'signup'] as const).map(m => (
+              <button
+                key={m}
+                onClick={() => { setMode(m); setError(null); setSuccessMsg(null); }}
+                style={{
+                  flex: 1, padding: '0.55rem', borderRadius: '10px', border: 'none', cursor: 'pointer',
+                  fontSize: '0.875rem', fontWeight: 600, transition: 'all 0.2s',
+                  background: mode === m ? '#6d28d9' : 'transparent',
+                  color: mode === m ? 'white' : '#64748b',
+                  boxShadow: mode === m ? '0 2px 8px rgba(109,40,217,0.25)' : 'none',
+                }}
+              >
+                {m === 'signin' ? 'Sign In' : 'Sign Up'}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Alerts */}
+        {error && (
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '1.25rem', color: '#e11d48', fontSize: '0.875rem' }}>
+            <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '1px' }} />{error}
+          </div>
+        )}
+        {successMsg && (
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '1.25rem', color: '#16a34a', fontSize: '0.875rem' }}>
+            <CheckCircle2 size={16} style={{ flexShrink: 0, marginTop: '1px' }} />{successMsg}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {/* Email */}
+          <div>
+            <label htmlFor="auth-email" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+              Email Address
+            </label>
+            <div style={{ position: 'relative' }}>
+              <Mail size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+              <input
+                id="auth-email" type="email" className="input-dark"
+                placeholder="you@example.com" value={email}
+                onChange={e => setEmail(e.target.value)} required
+                style={{ paddingLeft: '2.5rem' }}
+              />
+            </div>
           </div>
 
-          {/* Alerts */}
-          {error && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.5rem',
-                background: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid rgba(239, 68, 68, 0.3)',
-                borderRadius: '10px',
-                padding: '0.75rem 1rem',
-                marginBottom: '1.25rem',
-                color: '#f87171',
-                fontSize: '0.875rem',
-              }}
-            >
-              <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '1px' }} />
-              {error}
-            </div>
-          )}
-          {successMsg && (
-            <div
-              style={{
-                background: 'rgba(34, 197, 94, 0.1)',
-                border: '1px solid rgba(34, 197, 94, 0.3)',
-                borderRadius: '10px',
-                padding: '0.75rem 1rem',
-                marginBottom: '1.25rem',
-                color: '#4ade80',
-                fontSize: '0.875rem',
-              }}
-            >
-              {successMsg}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {/* Email */}
+          {/* Password (hidden in reset mode) */}
+          {mode !== 'reset' && (
             <div>
-              <label
-                htmlFor="auth-email"
-                style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.4rem' }}
-              >
-                Email Address
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Mail
-                  size={16}
-                  style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}
-                />
-                <input
-                  id="auth-email"
-                  type="email"
-                  className="input-dark"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                  style={{ paddingLeft: '2.5rem' }}
-                />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                <label htmlFor="auth-password" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151' }}>
+                  Password
+                </label>
+                <button 
+                  type="button" 
+                  onClick={() => { setMode('reset'); setError(null); setSuccessMsg(null); }}
+                  style={{ background: 'none', border: 'none', color: '#6d28d9', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', padding: 0 }}
+                >
+                  Forgot Password?
+                </button>
               </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label
-                htmlFor="auth-password"
-                style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.4rem' }}
-              >
-                Password
-              </label>
               <div style={{ position: 'relative' }}>
-                <Lock
-                  size={16}
-                  style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}
-                />
+                <Lock size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
                 <input
-                  id="auth-password"
-                  type={showPassword ? 'text' : 'password'}
-                  className="input-dark"
-                  placeholder="Minimum 6 characters"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  required
-                  minLength={6}
+                  id="auth-password" type={showPassword ? 'text' : 'password'} className="input-dark"
+                  placeholder="Minimum 6 characters" value={password}
+                  onChange={e => setPassword(e.target.value)} required={mode !== 'reset'} minLength={6}
                   style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{
-                    position: 'absolute',
-                    right: '0.875rem',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: '#94a3b8',
-                    padding: 0,
-                  }}
-                >
+                <button type="button" onClick={() => setShowPassword(!showPassword)}
+                  style={{ position: 'absolute', right: '0.875rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', padding: 0 }}>
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
+          )}
 
-            <button
-              id="btn-auth-submit"
-              type="submit"
-              disabled={loading}
-              className="btn-gradient"
-              style={{
-                width: '100%',
-                padding: '0.85rem',
-                borderRadius: '10px',
-                border: 'none',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.7 : 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                marginTop: '0.5rem',
-                fontFamily: 'Inter, sans-serif',
-              }}
-            >
-              {loading ? (
-                <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
-              ) : (
-                <>
-                  {mode === 'signup' ? 'Create Account' : 'Sign In'}
-                  <ArrowRight size={16} />
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-
-        <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem', marginTop: '1.5rem' }}>
-          By continuing, you agree to our{' '}
-          <span style={{ color: '#0ea5e9' }}>Terms of Service</span> and{' '}
-          <span style={{ color: '#0ea5e9' }}>Privacy Policy</span>
-        </p>
+          <button
+            id="btn-auth-submit" type="submit" disabled={loading}
+            className="btn-primary"
+            style={{ width: '100%', padding: '0.9rem', borderRadius: '12px', fontSize: '0.95rem', justifyContent: 'center', marginTop: '0.25rem', opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+          >
+            {loading ? 'Please wait…' : (
+              <>{mode === 'signup' ? 'Create Account' : mode === 'reset' ? 'Send Reset Link' : 'Sign In'} <ArrowRight size={16} /></>
+            )}
+          </button>
+        </form>
       </div>
+
+      <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem', marginTop: '1.5rem' }}>
+        By continuing, you agree to our <Link to="/terms" style={{ color: '#6d28d9', textDecoration: 'none' }}>Terms</Link> and{' '}
+        <Link to="/privacy" style={{ color: '#6d28d9', textDecoration: 'none' }}>Privacy Policy</Link>
+      </p>
     </div>
   )
 }

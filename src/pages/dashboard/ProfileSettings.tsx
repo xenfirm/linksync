@@ -84,11 +84,13 @@ export default function ProfileSettings() {
     setSaving(false)
   }
 
+  if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem' }}>
-        <Loader2 size={28} style={{ color: '#0ea5e9', animation: 'spin 1s linear infinite' }} />
+        <Loader2 size={28} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
       </div>
     )
+  }
 
   return (
     <div style={{ maxWidth: '640px' }}>
@@ -98,13 +100,13 @@ export default function ProfileSettings() {
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 800,
             fontSize: '1.6rem',
-            color: '#f8fafc',
+            color: '#0f172a',
             marginBottom: '0.35rem',
           }}
         >
           {isNew ? 'Create Your Profile' : 'Profile Settings'}
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+        <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
           {isNew
             ? 'Set up your public bio page to start collecting leads.'
             : 'Update your public profile information.'}
@@ -114,10 +116,15 @@ export default function ProfileSettings() {
       <form onSubmit={handleSave}>
         {/* Avatar */}
         <div
-          className="glass-card"
-          style={{ borderRadius: '16px', padding: '1.5rem', marginBottom: '1.25rem' }}
+          style={{ 
+            background: '#fff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '16px',
+            padding: '1.5rem',
+            marginBottom: '1.25rem' 
+          }}
         >
-          <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#9b99c4', marginBottom: '1rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '1rem' }}>
             Profile Photo
           </label>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
@@ -126,7 +133,7 @@ export default function ProfileSettings() {
                 <img
                   src={profileImage}
                   alt="Profile"
-                  style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #2a2a45' }}
+                  style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #f1f5f9' }}
                 />
               ) : (
                 <div
@@ -134,7 +141,7 @@ export default function ProfileSettings() {
                     width: '72px',
                     height: '72px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #0ea5e9, #f97316)',
+                    background: 'linear-gradient(135deg, #6d28d9, #7c3aed)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -161,9 +168,9 @@ export default function ProfileSettings() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.4rem',
-                  background: 'rgba(42,42,69,0.8)',
-                  border: '1px solid #2a2a45',
-                  color: '#f1f0ff',
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  color: '#0f172a',
                   padding: '0.5rem 1rem',
                   borderRadius: '8px',
                   cursor: uploading ? 'not-allowed' : 'pointer',
@@ -175,7 +182,7 @@ export default function ProfileSettings() {
                 {uploading ? <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> : <Camera size={14} />}
                 {uploading ? 'Uploading...' : 'Change Photo'}
               </button>
-              <p style={{ color: '#9b99c4', fontSize: '0.75rem', marginTop: '0.3rem' }}>
+              <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
                 JPG, PNG or WebP. Max 5MB.
               </p>
             </div>
@@ -184,12 +191,19 @@ export default function ProfileSettings() {
 
         {/* Form Fields */}
         <div
-          className="glass-card"
-          style={{ borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+          style={{ 
+            background: '#fff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '16px',
+            padding: '1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem' 
+          }}
         >
           {/* Username */}
           <div>
-            <label htmlFor="field-username" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#9b99c4', marginBottom: '0.4rem' }}>
+            <label htmlFor="field-username" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
               Username
             </label>
             <div style={{ position: 'relative' }}>
@@ -199,7 +213,7 @@ export default function ProfileSettings() {
                   left: '0.875rem',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#9b99c4',
+                  color: '#94a3b8',
                   fontSize: '0.9rem',
                   fontWeight: 500,
                 }}
@@ -218,13 +232,13 @@ export default function ProfileSettings() {
               />
             </div>
             {username && (
-              <p style={{ color: '#94a3b8', fontSize: '0.75rem', marginTop: '0.3rem' }}>
-                Your page: <span style={{ color: '#0ea5e9' }}>/{username}</span>
+              <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
+                Your page: <span style={{ color: '#6d28d9' }}>/{username}</span>
                 <a
                   href={`/${username}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: '#0ea5e9', marginLeft: '0.3rem' }}
+                  style={{ color: '#6d28d9', marginLeft: '0.3rem' }}
                 >
                   <ExternalLink size={12} style={{ display: 'inline', verticalAlign: 'middle' }} />
                 </a>
@@ -234,7 +248,7 @@ export default function ProfileSettings() {
 
           {/* Name */}
           <div>
-            <label htmlFor="field-name" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#9b99c4', marginBottom: '0.4rem' }}>
+            <label htmlFor="field-name" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
               Display Name
             </label>
             <input
@@ -250,7 +264,7 @@ export default function ProfileSettings() {
 
           {/* Bio */}
           <div>
-            <label htmlFor="field-bio" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#9b99c4', marginBottom: '0.4rem' }}>
+            <label htmlFor="field-bio" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
               Bio
             </label>
             <textarea
@@ -266,7 +280,7 @@ export default function ProfileSettings() {
 
           {/* WhatsApp */}
           <div>
-            <label htmlFor="field-whatsapp" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#9b99c4', marginBottom: '0.4rem' }}>
+            <label htmlFor="field-whatsapp" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
               WhatsApp Number
             </label>
             <input
@@ -278,7 +292,7 @@ export default function ProfileSettings() {
               onChange={e => setWhatsapp(e.target.value)}
               required
             />
-            <p style={{ color: '#9b99c4', fontSize: '0.75rem', marginTop: '0.3rem' }}>
+            <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
               Include country code (e.g. +1 for US, +91 for India)
             </p>
           </div>
@@ -290,12 +304,12 @@ export default function ProfileSettings() {
             style={{
               display: 'flex',
               gap: '0.5rem',
-              background: 'rgba(239,68,68,0.1)',
-              border: '1px solid rgba(239,68,68,0.3)',
+              background: '#fff1f2',
+              border: '1px solid #fecdd3',
               borderRadius: '10px',
               padding: '0.75rem 1rem',
               marginTop: '1rem',
-              color: '#f87171',
+              color: '#e11d48',
               fontSize: '0.875rem',
             }}
           >
@@ -310,12 +324,12 @@ export default function ProfileSettings() {
               display: 'flex',
               gap: '0.5rem',
               alignItems: 'center',
-              background: 'rgba(34,197,94,0.1)',
-              border: '1px solid rgba(34,197,94,0.3)',
+              background: '#f0fdf4',
+              border: '1px solid #bbf7d0',
               borderRadius: '10px',
               padding: '0.75rem 1rem',
               marginTop: '1rem',
-              color: '#4ade80',
+              color: '#16a34a',
               fontSize: '0.875rem',
             }}
           >
@@ -328,14 +342,14 @@ export default function ProfileSettings() {
           id="btn-save-profile"
           type="submit"
           disabled={saving}
-          className="btn-gradient"
+          className="btn-primary"
           style={{
             marginTop: '1.25rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
             padding: '0.8rem 2rem',
-            borderRadius: '10px',
+            borderRadius: '12px',
             border: 'none',
             color: 'white',
             fontWeight: 700,

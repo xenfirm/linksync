@@ -15,12 +15,12 @@ function CopyButton({ text }: { text: string }) {
       onClick={handleCopy}
       title="Copy phone number"
       style={{
-        background: copied ? 'rgba(34,197,94,0.15)' : 'rgba(42,42,69,0.8)',
-        border: `1px solid ${copied ? 'rgba(34,197,94,0.4)' : '#2a2a45'}`,
+        background: copied ? '#dcfce7' : '#f8fafc',
+        border: `1px solid ${copied ? '#bbf7d0' : '#e2e8f0'}`,
         borderRadius: '7px',
         padding: '0.3rem 0.5rem',
         cursor: 'pointer',
-        color: copied ? '#4ade80' : '#9b99c4',
+        color: copied ? '#16a34a' : '#64748b',
         display: 'flex',
         alignItems: 'center',
         gap: '0.3rem',
@@ -52,15 +52,16 @@ export default function LeadsPage() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
-          background: 'rgba(124,58,237,0.06)',
-          border: '1px solid rgba(124,58,237,0.2)',
+          background: '#ede9fe',
+          border: '1px solid #ddd6fe',
           borderRadius: '14px',
           padding: '1.5rem',
-          color: '#9b99c4',
+          color: '#6d28d9',
           fontSize: '0.9rem',
+          fontWeight: 500,
         }}
       >
-        <AlertCircle size={18} style={{ color: '#a78bfa', flexShrink: 0 }} />
+        <AlertCircle size={18} style={{ flexShrink: 0 }} />
         Please create your profile first to start collecting leads.
       </div>
     )
@@ -74,13 +75,13 @@ export default function LeadsPage() {
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 800,
             fontSize: '1.6rem',
-            color: '#f1f0ff',
+            color: '#0f172a',
             marginBottom: '0.35rem',
           }}
         >
           Leads
         </h1>
-        <p style={{ color: '#9b99c4', fontSize: '0.9rem' }}>
+        <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
           All leads collected from your bio page, sorted by newest first.
         </p>
       </div>
@@ -95,55 +96,51 @@ export default function LeadsPage() {
         }}
       >
         <div
-          className="glass-card"
-          style={{ borderRadius: '14px', padding: '1.25rem' }}
+          style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem' }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#9b99c4', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
             <Users size={14} /> Total Leads
           </div>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#f1f0ff' }}>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#0f172a' }}>
             {leads.length}
           </div>
         </div>
 
         <div
-          className="glass-card"
-          style={{ borderRadius: '14px', padding: '1.25rem' }}
+          style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem' }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#9b99c4', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
             <Phone size={14} /> From Form
           </div>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#f1f0ff' }}>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#0f172a' }}>
             {leads.filter(l => l.source === 'form').length}
           </div>
         </div>
 
         <div
-          className="glass-card"
-          style={{ borderRadius: '14px', padding: '1.25rem' }}
+          style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem' }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#9b99c4', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.5rem' }}>
             <MessageCircle size={14} /> WhatsApp Clicks
           </div>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#f1f0ff' }}>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '2rem', color: '#0f172a' }}>
             {leads.filter(l => l.source === 'whatsapp').length}
           </div>
         </div>
       </div>
 
-      {/* Leads Table */}
+      {/* Leads List/Table */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
-          <Loader2 size={28} style={{ color: '#7c3aed', animation: 'spin 1s linear infinite' }} />
+          <Loader2 size={28} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
         </div>
       ) : leads.length === 0 ? (
         <div
-          className="glass-card"
-          style={{ borderRadius: '16px', padding: '4rem', textAlign: 'center' }}
+          style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '4rem', textAlign: 'center' }}
         >
-          <Users size={36} style={{ color: '#9b99c4', margin: '0 auto 1rem' }} />
-          <h3 style={{ fontWeight: 700, color: '#f1f0ff', marginBottom: '0.5rem' }}>No leads yet</h3>
-          <p style={{ color: '#9b99c4', fontSize: '0.9rem', maxWidth: '340px', margin: '0 auto' }}>
+          <Users size={36} style={{ color: '#94a3b8', margin: '0 auto 1rem' }} />
+          <h3 style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>No leads yet</h3>
+          <p style={{ color: '#64748b', fontSize: '0.9rem', maxWidth: '340px', margin: '0 auto' }}>
             Share your bio link to start collecting leads. They'll appear here in real time.
           </p>
           {profile.username && (
@@ -151,17 +148,13 @@ export default function LeadsPage() {
               href={`/${profile.username}`}
               target="_blank"
               rel="noopener noreferrer"
+              className="btn-primary"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
                 marginTop: '1.5rem',
-                background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
-                color: 'white',
-                textDecoration: 'none',
                 padding: '0.65rem 1.5rem',
-                borderRadius: '10px',
-                fontWeight: 600,
                 fontSize: '0.875rem',
               }}
             >
@@ -170,82 +163,120 @@ export default function LeadsPage() {
           )}
         </div>
       ) : (
+        /* Responsive List/Table Container */
         <div
-          className="glass-card"
-          style={{ borderRadius: '16px', overflow: 'hidden' }}
+          style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}
         >
-          {/* Table header */}
+          {/* Desktop Table Header */}
           <div
+            className="hide-mobile"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1.2fr auto auto',
               gap: '1rem',
               padding: '0.75rem 1.25rem',
-              borderBottom: '1px solid #2a2a45',
-              background: 'rgba(15,15,26,0.5)',
+              borderBottom: '1px solid #f1f5f9',
+              background: '#f8fafc',
             }}
           >
             {['Name', 'Phone', 'Source', 'Date'].map(h => (
-              <div key={h} style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9b99c4', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div key={h} style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {h}
               </div>
             ))}
           </div>
 
-          {/* Table rows */}
-          {leads.map((lead, i) => (
-            <div
-              key={lead.id}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1.2fr auto auto',
-                gap: '1rem',
-                padding: '0.875rem 1.25rem',
-                borderBottom: i < leads.length - 1 ? '1px solid rgba(42,42,69,0.5)' : 'none',
-                alignItems: 'center',
-                transition: 'background 0.15s',
-              }}
-            >
-              <div style={{ fontWeight: 600, color: '#f1f0ff', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {lead.name}
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ color: '#9b99c4', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {lead.phone}
-                </span>
-                {lead.phone !== 'N/A' && <CopyButton text={lead.phone} />}
-              </div>
-              <div>
-                <span
+          {/* Table Rows (Desktop) / Cards (Mobile) */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {leads.map((lead, i) => (
+              <div
+                key={lead.id}
+                style={{
+                  padding: '1rem 1.25rem',
+                  borderBottom: i < leads.length - 1 ? '1px solid #f1f5f9' : 'none',
+                  transition: 'background 0.15s',
+                }}
+              >
+                {/* Desktop Layout */}
+                <div
+                  className="hide-mobile"
                   style={{
-                    display: 'inline-flex',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1.2fr auto auto',
+                    gap: '1rem',
                     alignItems: 'center',
-                    gap: '0.3rem',
-                    padding: '0.25rem 0.6rem',
-                    borderRadius: '100px',
-                    fontSize: '0.72rem',
-                    fontWeight: 600,
-                    background: lead.source === 'whatsapp'
-                      ? 'rgba(37,211,102,0.12)'
-                      : 'rgba(124,58,237,0.12)',
-                    color: lead.source === 'whatsapp' ? '#25d366' : '#a78bfa',
-                    border: `1px solid ${lead.source === 'whatsapp' ? 'rgba(37,211,102,0.25)' : 'rgba(124,58,237,0.25)'}`,
-                    whiteSpace: 'nowrap',
                   }}
                 >
-                  {lead.source === 'whatsapp' ? (
-                    <><MessageCircle size={10} /> WhatsApp</>
-                  ) : (
-                    <><Phone size={10} /> Form</>
+                  <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {lead.name}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ color: '#374151', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {lead.phone}
+                    </span>
+                    {lead.phone !== 'N/A' && <CopyButton text={lead.phone} />}
+                  </div>
+                  <div>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                        padding: '0.25rem 0.6rem',
+                        borderRadius: '100px',
+                        fontSize: '0.72rem',
+                        fontWeight: 700,
+                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#ede9fe',
+                        color: lead.source === 'whatsapp' ? '#16a34a' : '#6d28d9',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {lead.source === 'whatsapp' ? (
+                        <><MessageCircle size={10} /> WhatsApp</>
+                      ) : (
+                        <><Phone size={10} /> Form</>
+                      )}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#64748b', fontSize: '0.78rem', whiteSpace: 'nowrap' }}>
+                    <Calendar size={12} />
+                    {formatDate(lead.created_at)}
+                  </div>
+                </div>
+
+                {/* Mobile Layout */}
+                <div className="hide-desktop" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                      <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem', marginBottom: '0.2rem' }}>{lead.name}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748b', fontSize: '0.8rem' }}>
+                        <Calendar size={12} /> {formatDate(lead.created_at)}
+                      </div>
+                    </div>
+                    <span
+                      style={{
+                        padding: '0.2rem 0.6rem',
+                        borderRadius: '100px',
+                        fontSize: '0.65rem',
+                        fontWeight: 800,
+                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#ede9fe',
+                        color: lead.source === 'whatsapp' ? '#16a34a' : '#6d28d9',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {lead.source}
+                    </span>
+                  </div>
+                  {lead.phone !== 'N/A' && (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f8fafc', padding: '0.6rem 0.8rem', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#374151' }}>{lead.phone}</span>
+                      <CopyButton text={lead.phone} />
+                    </div>
                   )}
-                </span>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#9b99c4', fontSize: '0.78rem', whiteSpace: 'nowrap' }}>
-                <Calendar size={12} />
-                {formatDate(lead.created_at)}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

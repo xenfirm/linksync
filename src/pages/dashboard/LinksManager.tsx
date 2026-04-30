@@ -38,28 +38,29 @@ function LinkCard({
       onDragStart={e => onDragStart(e, link.id)}
       onDragOver={e => onDragOver(e, link.id)}
       onDrop={onDrop}
-      className="glass-card"
       style={{
+        background: '#fff',
+        border: dragOver ? '1.5px solid #6d28d9' : '1px solid #e2e8f0',
         borderRadius: '12px',
-        padding: '1rem 1.25rem',
+        padding: '1rem',
         display: 'flex',
         alignItems: 'center',
         gap: '0.75rem',
         cursor: 'grab',
-        border: dragOver ? '1px solid #0ea5e9' : '1px solid rgba(51,65,85,0.8)',
-        transition: 'border-color 0.2s',
+        transition: 'all 0.2s',
+        boxShadow: dragOver ? '0 4px 12px rgba(109,40,217,0.1)' : 'none',
       }}
     >
-      <GripVertical size={16} style={{ color: '#9b99c4', flexShrink: 0 }} />
+      <GripVertical size={16} style={{ color: '#94a3b8', flexShrink: 0 }} />
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontWeight: 600, color: '#f8fafc', fontSize: '0.9rem', marginBottom: '0.2rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <p style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.9rem', marginBottom: '0.2rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {link.title}
         </p>
         <a
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: '#94a3b8', fontSize: '0.78rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.2rem' }}
+          style={{ color: '#64748b', fontSize: '0.78rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}
         >
           {link.url} <ExternalLink size={11} />
         </a>
@@ -68,12 +69,12 @@ function LinkCard({
         <button
           onClick={() => onEdit(link)}
           style={{
-            background: 'rgba(42,42,69,0.8)',
-            border: '1px solid #2a2a45',
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
             borderRadius: '8px',
             padding: '0.4rem',
             cursor: 'pointer',
-            color: '#9b99c4',
+            color: '#64748b',
             display: 'flex',
           }}
         >
@@ -83,16 +84,16 @@ function LinkCard({
           onClick={handleDelete}
           disabled={deleting}
           style={{
-            background: 'rgba(239,68,68,0.1)',
-            border: '1px solid rgba(239,68,68,0.3)',
+            background: '#fff1f2',
+            border: '1px solid #fecdd3',
             borderRadius: '8px',
             padding: '0.4rem',
             cursor: deleting ? 'not-allowed' : 'pointer',
-            color: '#f87171',
+            color: '#e11d48',
             display: 'flex',
           }}
         >
-          {deleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+          {deleting ? <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> : <Trash2 size={14} />}
         </button>
       </div>
     </div>
@@ -183,15 +184,16 @@ export default function LinksManager() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
-          background: 'rgba(14,165,233,0.06)',
-          border: '1px solid rgba(14,165,233,0.2)',
+          background: '#ede9fe',
+          border: '1px solid #ddd6fe',
           borderRadius: '14px',
           padding: '1.5rem',
-          color: '#94a3b8',
+          color: '#6d28d9',
           fontSize: '0.9rem',
+          fontWeight: 500,
         }}
       >
-        <AlertCircle size={18} style={{ color: '#0ea5e9', flexShrink: 0 }} />
+        <AlertCircle size={18} style={{ flexShrink: 0 }} />
         Please create your profile first before adding links.
       </div>
     )
@@ -215,13 +217,13 @@ export default function LinksManager() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 800,
               fontSize: '1.6rem',
-              color: '#f8fafc',
+              color: '#0f172a',
               marginBottom: '0.35rem',
             }}
           >
             Links Manager
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+          <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
             Add up to 5 links to your bio page. Drag to reorder.
           </p>
         </div>
@@ -230,19 +232,14 @@ export default function LinksManager() {
           <button
             id="btn-add-link"
             onClick={() => { setShowAddForm(!showAddForm); setFormError(null) }}
-            className="btn-gradient"
+            className="btn-primary"
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
               padding: '0.6rem 1.25rem',
               borderRadius: '10px',
-              border: 'none',
-              color: 'white',
-              fontWeight: 600,
               fontSize: '0.875rem',
-              cursor: 'pointer',
-              fontFamily: 'Inter, sans-serif',
               flexShrink: 0,
             }}
           >
@@ -255,15 +252,16 @@ export default function LinksManager() {
       {showAddForm && (
         <form
           onSubmit={handleAdd}
-          className="glass-card"
           style={{
+            background: '#fff',
             borderRadius: '16px',
             padding: '1.5rem',
             marginBottom: '1.25rem',
-            border: '1px solid rgba(14,165,233,0.3)',
+            border: '1px solid #6d28d9',
+            boxShadow: '0 4px 12px rgba(109,40,217,0.1)',
           }}
         >
-          <h3 style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.95rem', marginBottom: '1rem' }}>
+          <h3 style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem', marginBottom: '1rem' }}>
             New Link
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -286,45 +284,27 @@ export default function LinksManager() {
               onChange={e => setNewUrl(e.target.value)}
               required
             />
-            {formError && <p style={{ color: '#f87171', fontSize: '0.8rem' }}>{formError}</p>}
+            {formError && <p style={{ color: '#e11d48', fontSize: '0.8rem' }}>{formError}</p>}
             <div style={{ display: 'flex', gap: '0.6rem' }}>
               <button
                 type="submit"
                 disabled={addLoading}
-                className="btn-gradient"
+                className="btn-primary"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
                   padding: '0.55rem 1.25rem',
-                  borderRadius: '8px',
-                  border: 'none',
-                  color: 'white',
-                  fontWeight: 600,
                   fontSize: '0.85rem',
-                  cursor: addLoading ? 'not-allowed' : 'pointer',
-                  fontFamily: 'Inter, sans-serif',
                 }}
               >
-                {addLoading ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />}
+                {addLoading ? <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> : <Check size={14} />}
                 Save
               </button>
               <button
                 type="button"
                 onClick={() => { setShowAddForm(false); setNewTitle(''); setNewUrl('') }}
+                className="btn-outline"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
                   padding: '0.55rem 1rem',
-                  borderRadius: '8px',
-                  border: '1px solid #2a2a45',
-                  background: 'transparent',
-                  color: '#9b99c4',
-                  fontWeight: 500,
                   fontSize: '0.85rem',
-                  cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif',
                 }}
               >
                 <X size={14} /> Cancel
@@ -337,15 +317,16 @@ export default function LinksManager() {
       {/* Edit Modal */}
       {editingLink && (
         <div
-          className="glass-card"
           style={{
+            background: '#fff',
             borderRadius: '16px',
             padding: '1.5rem',
             marginBottom: '1.25rem',
-            border: '1px solid rgba(124,58,237,0.3)',
+            border: '1px solid #6d28d9',
+            boxShadow: '0 4px 12px rgba(109,40,217,0.1)',
           }}
         >
-          <h3 style={{ fontWeight: 700, color: '#f1f0ff', fontSize: '0.95rem', marginBottom: '1rem' }}>
+          <h3 style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem', marginBottom: '1rem' }}>
             Edit Link
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -368,39 +349,21 @@ export default function LinksManager() {
               <button
                 onClick={handleEditSave}
                 disabled={editLoading}
-                className="btn-gradient"
+                className="btn-primary"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
                   padding: '0.55rem 1.25rem',
-                  borderRadius: '8px',
-                  border: 'none',
-                  color: 'white',
-                  fontWeight: 600,
                   fontSize: '0.85rem',
-                  cursor: editLoading ? 'not-allowed' : 'pointer',
-                  fontFamily: 'Inter, sans-serif',
                 }}
               >
-                {editLoading ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />}
+                {editLoading ? <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> : <Check size={14} />}
                 Save Changes
               </button>
               <button
                 onClick={() => setEditingLink(null)}
+                className="btn-outline"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
                   padding: '0.55rem 1rem',
-                  borderRadius: '8px',
-                  border: '1px solid #2a2a45',
-                  background: 'transparent',
-                  color: '#9b99c4',
-                  fontWeight: 500,
                   fontSize: '0.85rem',
-                  cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif',
                 }}
               >
                 <X size={14} /> Cancel
@@ -413,19 +376,20 @@ export default function LinksManager() {
       {/* Links List */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-          <Loader2 size={24} style={{ color: '#0ea5e9', animation: 'spin 1s linear infinite' }} />
+          <Loader2 size={24} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
         </div>
       ) : links.length === 0 ? (
         <div
-          className="glass-card"
           style={{
+            background: '#fff',
+            border: '1px solid #e2e8f0',
             borderRadius: '16px',
             padding: '3rem',
             textAlign: 'center',
           }}
         >
-          <Link2 size={32} style={{ color: '#9b99c4', margin: '0 auto 1rem' }} />
-          <p style={{ color: '#9b99c4', fontSize: '0.9rem' }}>No links yet. Add your first link above.</p>
+          <Link2 size={32} style={{ color: '#94a3b8', margin: '0 auto 1rem' }} />
+          <p style={{ color: '#64748b', fontSize: '0.9rem' }}>No links yet. Add your first link above.</p>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -445,7 +409,7 @@ export default function LinksManager() {
       )}
 
       {links.length >= 5 && (
-        <p style={{ color: '#9b99c4', fontSize: '0.8rem', marginTop: '1rem', textAlign: 'center' }}>
+        <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '1rem', textAlign: 'center' }}>
           Maximum 5 links allowed on your bio page.
         </p>
       )}

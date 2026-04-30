@@ -8,6 +8,10 @@ import DashboardLayout from './pages/dashboard/DashboardLayout'
 import ProfileSettings from './pages/dashboard/ProfileSettings'
 import LinksManager from './pages/dashboard/LinksManager'
 import LeadsPage from './pages/dashboard/LeadsPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
+import RefundPage from './pages/RefundPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 
 function App() {
   return (
@@ -17,6 +21,10 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/refund" element={<RefundPage />} />
 
           {/* Dashboard (protected) */}
           <Route

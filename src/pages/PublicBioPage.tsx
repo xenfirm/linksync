@@ -11,40 +11,20 @@ export default function PublicBioPage() {
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
-  // Lead form
   const [leadName, setLeadName] = useState('')
   const [leadPhone, setLeadPhone] = useState('')
   const [formLoading, setFormLoading] = useState(false)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchProfile()
-  }, [username])
+  useEffect(() => { fetchProfile() }, [username])
 
   const fetchProfile = async () => {
     setLoading(true)
-    const { data: profileData, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('username', username)
-      .single()
-
-    if (error || !profileData) {
-      setNotFound(true)
-      setLoading(false)
-      return
-    }
-
+    const { data: profileData, error } = await supabase.from('profiles').select('*').eq('username', username).single()
+    if (error || !profileData) { setNotFound(true); setLoading(false); return }
     setProfile(profileData)
-
-    // Fetch links
-    const { data: linksData } = await supabase
-      .from('links')
-      .select('*')
-      .eq('profile_id', profileData.id)
-      .order('order_index', { ascending: true })
-
+    const { data: linksData } = await supabase.from('links').select('*').eq('profile_id', profileData.id).order('order_index', { ascending: true })
     setLinks(linksData || [])
     setLoading(false)
   }
@@ -52,86 +32,36 @@ export default function PublicBioPage() {
   const handleWhatsApp = async () => {
     if (!profile) return
     const number = profile.whatsapp_number.replace(/\D/g, '')
-    const msg = encodeURIComponent('Hi, I am interested in your services')
+    const msg = encodeURIComponent('Hi, I found you on LinkSync and I am interested in your services!')
     window.open(`https://wa.me/${number}?text=${msg}`, '_blank')
-
-    // Log WhatsApp click as lead if we have contact info
-    await supabase.from('leads').insert({
-      profile_id: profile.id,
-      name: 'WhatsApp visitor',
-      phone: 'N/A',
-      source: 'whatsapp',
-    })
+    await supabase.from('leads').insert({ profile_id: profile.id, name: 'WhatsApp visitor', phone: 'N/A', source: 'whatsapp' })
   }
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!profile) return
-    setFormLoading(true)
-    setFormError(null)
-
-    const { error } = await supabase.from('leads').insert({
-      profile_id: profile.id,
-      name: leadName.trim(),
-      phone: leadPhone.trim(),
-      source: 'form',
-    })
-
-    if (error) {
-      setFormError('Something went wrong. Please try again.')
-    } else {
-      setFormSuccess(true)
-      setLeadName('')
-      setLeadPhone('')
-    }
+    setFormLoading(true); setFormError(null)
+    const { error } = await supabase.from('leads').insert({ profile_id: profile.id, name: leadName.trim(), phone: leadPhone.trim(), source: 'form' })
+    if (error) setFormError('Something went wrong. Please try again.')
+    else { setFormSuccess(true); setLeadName(''); setLeadPhone('') }
     setFormLoading(false)
   }
 
   if (loading) {
     return (
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#0f0f1a',
-        }}
-      >
-        <Loader2 size={32} style={{ color: '#7c3aed', animation: 'spin 1s linear infinite' }} />
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#faf5ff' }}>
+        <Loader2 size={32} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
       </div>
     )
   }
 
   if (notFound) {
     return (
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#0f0f1a',
-          gap: '1rem',
-        }}
-      >
-        <AlertCircle size={40} style={{ color: '#9b99c4' }} />
-        <h1 style={{ fontWeight: 700, color: '#f1f0ff' }}>Profile not found</h1>
-        <p style={{ color: '#9b99c4' }}>@{username} doesn't exist on LinkSync</p>
-        <a
-          href="/"
-          style={{
-            marginTop: '0.5rem',
-            background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
-            color: 'white',
-            textDecoration: 'none',
-            padding: '0.65rem 1.5rem',
-            borderRadius: '10px',
-            fontWeight: 600,
-            fontSize: '0.9rem',
-          }}
-        >
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#faf5ff', padding: '2rem', gap: '1rem' }}>
+        <AlertCircle size={48} style={{ color: '#94a3b8' }} />
+        <h1 style={{ fontWeight: 800, color: '#0f172a', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Profile not found</h1>
+        <p style={{ color: '#64748b' }}>@{username} doesn't exist on LinkSync</p>
+        <a href="/" style={{ marginTop: '0.5rem', background: '#6d28d9', color: 'white', textDecoration: 'none', padding: '0.75rem 1.75rem', borderRadius: '12px', fontWeight: 700, fontSize: '0.95rem' }}>
           Create your own LinkSync
         </a>
       </div>
@@ -139,97 +69,26 @@ export default function PublicBioPage() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(180deg, #130820 0%, #0f0f1a 50%, #0f0f1a 100%)',
-        padding: '2rem 1rem 4rem',
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      {/* Background glow */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '500px',
-          height: '300px',
-          background: 'radial-gradient(ellipse, rgba(124,58,237,0.2) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #faf5ff 0%, #f0f9ff 50%, #faf5ff 100%)', padding: '2.5rem 1rem 5rem', display: 'flex', justifyContent: 'center' }}>
+      {/* Subtle top glow */}
+      <div style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', width: '600px', height: '250px', background: 'radial-gradient(ellipse, rgba(109,40,217,0.12) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
 
       <div style={{ width: '100%', maxWidth: '420px', position: 'relative', zIndex: 1 }}>
         {/* Profile Card */}
-        <div
-          className="glass-card"
-          style={{
-            borderRadius: '24px',
-            padding: '2.5rem 2rem',
-            textAlign: 'center',
-            marginBottom: '1rem',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
-          }}
-        >
-          {/* Profile Image */}
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2.5rem 1.75rem', textAlign: 'center', marginBottom: '1rem', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}>
           {profile?.profile_image ? (
-            <img
-              src={profile.profile_image}
-              alt={profile.name}
-              style={{
-                width: '88px',
-                height: '88px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '3px solid transparent',
-                background: 'linear-gradient(#0f0f1a, #0f0f1a) padding-box, linear-gradient(135deg, #7c3aed, #ec4899) border-box',
-                margin: '0 auto 1rem',
-                display: 'block',
-              }}
-            />
+            <img src={profile.profile_image} alt={profile.name}
+              style={{ width: '88px', height: '88px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #ede9fe', margin: '0 auto 1rem', display: 'block' }} />
           ) : (
-            <div
-              style={{
-                width: '88px',
-                height: '88px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 1rem',
-                fontSize: '2rem',
-                fontWeight: 800,
-                color: 'white',
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-              }}
-            >
+            <div style={{ width: '88px', height: '88px', borderRadius: '50%', background: 'linear-gradient(135deg, #6d28d9, #7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: '2.25rem', fontWeight: 900, color: 'white', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {profile?.name?.charAt(0)?.toUpperCase() || '?'}
             </div>
           )}
-
-          <h1
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 800,
-              fontSize: '1.35rem',
-              color: '#f1f0ff',
-              marginBottom: '0.4rem',
-            }}
-          >
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.35rem', color: '#0f172a', marginBottom: '0.3rem' }}>
             {profile?.name}
           </h1>
-          <p style={{ color: '#a78bfa', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.5rem' }}>
-            @{profile?.username}
-          </p>
-          {profile?.bio && (
-            <p style={{ color: '#9b99c4', fontSize: '0.9rem', lineHeight: 1.7 }}>{profile.bio}</p>
-          )}
+          <p style={{ color: '#6d28d9', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>@{profile?.username}</p>
+          {profile?.bio && <p style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: 1.65 }}>{profile.bio}</p>}
         </div>
 
         {/* WhatsApp Button */}
@@ -237,167 +96,60 @@ export default function PublicBioPage() {
           <button
             id="btn-whatsapp"
             onClick={handleWhatsApp}
-            style={{
-              width: '100%',
-              padding: '0.9rem',
-              borderRadius: '14px',
-              border: 'none',
-              background: '#25d366',
-              color: 'white',
-              fontWeight: 700,
-              fontSize: '1rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem',
-              marginBottom: '0.75rem',
-              boxShadow: '0 8px 25px rgba(37,211,102,0.3)',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              fontFamily: 'Inter, sans-serif',
-            }}
+            style={{ width: '100%', padding: '0.9rem', borderRadius: '14px', border: 'none', background: '#25d366', color: 'white', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.75rem', boxShadow: '0 6px 20px rgba(37,211,102,0.3)', transition: 'transform 0.2s', fontFamily: 'Inter, sans-serif' }}
           >
-            <MessageCircle size={20} fill="white" />
-            Chat on WhatsApp
+            <MessageCircle size={20} fill="white" /> Chat on WhatsApp
           </button>
         )}
 
-        {/* Custom Links */}
+        {/* Links */}
         {links.map((link) => (
           <a
             key={link.id}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-              padding: '0.875rem 1.25rem',
-              borderRadius: '14px',
-              background: 'rgba(30, 30, 53, 0.7)',
-              border: '1px solid #2a2a45',
-              color: '#f1f0ff',
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: '0.925rem',
-              marginBottom: '0.6rem',
-              transition: 'background 0.2s, border-color 0.2s, transform 0.2s',
-              boxSizing: 'border-box',
-            }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '0.9rem 1.25rem', borderRadius: '14px', background: '#fff', border: '1px solid #e2e8f0', color: '#0f172a', textDecoration: 'none', fontWeight: 600, fontSize: '0.925rem', marginBottom: '0.6rem', transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', boxSizing: 'border-box' }}
           >
             {link.title}
-            <ExternalLink size={15} style={{ color: '#9b99c4', flexShrink: 0 }} />
+            <ExternalLink size={15} style={{ color: '#94a3b8', flexShrink: 0 }} />
           </a>
         ))}
 
         {/* Lead Form */}
-        <div
-          style={{
-            marginTop: '1.25rem',
-            background: 'rgba(124,58,237,0.06)',
-            border: '1px solid rgba(124,58,237,0.2)',
-            borderRadius: '20px',
-            padding: '1.75rem',
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: '1rem',
-              color: '#f1f0ff',
-              marginBottom: '0.25rem',
-            }}
-          >
+        <div style={{ marginTop: '1.25rem', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '1.75rem', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1rem', color: '#0f172a', marginBottom: '0.25rem' }}>
             Get in Touch
           </h2>
-          <p style={{ color: '#9b99c4', fontSize: '0.825rem', marginBottom: '1.25rem' }}>
+          <p style={{ color: '#64748b', fontSize: '0.825rem', marginBottom: '1.25rem' }}>
             Leave your details and {profile?.name?.split(' ')[0]} will reach out to you.
           </p>
 
           {formSuccess ? (
-            <div
-              style={{
-                background: 'rgba(34,197,94,0.1)',
-                border: '1px solid rgba(34,197,94,0.3)',
-                borderRadius: '12px',
-                padding: '1rem',
-                textAlign: 'center',
-                color: '#4ade80',
-                fontSize: '0.9rem',
-                fontWeight: 600,
-              }}
-            >
+            <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '1rem', textAlign: 'center', color: '#16a34a', fontSize: '0.9rem', fontWeight: 600 }}>
               ✓ Thanks! We'll be in touch soon.
             </div>
           ) : (
             <form onSubmit={handleLeadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <input
-                id="lead-name"
-                type="text"
-                className="input-dark"
-                placeholder="Your Name *"
-                value={leadName}
-                onChange={e => setLeadName(e.target.value)}
-                required
-              />
-              <input
-                id="lead-phone"
-                type="tel"
-                className="input-dark"
-                placeholder="Phone Number *"
-                value={leadPhone}
-                onChange={e => setLeadPhone(e.target.value)}
-                required
-              />
-              {formError && (
-                <p style={{ color: '#f87171', fontSize: '0.8rem' }}>{formError}</p>
-              )}
+              <input id="lead-name" type="text" className="input-dark" placeholder="Your Name *" value={leadName} onChange={e => setLeadName(e.target.value)} required />
+              <input id="lead-phone" type="tel" className="input-dark" placeholder="Phone Number *" value={leadPhone} onChange={e => setLeadPhone(e.target.value)} required />
+              {formError && <p style={{ color: '#e11d48', fontSize: '0.8rem' }}>{formError}</p>}
               <button
                 id="btn-lead-submit"
                 type="submit"
                 disabled={formLoading}
-                className="btn-gradient"
-                style={{
-                  width: '100%',
-                  padding: '0.8rem',
-                  borderRadius: '10px',
-                  border: 'none',
-                  color: 'white',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  cursor: formLoading ? 'not-allowed' : 'pointer',
-                  opacity: formLoading ? 0.7 : 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.4rem',
-                  fontFamily: 'Inter, sans-serif',
-                }}
+                className="btn-primary"
+                style={{ width: '100%', padding: '0.85rem', borderRadius: '12px', fontSize: '0.9rem', justifyContent: 'center', opacity: formLoading ? 0.7 : 1, cursor: formLoading ? 'not-allowed' : 'pointer' }}
               >
-                {formLoading ? (
-                  <Loader2 size={16} className="animate-spin" />
-                ) : (
-                  <>
-                    <Send size={15} /> Get in Touch
-                  </>
-                )}
+                {formLoading ? <Loader2 size={16} className="animate-spin" /> : <><Send size={15} /> Get in Touch</>}
               </button>
             </form>
           )}
         </div>
 
         {/* Powered by */}
-        <p style={{ textAlign: 'center', color: '#9b99c4', fontSize: '0.75rem', marginTop: '2rem' }}>
-          Powered by{' '}
-          <a
-            href="/"
-            style={{ color: '#a78bfa', textDecoration: 'none', fontWeight: 600 }}
-          >
-            LinkSync
-          </a>
+        <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.75rem', marginTop: '2rem' }}>
+          Powered by{' '}<a href="/" style={{ color: '#6d28d9', textDecoration: 'none', fontWeight: 600 }}>LinkSync</a>
         </p>
       </div>
     </div>
