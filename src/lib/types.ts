@@ -6,6 +6,9 @@ export interface Profile {
   bio: string
   profile_image: string | null
   whatsapp_number: string
+  whatsapp_message?: string
+  plan: 'free' | 'basic' | 'pro'
+  is_admin: boolean
   created_at: string
 }
 
@@ -29,4 +32,11 @@ export interface Lead {
 export interface User {
   id: string
   email: string
+}
+
+export interface Click {
+  id: string
+  profile_id: string
+  type: 'link' | 'whatsapp'
+  created_at: string
 }

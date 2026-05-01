@@ -46,7 +46,7 @@ export function useProfile() {
     return { error: error?.message || null }
   }
 
-  const createProfile = async (profileData: Omit<Profile, 'id' | 'user_id' | 'created_at'>) => {
+  const createProfile = async (profileData: Omit<Profile, 'id' | 'user_id' | 'created_at' | 'is_admin'>) => {
     if (!user) return { error: 'Not authenticated' }
     const { error } = await supabase
       .from('profiles')

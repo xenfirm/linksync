@@ -56,19 +56,20 @@ body {
   color: white;
   border: none;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.15);
 }
 .btn-primary:hover {
   background: #5b21b6;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(109, 40, 217, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(109, 40, 217, 0.25);
 }
 .btn-primary:active { transform: translateY(0); }
 
@@ -77,9 +78,9 @@ body {
   color: #0f172a;
   border: 1.5px solid #e2e8f0;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
@@ -94,38 +95,41 @@ body {
   color: white;
   border: none;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.15);
 }
 .btn-gradient:hover {
   background: #5b21b6;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(109, 40, 217, 0.25);
 }
 
 /* ── CARDS ── */
 .card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 .card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
 }
 
 /* glass-card — keep name for compat, now light */
 .glass-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 /* ── INPUTS ── */

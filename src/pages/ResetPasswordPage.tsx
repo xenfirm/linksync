@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Lock, Eye, EyeOff, CheckCircle2, AlertCircle, Save } from 'lucide-react'
+import { Lock, Eye, EyeOff, CheckCircle2, AlertCircle, Save, Loader2 } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import Logo from '../components/Logo'
+import { supabase } from '../lib/supabase'
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState('')
@@ -10,12 +11,54 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  
+  // Session check states
+  const [sessionChecking, setSessionChecking] = useState(true)
+  const [hasValidSession, setHasValidSession] = useState(false)
 
   const { updatePassword } = useAuth()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    let mounted = true;
+
+    // Check if session exists immediately (e.g. hash parsed by supabase client)
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (mounted) {
+        if (session) {
+          setHasValidSession(true)
+          setError(null)
+        } else {
+          setHasValidSession(false)
+          setError("Invalid or expired reset link. Please request a new one.")
+        }
+        setSessionChecking(false)
+      }
+    }
+
+    checkSession()
+
+    // Listen specifically for the PASSWORD_RECOVERY event
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" || session) {
+        if (mounted) {
+          setHasValidSession(true)
+          setSessionChecking(false)
+          setError(null)
+        }
+      }
+    })
+
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!hasValidSession) return;
     setError(null)
     setLoading(true)
 
@@ -46,7 +89,7 @@ export default function ResetPasswordPage() {
           Update Password
         </h1>
         <p style={{ color: '#64748b', textAlign: 'center', fontSize: '0.9rem', marginBottom: '2rem' }}>
-          Enter your new password below to regain access to your account.
+          {sessionChecking ? 'Verifying your reset link...' : 'Enter your new password below to regain access to your account.'}
         </p>
 
         {/* Alerts */}
@@ -62,7 +105,11 @@ export default function ResetPasswordPage() {
           </div>
         )}
 
-        {!success && (
+        {sessionChecking ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+            <Loader2 size={32} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+          </div>
+        ) : !success && hasValidSession ? (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
               <label htmlFor="new-password" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
@@ -91,7 +138,13 @@ export default function ResetPasswordPage() {
               {loading ? 'Updating...' : <><Save size={16} /> Update Password</>}
             </button>
           </form>
-        )}
+        ) : !success && !hasValidSession ? (
+          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+             <Link to="/auth?mode=reset" className="btn-primary" style={{ display: 'inline-flex', padding: '0.8rem 1.5rem', borderRadius: '12px', fontSize: '0.9rem' }}>
+               Request New Link
+             </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   )

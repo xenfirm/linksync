@@ -6,7 +6,7 @@ import Logo from '../components/Logo'
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams()
-  const [mode, setMode] = useState<'signin' | 'signup' | 'reset'>(
+  const [mode, setMode] = useState<'signin' | 'signup'>(
     searchParams.get('mode') === 'signup' ? 'signup' : 'signin'
   )
   const [email, setEmail] = useState('')
@@ -16,12 +16,22 @@ export default function AuthPage() {
   const [error, setError] = useState<string | null>(null)
   const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
-  const { signIn, signUp, sendPasswordResetEmail, user } = useAuth()
+  const { signIn, signUp, user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user && mode !== 'reset') navigate('/dashboard', { replace: true })
-  }, [user, navigate, mode])
+    if (user) navigate('/dashboard', { replace: true })
+  }, [user, navigate])
+
+  const getErrorMessage = (errorMsg: string) => {
+    const msg = errorMsg.toLowerCase()
+    if (msg.includes('invalid login')) return 'Incorrect email or password. Please try again.'
+    if (msg.includes('already registered')) return 'An account with this email already exists.'
+    if (msg.includes('password should be at least')) return 'Your password must be at least 6 characters long.'
+    if (msg.includes('user not found')) return 'No account found with this email address.'
+    if (msg.includes('rate limit')) return 'Too many attempts. Please try again later.'
+    return errorMsg
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,22 +42,18 @@ export default function AuthPage() {
     try {
       if (mode === 'signup') {
         const { error } = await signUp(email, password)
-        if (error) setError(error.message)
+        if (error) setError(getErrorMessage(error.message))
         else {
           setSuccessMsg('Account created! Check your email to confirm, then sign in.')
           setMode('signin')
         }
       } else if (mode === 'signin') {
         const { error } = await signIn(email, password)
-        if (error) setError(error.message)
+        if (error) setError(getErrorMessage(error.message))
         else navigate('/dashboard', { replace: true })
-      } else if (mode === 'reset') {
-        const { error } = await sendPasswordResetEmail(email)
-        if (error) setError(error.message)
-        else setSuccessMsg('Password reset link sent! Check your inbox.')
       }
     } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred')
+      setError(getErrorMessage(err.message || 'An unexpected error occurred'))
     }
     
     setLoading(false)
@@ -62,42 +68,31 @@ export default function AuthPage() {
 
       {/* Card */}
       <div style={{ width: '100%', maxWidth: '420px', background: '#fff', borderRadius: '24px', padding: 'clamp(1.75rem, 5vw, 2.5rem)', boxShadow: '0 8px 40px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
-        {mode === 'reset' && (
-          <button 
-            onClick={() => { setMode('signin'); setError(null); setSuccessMsg(null); }}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'none', border: 'none', color: '#6d28d9', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', marginBottom: '1rem', padding: 0 }}
-          >
-            <ChevronLeft size={16} /> Back to Sign In
-          </button>
-        )}
-
         <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', color: '#0f172a', marginBottom: '0.4rem', textAlign: 'center' }}>
-          {mode === 'signup' ? 'Create your account' : mode === 'reset' ? 'Reset Password' : 'Welcome back'}
+          {mode === 'signup' ? 'Create your account' : 'Welcome back'}
         </h1>
         <p style={{ color: '#64748b', textAlign: 'center', fontSize: '0.9rem', marginBottom: '2rem' }}>
-          {mode === 'signup' ? 'Start capturing leads from your bio link' : mode === 'reset' ? 'Enter your email to receive a reset link' : 'Sign in to access your dashboard'}
+          {mode === 'signup' ? 'Start capturing leads from your bio link' : 'Sign in to access your dashboard'}
         </p>
 
-        {/* Toggle (hidden in reset mode) */}
-        {mode !== 'reset' && (
-          <div style={{ display: 'flex', background: '#f8fafc', borderRadius: '12px', padding: '4px', marginBottom: '1.75rem', border: '1px solid #e2e8f0' }}>
-            {(['signin', 'signup'] as const).map(m => (
-              <button
-                key={m}
-                onClick={() => { setMode(m); setError(null); setSuccessMsg(null); }}
-                style={{
-                  flex: 1, padding: '0.55rem', borderRadius: '10px', border: 'none', cursor: 'pointer',
-                  fontSize: '0.875rem', fontWeight: 600, transition: 'all 0.2s',
-                  background: mode === m ? '#6d28d9' : 'transparent',
-                  color: mode === m ? 'white' : '#64748b',
-                  boxShadow: mode === m ? '0 2px 8px rgba(109,40,217,0.25)' : 'none',
-                }}
-              >
-                {m === 'signin' ? 'Sign In' : 'Sign Up'}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Toggle */}
+        <div style={{ display: 'flex', background: '#f8fafc', borderRadius: '12px', padding: '4px', marginBottom: '1.75rem', border: '1px solid #e2e8f0' }}>
+          {(['signin', 'signup'] as const).map(m => (
+            <button
+              key={m}
+              onClick={() => { setMode(m); setError(null); setSuccessMsg(null); }}
+              style={{
+                flex: 1, padding: '0.55rem', borderRadius: '10px', border: 'none', cursor: 'pointer',
+                fontSize: '0.875rem', fontWeight: 600, transition: 'all 0.2s',
+                background: mode === m ? '#6d28d9' : 'transparent',
+                color: mode === m ? 'white' : '#64748b',
+                boxShadow: mode === m ? '0 2px 8px rgba(109,40,217,0.25)' : 'none',
+              }}
+            >
+              {m === 'signin' ? 'Sign In' : 'Sign Up'}
+            </button>
+          ))}
+        </div>
 
         {/* Alerts */}
         {error && (
@@ -128,36 +123,35 @@ export default function AuthPage() {
             </div>
           </div>
 
-          {/* Password (hidden in reset mode) */}
-          {mode !== 'reset' && (
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                <label htmlFor="auth-password" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151' }}>
-                  Password
-                </label>
-                <button 
-                  type="button" 
-                  onClick={() => { setMode('reset'); setError(null); setSuccessMsg(null); }}
-                  style={{ background: 'none', border: 'none', color: '#6d28d9', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', padding: 0 }}
+          {/* Password */}
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+              <label htmlFor="auth-password" style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151' }}>
+                Password
+              </label>
+              {mode === 'signin' && (
+                <Link 
+                  to="/forgot-password"
+                  style={{ color: '#6d28d9', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none' }}
                 >
                   Forgot Password?
-                </button>
-              </div>
-              <div style={{ position: 'relative' }}>
-                <Lock size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-                <input
-                  id="auth-password" type={showPassword ? 'text' : 'password'} className="input-dark"
-                  placeholder="Minimum 6 characters" value={password}
-                  onChange={e => setPassword(e.target.value)} required minLength={6}
-                  style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
-                />
-                <button type="button" onClick={() => setShowPassword(!showPassword)}
-                  style={{ position: 'absolute', right: '0.875rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', padding: 0 }}>
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
+                </Link>
+              )}
             </div>
-          )}
+            <div style={{ position: 'relative' }}>
+              <Lock size={16} style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+              <input
+                id="auth-password" type={showPassword ? 'text' : 'password'} className="input-dark"
+                placeholder="Minimum 6 characters" value={password}
+                onChange={e => setPassword(e.target.value)} required minLength={6}
+                style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
+              />
+              <button type="button" onClick={() => setShowPassword(!showPassword)}
+                style={{ position: 'absolute', right: '0.875rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', padding: 0 }}>
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+          </div>
 
           <button
             id="btn-auth-submit" type="submit" disabled={loading}
@@ -165,7 +159,7 @@ export default function AuthPage() {
             style={{ width: '100%', padding: '0.9rem', borderRadius: '12px', fontSize: '0.95rem', justifyContent: 'center', marginTop: '0.25rem', opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
           >
             {loading ? 'Please wait…' : (
-              <>{mode === 'signup' ? 'Create Account' : mode === 'reset' ? 'Send Reset Link' : 'Sign In'} <ArrowRight size={16} /></>
+              <>{mode === 'signup' ? 'Create Account' : 'Sign In'} <ArrowRight size={16} /></>
             )}
           </button>
         </form>

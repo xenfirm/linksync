@@ -29,6 +29,13 @@ export default function DashboardLayout() {
           )}
           <p style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.875rem' }}>{profile.name}</p>
           <p style={{ color: '#94a3b8', fontSize: '0.75rem' }}>@{profile.username}</p>
+          
+          {profile.is_admin && (
+            <div style={{ marginTop: '0.5rem', display: 'inline-block', background: '#0f172a', color: 'white', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Admin Mode
+            </div>
+          )}
+
           <a href={`/${profile.username}`} target="_blank" rel="noopener noreferrer"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.75rem', background: '#ede9fe', border: '1px solid #ddd6fe', color: '#6d28d9', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 600, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
             <ExternalLink size={11} /> View Page
@@ -57,6 +64,20 @@ export default function DashboardLayout() {
           </NavLink>
         ))}
       </nav>
+
+      {/* Upgrade Banner */}
+      {profile && profile.plan !== 'pro' && !profile.is_admin && (
+        <div style={{ marginTop: '1rem', background: 'linear-gradient(135deg, #6d28d9, #4f46e5)', borderRadius: '16px', padding: '1.25rem', color: 'white' }}>
+          <p style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Upgrade to Pro</p>
+          <p style={{ fontSize: '0.75rem', opacity: 0.9, marginBottom: '1rem', lineHeight: 1.4 }}>Unlock lead capture, unlimited links, and advanced analytics.</p>
+          <NavLink 
+            to="/dashboard/leads" // Direct them to leads page where the upgrade UI is clear
+            style={{ display: 'block', background: 'white', color: '#6d28d9', textAlign: 'center', padding: '0.5rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
+          >
+            Learn More
+          </NavLink>
+        </div>
+      )}
     </aside>
   )
 

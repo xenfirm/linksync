@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Copy, Check, Users, Loader2, Phone, Calendar, MessageCircle, AlertCircle } from 'lucide-react'
 import { useProfile } from '../../hooks/useProfile'
 import { useLeads } from '../../hooks/useLeads'
+import { usePayments } from '../../hooks/usePayments'
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
@@ -44,6 +45,9 @@ function formatDate(iso: string) {
 export default function LeadsPage() {
   const { profile } = useProfile()
   const { leads, loading } = useLeads(profile?.id)
+  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
+  
+  const hasProAccess = profile?.plan === 'pro' || profile?.is_admin;
 
   if (!profile) {
     return (
@@ -86,7 +90,30 @@ export default function LeadsPage() {
         </p>
       </div>
 
-      {/* Stats Row */}
+      {!hasProAccess ? (
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '4rem 2rem', textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}>
+          <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#6d28d9' }}>
+            <Users size={32} />
+          </div>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', color: '#0f172a', marginBottom: '0.5rem' }}>
+            Lead Capture is a Pro Feature
+          </h2>
+          <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '2rem', lineHeight: 1.6 }}>
+            Upgrade to Pro to add a lead capture form to your bio page, collect phone numbers, and manage your leads here.
+          </p>
+          <button 
+            onClick={() => upgradeToPro(profile.user_id, profile.name)}
+            disabled={paymentLoading}
+            className="btn-primary" 
+            style={{ padding: '0.8rem 2rem', opacity: paymentLoading ? 0.7 : 1 }}
+          >
+            {paymentLoading ? 'Opening Checkout...' : 'Upgrade to Pro'}
+          </button>
+          {paymentError && <p style={{ color: '#e11d48', fontSize: '0.85rem', marginTop: '1rem' }}>{paymentError}</p>}
+        </div>
+      ) : (
+        <>
+          {/* Stats Row */}
       <div
         style={{
           display: 'grid',
@@ -278,6 +305,8 @@ export default function LeadsPage() {
             ))}
           </div>
         </div>
+      )}
+      </>
       )}
     </div>
   )

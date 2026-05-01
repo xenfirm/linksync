@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# 🚀 LinkSync - Turn Your Bio Into a Lead Machine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LinkSync is a high-conversion "Link in Bio" platform designed specifically for creators, freelancers, and small businesses who want to transform Instagram profile visits into direct WhatsApp leads.
 
-Currently, two official plugins are available:
+## 🌟 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dynamic Bio Page**: A premium, responsive landing page for all your important links.
+- **Lead Capture System (Pro)**: Integrated form to collect name and phone number before redirecting to WhatsApp.
+- **WhatsApp Integration**: Sticky primary CTA to start instant conversations.
+- **Analytics Dashboard**: Track total leads, link clicks, and conversion rates.
+- **Secure Authentication**: Robust system with centralized `useAuth`, password recovery, and protected routes.
+- **Internal Admin Bypass**: Built-in developer mode to test Pro features without active payments.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Technology Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React (Vite), TypeScript, Lucide Icons.
+- **Styling**: Vanilla CSS (Custom design system).
+- **Backend**: Supabase (PostgreSQL, Auth, Storage).
+- **Payments**: Razorpay (Edge Function integration).
+- **Emails**: Resend (Transactional notifications).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🏗️ Architecture & Security
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+LinkSync follows a **Zero-Trust Frontend** architecture. All sensitive logic and data protection are enforced at the database and serverless level.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🛡️ Row Level Security (RLS)
+- **Profiles**: Publicly viewable; updatable only by the owner.
+- **Links**: Publicly viewable; managed only by the owner.
+- **Leads**: Publicly submittable (for Pro users); viewable ONLY by Pro owners or Admins.
+
+### ⚡ Edge Functions
+- `create-order`: Generates secure Razorpay orders.
+- `verify-payment`: Validates HMAC signatures and upgrades user plans via Service Role.
+- `send-lead-email`: Sends instant email alerts when a new lead is captured.
+- `send-auth-email`: Custom transactional emails for password resets.
+
+---
+
+## ⚙️ Setup & Configuration
+
+### 1. Environment Variables (`.env.local`)
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Supabase Secrets
+Set these for your Edge Functions using the CLI:
+```bash
+npx supabase secrets set RAZORPAY_KEY_ID=xxx
+npx supabase secrets set RAZORPAY_KEY_SECRET=xxx
+npx supabase secrets set RESEND_API_KEY=xxx
 ```
+
+### 3. Database Schema
+Run the contents of `supabase-schema.sql` in your Supabase SQL Editor to initialize tables, indexes, and RLS policies.
+
+---
+
+## 👨‍💻 Developer Tips
+
+### Admin Bypass
+To unlock Pro features for testing without paying:
+```sql
+UPDATE profiles SET is_admin = true WHERE user_id = 'your_user_id';
+```
+*Look for the "Admin Mode" badge in your dashboard to confirm activation.*
+
+### Local Development
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 📄 License
+Internal Project - All Rights Reserved.

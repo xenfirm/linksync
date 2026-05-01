@@ -95,13 +95,12 @@ export default function LandingPage() {
             </div>
 
             <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', lineHeight: 1.15, color: '#0f172a', marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>
-              Turn Your Bio Link<br />
+              Turn Your Instagram Bio<br />
               Into a <span className="gradient-text">Lead Machine</span>
             </h1>
 
             <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: '#64748b', maxWidth: '480px', marginBottom: '2rem', lineHeight: 1.65 }}>
-              Create a beautiful bio link page, capture leads and<br className="hide-mobile" />
-              start WhatsApp conversations instantly.
+              Capture leads and start WhatsApp conversations instantly.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.875rem', marginBottom: '2rem' }}>
@@ -110,7 +109,7 @@ export default function LandingPage() {
                 className="btn-primary"
                 style={{ padding: '0.875rem 1.75rem', fontSize: '0.95rem', borderRadius: '12px', boxShadow: '0 8px 24px rgba(109,40,217,0.3)' }}
               >
-                Get Started Free <ArrowRight size={18} />
+                Create Your Page Free <ArrowRight size={18} />
               </Link>
               <a
                 href="#demo"
@@ -138,6 +137,36 @@ export default function LandingPage() {
           {/* Right — phone */}
           <div style={{ flex: '0 1 340px', display: 'flex', justifyContent: 'center', minWidth: 0, paddingRight: '80px' }}>
             <PhoneMockup />
+          </div>
+        </div>
+      </section>
+
+      {/* ── LOSING CUSTOMERS SECTION ── */}
+      <section style={{ padding: '5rem 1.25rem', background: '#fff', borderBottom: '1px solid #f1f5f9' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: '1rem', color: '#ef4444', letterSpacing: '-0.02em' }}>
+            You're losing customers daily
+          </h2>
+          <p style={{ fontSize: '1.1rem', color: '#64748b', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
+            If you only have a basic bio link, you are missing out on potential sales and leads.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', textAlign: 'left' }}>
+            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>🙈</div>
+              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>Visitors Don't Message</h3>
+              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>People click your link but find it too hard to start a conversation with you.</p>
+            </div>
+            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>📉</div>
+              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>No Lead Capture</h3>
+              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>Without a form, you have no way to collect phone numbers and follow up.</p>
+            </div>
+            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>💸</div>
+              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>Lost Opportunities</h3>
+              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>Every uncaptured lead is potential revenue walking out the door.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -221,7 +250,7 @@ export default function LandingPage() {
                 ))}
               </ul>
               <Link to="/auth?mode=signup" style={{ display: 'block', textAlign: 'center', padding: '0.85rem', borderRadius: '12px', border: '1.5px solid #e2e8f0', color: '#374151', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'all 0.2s' }}>
-                Get Started Free
+                Create Your Page Free
               </Link>
             </div>
 
@@ -318,7 +347,7 @@ export default function LandingPage() {
               className="btn-primary"
               style={{ padding: '0.9rem 2rem', fontSize: '1rem', borderRadius: '12px', boxShadow: '0 8px 24px rgba(109,40,217,0.3)', whiteSpace: 'nowrap' }}
             >
-              Create Your LinkSync Page <ArrowRight size={18} />
+              Create Your Page Free <ArrowRight size={18} />
             </Link>
             <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
               No credit card required • Setup in 2 minutes

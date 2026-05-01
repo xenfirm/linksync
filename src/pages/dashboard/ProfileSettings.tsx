@@ -13,6 +13,7 @@ export default function ProfileSettings() {
   const [username, setUsername] = useState('')
   const [bio, setBio] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
+  const [whatsappMessage, setWhatsappMessage] = useState('')
   const [profileImage, setProfileImage] = useState('')
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -20,16 +21,25 @@ export default function ProfileSettings() {
   const [uploading, setUploading] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const [initialized, setInitialized] = useState(false)
+  const [stats, setStats] = useState({ leads: 0, clicks: 0 })
 
-  // Populate form fields when profile loads (only once)
   useEffect(() => {
     if (profile && !initialized) {
       setName(profile.name || '')
       setUsername(profile.username || '')
       setBio(profile.bio || '')
       setWhatsapp(profile.whatsapp_number || '')
+      setWhatsappMessage(profile.whatsapp_message || '')
       setProfileImage(profile.profile_image || '')
       setInitialized(true)
+      
+      // Fetch stats
+      const fetchStats = async () => {
+        const { count: leadsCount } = await supabase.from('leads').select('*', { count: 'exact', head: true }).eq('profile_id', profile.id)
+        const { count: clicksCount } = await supabase.from('clicks').select('*', { count: 'exact', head: true }).eq('profile_id', profile.id)
+        setStats({ leads: leadsCount || 0, clicks: clicksCount || 0 })
+      }
+      fetchStats()
     }
   }, [profile, initialized])
 
@@ -68,7 +78,9 @@ export default function ProfileSettings() {
       username: username.trim().toLowerCase().replace(/[^a-z0-9_-]/g, ''),
       bio: bio.trim(),
       whatsapp_number: whatsapp.trim(),
+      whatsapp_message: whatsappMessage.trim(),
       profile_image: profileImage,
+      plan: profile?.plan || 'free',
     }
 
     const { error: err } = isNew
@@ -102,9 +114,17 @@ export default function ProfileSettings() {
             fontSize: '1.6rem',
             color: '#0f172a',
             marginBottom: '0.35rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem'
           }}
         >
           {isNew ? 'Create Your Profile' : 'Profile Settings'}
+          {profile?.is_admin && (
+            <span style={{ background: '#0f172a', color: 'white', fontSize: '10px', fontWeight: 800, padding: '4px 10px', borderRadius: '6px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+              Admin Mode
+            </span>
+          )}
         </h1>
         <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
           {isNew
@@ -112,6 +132,25 @@ export default function ProfileSettings() {
             : 'Update your public profile information.'}
         </p>
       </div>
+
+      {!isNew && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Total Leads</span>
+            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>{stats.leads}</span>
+          </div>
+          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Total Clicks</span>
+            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>{stats.clicks}</span>
+          </div>
+          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Conversion Rate</span>
+            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>
+              {stats.clicks > 0 ? Math.round((stats.leads / stats.clicks) * 100) : 0}%
+            </span>
+          </div>
+        </div>
+      )}
 
       <form onSubmit={handleSave}>
         {/* Avatar */}
@@ -294,6 +333,25 @@ export default function ProfileSettings() {
             />
             <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
               Include country code (e.g. +1 for US, +91 for India)
+            </p>
+          </div>
+
+          {/* WhatsApp Message Builder */}
+          <div>
+            <label htmlFor="field-whatsapp-msg" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>
+              Default WhatsApp Message
+            </label>
+            <textarea
+              id="field-whatsapp-msg"
+              className="input-dark"
+              placeholder="Hi, I saw your profile and I'm interested..."
+              value={whatsappMessage}
+              onChange={e => setWhatsappMessage(e.target.value)}
+              rows={2}
+              style={{ resize: 'vertical' }}
+            />
+            <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
+              This message will be pre-filled when visitors click your WhatsApp button.
             </p>
           </div>
         </div>

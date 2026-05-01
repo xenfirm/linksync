@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { useProfile } from '../../hooks/useProfile'
 import { useLinks } from '../../hooks/useLinks'
+import { usePayments } from '../../hooks/usePayments'
 import type { Link } from '../../lib/types'
 
 function LinkCard({
@@ -103,6 +104,10 @@ function LinkCard({
 export default function LinksManager() {
   const { profile } = useProfile()
   const { links, loading, addLink, updateLink, deleteLink, reorderLinks } = useLinks(profile?.id)
+  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
+
+  const hasProAccess = profile?.plan === 'pro' || profile?.is_admin;
+  const hasBasicAccess = profile?.plan === 'basic' || hasProAccess;
 
   const [editingLink, setEditingLink] = useState<Link | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
@@ -211,7 +216,7 @@ export default function LinksManager() {
           flexWrap: 'wrap',
         }}
       >
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <h1
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -224,11 +229,11 @@ export default function LinksManager() {
             Links Manager
           </h1>
           <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
-            Add up to 5 links to your bio page. Drag to reorder.
+            Add links to your bio page. Drag to reorder.
           </p>
         </div>
 
-        {links.length < 5 && (
+        {links.length < (hasProAccess ? Infinity : hasBasicAccess ? 10 : 3) && (
           <button
             id="btn-add-link"
             onClick={() => { setShowAddForm(!showAddForm); setFormError(null) }}
@@ -408,10 +413,21 @@ export default function LinksManager() {
         </div>
       )}
 
-      {links.length >= 5 && (
-        <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '1rem', textAlign: 'center' }}>
-          Maximum 5 links allowed on your bio page.
-        </p>
+      {links.length >= (hasProAccess ? Infinity : hasBasicAccess ? 10 : 3) && !hasProAccess && (
+        <div style={{ marginTop: '1.5rem', background: '#faf5ff', border: '1px solid #ddd6fe', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
+          <p style={{ color: '#6d28d9', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+            You've reached your link limit ({hasBasicAccess ? 10 : 3} links)
+          </p>
+          <button 
+            onClick={() => upgradeToPro(profile.user_id, profile.name)}
+            disabled={paymentLoading}
+            className="btn-primary" 
+            style={{ padding: '0.6rem 1.5rem', fontSize: '0.85rem', opacity: paymentLoading ? 0.7 : 1 }}
+          >
+            {paymentLoading ? 'Opening Checkout...' : 'Upgrade to Pro for Unlimited Links'}
+          </button>
+          {paymentError && <p style={{ color: '#e11d48', fontSize: '0.8rem', marginTop: '0.75rem' }}>{paymentError}</p>}
+        </div>
       )}
     </div>
   )
