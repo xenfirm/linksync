@@ -44,10 +44,9 @@ function formatDate(iso: string) {
 
 export default function LeadsPage() {
   const { profile } = useProfile()
-  const { leads, loading } = useLeads(profile?.id)
-  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
-  
   const hasProAccess = profile?.plan === 'pro' || profile?.is_admin;
+  const { leads, loading } = useLeads(profile?.id, hasProAccess)
+  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
 
   if (!profile) {
     return (

@@ -60,10 +60,12 @@ export default function PublicBioPage() {
     else { 
       setFormSuccess(true)
       
-      // Trigger the edge function to send an email notification (fire and forget to not block UI)
-      supabase.functions.invoke('send-lead-email', {
-        body: leadPayload
-      }).then().catch(console.error);
+      // Trigger the edge function to send an email notification ONLY IF profile is Pro (fire and forget)
+      if (isPro) {
+        supabase.functions.invoke('send-lead-email', {
+          body: leadPayload
+        }).then().catch(console.error);
+      }
 
       // Auto redirect to WhatsApp
       if (profile.whatsapp_number) {

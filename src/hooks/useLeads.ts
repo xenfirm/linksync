@@ -2,12 +2,12 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Lead } from '../lib/types'
 
-export function useLeads(profileId: string | undefined) {
+export function useLeads(profileId: string | undefined, enabled: boolean = true) {
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(false)
 
   const fetchLeads = useCallback(async () => {
-    if (!profileId) return
+    if (!profileId || !enabled) return
     setLoading(true)
     const { data } = await supabase
       .from('leads')
