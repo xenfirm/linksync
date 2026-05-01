@@ -81,3 +81,6 @@ npm run dev
 
 ## 📄 License
 Internal Project - All Rights Reserved.
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Made with](https://img.shields.io/badge/made%20with-React-blue)
