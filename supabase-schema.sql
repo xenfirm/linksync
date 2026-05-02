@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   plan text DEFAULT 'free' CHECK (plan IN ('free', 'basic', 'pro')),
   is_admin boolean DEFAULT false,
   trial_ends_at timestamptz,
+  referral_code text UNIQUE,
+  referred_by text REFERENCES public.profiles(referral_code),
+  referral_count integer DEFAULT 0,
+  reward_unlocked boolean DEFAULT false,
   created_at timestamptz DEFAULT now()
 );
 
@@ -193,15 +197,46 @@ CREATE INDEX IF NOT EXISTS idx_clicks_type ON public.clicks(type);
 -- This function creates a profile automatically when a new user signs up in auth.users
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS trigger AS $$
+DECLARE
+  base_username text;
+  final_username text;
+  ref_by text;
 BEGIN
-  INSERT INTO public.profiles (user_id, username, name, trial_ends_at, plan)
+  -- 1. Create unique username
+  base_username := LOWER(SPLIT_PART(new.email, '@', 1));
+  final_username := base_username || '_' || floor(random() * 1000)::text;
+  
+  -- 2. Check for referral metadata
+  ref_by := new.raw_user_meta_data->>'referred_by';
+  
+  -- 3. Insert the new profile
+  INSERT INTO public.profiles (user_id, username, name, trial_ends_at, plan, referral_code, referred_by)
   VALUES (
     new.id,
-    LOWER(SPLIT_PART(new.email, '@', 1)) || '_' || floor(random() * 1000)::text, -- unique username
+    final_username,
     COALESCE(new.raw_user_meta_data->>'full_name', SPLIT_PART(new.email, '@', 1)),
     now() + interval '7 days', -- 7-day trial
-    'basic' -- Start on basic with trial features unlocked
+    'basic', -- Start on basic
+    final_username, -- Using username as referral code (simple and memorable)
+    ref_by
   );
+
+  -- 4. Process the referrer if valid
+  IF ref_by IS NOT NULL THEN
+    -- Increment count and check for reward
+    UPDATE public.profiles
+    SET referral_count = referral_count + 1
+    WHERE referral_code = ref_by;
+
+    -- Unlock Pro reward if count hits 3
+    UPDATE public.profiles
+    SET plan = 'pro', 
+        reward_unlocked = true
+    WHERE referral_code = ref_by 
+      AND referral_count >= 3 
+      AND reward_unlocked = false;
+  END IF;
+
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

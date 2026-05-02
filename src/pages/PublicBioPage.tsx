@@ -83,19 +83,19 @@ export default function PublicBioPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#faf5ff' }}>
-        <Loader2 size={32} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff7f2' }}>
+        <Loader2 size={32} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
       </div>
     )
   }
 
   if (notFound) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#faf5ff', padding: '2rem', gap: '1rem' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff7f2', padding: '2rem', gap: '1rem' }}>
         <AlertCircle size={48} style={{ color: '#94a3b8' }} />
         <h1 style={{ fontWeight: 800, color: '#0f172a', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Profile not found</h1>
         <p style={{ color: '#64748b' }}>@{username} doesn't exist on LinkSync</p>
-        <a href="/" style={{ marginTop: '0.5rem', background: '#6d28d9', color: 'white', textDecoration: 'none', padding: '0.75rem 1.75rem', borderRadius: '12px', fontWeight: 700, fontSize: '0.95rem' }}>
+        <a href="/" style={{ marginTop: '0.5rem', background: '#ff4d00', color: 'white', textDecoration: 'none', padding: '0.75rem 1.75rem', borderRadius: '12px', fontWeight: 700, fontSize: '0.95rem' }}>
           Create your own LinkSync
         </a>
       </div>
@@ -110,25 +110,25 @@ export default function PublicBioPage() {
   const isBasic = profile?.plan === 'basic' || isPro;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #faf5ff 0%, #f0f9ff 50%, #faf5ff 100%)', padding: '2.5rem 1rem 7rem', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #fff7f2 0%, #f0f9ff 50%, #fff7f2 100%)', padding: '2.5rem 1rem 7rem', display: 'flex', justifyContent: 'center' }}>
       {/* Subtle top glow */}
-      <div style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', width: '600px', height: '250px', background: 'radial-gradient(ellipse, rgba(109,40,217,0.12) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', width: '600px', height: '250px', background: 'radial-gradient(ellipse, rgba(255,77,0,0.12) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
 
       <div style={{ width: '100%', maxWidth: '420px', position: 'relative', zIndex: 1 }}>
         {/* Profile Card */}
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2.5rem 1.75rem', textAlign: 'center', marginBottom: '1rem', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}>
           {profile?.profile_image ? (
             <img src={profile.profile_image} alt={profile.name}
-              style={{ width: '88px', height: '88px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #ede9fe', margin: '0 auto 1rem', display: 'block' }} />
+              style={{ width: '88px', height: '88px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #fff7f2', margin: '0 auto 1rem', display: 'block' }} />
           ) : (
-            <div style={{ width: '88px', height: '88px', borderRadius: '50%', background: 'linear-gradient(135deg, #6d28d9, #7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: '2.25rem', fontWeight: 900, color: 'white', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <div style={{ width: '88px', height: '88px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff4d00, #ff6a26)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: '2.25rem', fontWeight: 900, color: 'white', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {profile?.name?.charAt(0)?.toUpperCase() || '?'}
             </div>
           )}
           <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.35rem', color: '#0f172a', marginBottom: '0.3rem' }}>
             {profile?.name}
           </h1>
-          <p style={{ color: '#6d28d9', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>@{profile?.username}</p>
+          <p style={{ color: '#ff4d00', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>@{profile?.username}</p>
           {profile?.bio && <p style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: 1.65 }}>{profile.bio}</p>}
         </div>
 
@@ -185,7 +185,7 @@ export default function PublicBioPage() {
         {/* Powered by */}
         {!isPro && (
           <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.75rem', marginTop: '2.5rem' }}>
-            Powered by{' '}<a href="/" style={{ color: '#6d28d9', textDecoration: 'none', fontWeight: 600 }}>LinkSync</a>
+            Powered by{' '}<a href="/" style={{ color: '#ff4d00', textDecoration: 'none', fontWeight: 600 }}>LinkSync</a>
           </p>
         )}
       </div>

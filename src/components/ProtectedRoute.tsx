@@ -10,10 +10,10 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#0f0f1a' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#ffffff' }}>
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
-          <span style={{ color: '#9b99c4', fontSize: '0.9rem' }}>Loading...</span>
+          <div className="w-10 h-10 rounded-full border-2 border-brand border-t-transparent animate-spin" />
+          <span style={{ color: '#64748b', fontSize: '0.9rem' }}>Loading...</span>
         </div>
       </div>
     )

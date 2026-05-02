@@ -10,6 +10,10 @@ export interface Profile {
   plan: 'free' | 'basic' | 'pro'
   is_admin: boolean
   trial_ends_at?: string
+  referral_code?: string
+  referred_by?: string
+  referral_count?: number
+  reward_unlocked?: boolean
   created_at: string
 }
 

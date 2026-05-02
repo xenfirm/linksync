@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #faf5ff, #f0f9ff)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #fff7f2, #f0f9ff)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem' }}>
       {/* Logo */}
       <Link to="/" style={{ textDecoration: 'none', marginBottom: '2rem' }}>
         <Logo size={34} />
@@ -107,7 +107,7 @@ export default function ResetPasswordPage() {
 
         {sessionChecking ? (
           <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-            <Loader2 size={32} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+            <Loader2 size={32} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
           </div>
         ) : !success && hasValidSession ? (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

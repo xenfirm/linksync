@@ -92,7 +92,7 @@ export default function ProfileSettings() {
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem' }}>
-        <Loader2 size={28} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+        <Loader2 size={28} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
       </div>
     )
   }
@@ -131,7 +131,7 @@ export default function ProfileSettings() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <div>
               <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Account Plan</h3>
-              <p style={{ color: '#64748b', fontSize: '0.8rem' }}>Current Plan: <span style={{ color: '#6d28d9', fontWeight: 700, textTransform: 'capitalize' }}>{profile.plan}</span></p>
+              <p style={{ color: '#64748b', fontSize: '0.8rem' }}>Current Plan: <span style={{ color: '#ff4d00', fontWeight: 700, textTransform: 'capitalize' }}>{profile.plan}</span></p>
             </div>
             {profile.plan === 'free' && (
               <div style={{ display: 'flex', gap: '0.6rem' }}>
@@ -145,7 +145,7 @@ export default function ProfileSettings() {
                 <button 
                   type="button"
                   onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
-                  style={{ background: '#6d28d9', border: '1px solid #6d28d9', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
                 >
                   Upgrade to Pro (₹299)
                 </button>
@@ -155,7 +155,7 @@ export default function ProfileSettings() {
               <button 
                 type="button"
                 onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
-                style={{ background: '#6d28d9', border: '1px solid #6d28d9', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
               >
                 Upgrade to Pro (₹299)
               </button>
@@ -164,6 +164,7 @@ export default function ProfileSettings() {
           {paymentError && <p style={{ color: '#e11d48', fontSize: '0.75rem', marginTop: '0.5rem' }}>{paymentError}</p>}
         </div>
       )}
+
       <form onSubmit={handleSave}>
         {/* Avatar */}
         <div
@@ -192,7 +193,7 @@ export default function ProfileSettings() {
                     width: '72px',
                     height: '72px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #6d28d9, #7c3aed)',
+                    background: 'linear-gradient(135deg, #ff4d00, #ff6a26)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -285,7 +286,7 @@ export default function ProfileSettings() {
             {username && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.4rem' }}>
                 <p style={{ color: '#64748b', fontSize: '0.75rem' }}>
-                  Your page: <span style={{ color: '#6d28d9' }}>/{username}</span>
+                  Your page: <span style={{ color: '#ff4d00' }}>/{username}</span>
                 </p>
                 <div style={{ display: 'flex', gap: '0.25rem' }}>
                   <a

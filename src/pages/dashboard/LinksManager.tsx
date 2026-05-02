@@ -42,7 +42,7 @@ function LinkCard({
       onDrop={onDrop}
       style={{
         background: '#fff',
-        border: dragOver ? '1.5px solid #6d28d9' : '1px solid #e2e8f0',
+        border: dragOver ? '1.5px solid #ff4d00' : '1px solid #e2e8f0',
         borderRadius: '12px',
         padding: '1rem',
         display: 'flex',
@@ -50,7 +50,7 @@ function LinkCard({
         gap: '0.75rem',
         cursor: 'grab',
         transition: 'all 0.2s',
-        boxShadow: dragOver ? '0 4px 12px rgba(109,40,217,0.1)' : 'none',
+        boxShadow: dragOver ? '0 4px 12px rgba(255, 77, 0,0.1)' : 'none',
       }}
     >
       <GripVertical size={16} style={{ color: '#94a3b8', flexShrink: 0 }} />
@@ -187,11 +187,11 @@ export default function LinksManager() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
-          background: '#ede9fe',
+          background: '#fff7f2',
           border: '1px solid #ddd6fe',
           borderRadius: '14px',
           padding: '1.5rem',
-          color: '#6d28d9',
+          color: '#ff4d00',
           fontSize: '0.9rem',
           fontWeight: 500,
         }}
@@ -263,8 +263,8 @@ export default function LinksManager() {
             borderRadius: '16px',
             padding: '1.5rem',
             marginBottom: '1.25rem',
-            border: '1px solid #6d28d9',
-            boxShadow: '0 4px 12px rgba(109,40,217,0.1)',
+            border: '1px solid #ff4d00',
+            boxShadow: '0 4px 12px rgba(255, 77, 0,0.1)',
           }}
         >
           <h3 style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem', marginBottom: '1rem' }}>
@@ -328,8 +328,8 @@ export default function LinksManager() {
             borderRadius: '16px',
             padding: '1.5rem',
             marginBottom: '1.25rem',
-            border: '1px solid #6d28d9',
-            boxShadow: '0 4px 12px rgba(109,40,217,0.1)',
+            border: '1px solid #ff4d00',
+            boxShadow: '0 4px 12px rgba(255, 77, 0,0.1)',
           }}
         >
           <h3 style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem', marginBottom: '1rem' }}>
@@ -382,7 +382,7 @@ export default function LinksManager() {
       {/* Links List */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-          <Loader2 size={24} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+          <Loader2 size={24} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
         </div>
       ) : links.length === 0 ? (
         <div
@@ -415,8 +415,8 @@ export default function LinksManager() {
       )}
 
       {links.length >= (isPro ? Infinity : isBasic ? 10 : 3) && !isPro && (
-        <div style={{ marginTop: '1.5rem', background: '#faf5ff', border: '1px solid #ddd6fe', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
-          <p style={{ color: '#6d28d9', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
+        <div style={{ marginTop: '1.5rem', background: '#fff7f2', border: '1px solid #ddd6fe', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
+          <p style={{ color: '#ff4d00', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
             You've reached your link limit ({isBasic ? 10 : 3} links)
           </p>
           <button 

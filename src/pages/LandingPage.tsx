@@ -1,77 +1,94 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle2, XCircle, MessageCircle, Users, Link2, Clock, Zap, Shield, Star } from 'lucide-react'
+import { useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { ArrowRight, CheckCircle2, MessageCircle, Users, Link2, Clock, Zap, Shield, Star, Mail, Send } from 'lucide-react'
+import { FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import Logo from '../components/Logo'
 
 /* ─── Phone Mockup ─── */
 function PhoneMockup() {
   return (
-    <div style={{ position: 'relative', width: '260px', margin: '0 auto', flexShrink: 0 }}>
+    <div style={{ position: 'relative', width: '280px', margin: '0 auto', flexShrink: 0 }}>
       {/* Soft background glow */}
-      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(109,40,217,0.12) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
+      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '320px', height: '320px', background: 'radial-gradient(circle, rgba(255,77,0,0.08) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
 
       {/* Phone frame */}
-      <div style={{ position: 'relative', zIndex: 1, background: '#1e1b4b', borderRadius: '36px', padding: '10px', border: '6px solid #2d2a6e', boxShadow: '0 40px 80px rgba(0,0,0,0.3)' }}>
+      <div style={{ position: 'relative', zIndex: 1, background: '#000', borderRadius: '44px', padding: '10px', boxShadow: '0 40px 80px rgba(0,0,0,0.2)' }}>
         {/* Notch */}
-        <div style={{ position: 'absolute', top: '16px', left: '50%', transform: 'translateX(-50%)', width: '50px', height: '14px', background: '#2d2a6e', borderRadius: '8px', zIndex: 2 }} />
+        <div style={{ position: 'absolute', top: '18px', left: '50%', transform: 'translateX(-50%)', width: '60px', height: '22px', background: '#000', borderRadius: '12px', zIndex: 2 }} />
 
         {/* Screen */}
-        <div style={{ background: '#f8fafc', borderRadius: '26px', padding: '2rem 1rem 1.25rem', minHeight: '450px', overflow: 'hidden' }}>
-          {/* Profile */}
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'linear-gradient(135deg, #6d28d9, #7c3aed)', margin: '0 auto 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '1.2rem' }}>A</div>
-            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>Anjali Sharma 🔵</div>
-            <div style={{ color: '#64748b', fontSize: '0.7rem', marginTop: '0.15rem' }}>Helping creators grow their<br />brand & revenue online</div>
+        <div style={{ background: '#ffffff', borderRadius: '34px', padding: '2.5rem 1.25rem 1.5rem', minHeight: '480px', overflow: 'hidden', position: 'relative' }}>
+          {/* Profile Image */}
+          <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+            <div style={{ width: '64px', height: '64px', borderRadius: '50%', overflow: 'hidden', margin: '0 auto 0.75rem', border: '2px solid #f1f5f9' }}>
+               <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}>
+              Anjali Sharma <CheckCircle2 size={14} fill="#ff4d00" color="white" />
+            </div>
+            <div style={{ color: '#64748b', fontSize: '0.7rem', marginTop: '0.25rem', lineHeight: 1.4 }}>Helping creators grow their<br />brand & revenue online ✨</div>
           </div>
 
           {/* WhatsApp */}
-          <button style={{ width: '100%', padding: '0.55rem', borderRadius: '8px', border: 'none', background: '#25d366', color: 'white', fontWeight: 700, fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-            <MessageCircle size={13} fill="white" /> WhatsApp Me
+          <button style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#ff4d00', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+            <MessageCircle size={15} fill="white" /> WhatsApp Me
           </button>
 
           {/* Links */}
-          {['My Store', 'Watch My YouTube', 'Book a Call'].map(l => (
-            <div key={l} style={{ width: '100%', padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontSize: '0.65rem' }}>📌</span>{l}
+          {[
+            { icon: '🛒', label: 'My Store' },
+            { icon: '📺', label: 'Watch My YouTube' },
+            { icon: '📅', label: 'Book a Call' }
+          ].map(l => (
+            <div key={l.label} style={{ width: '100%', padding: '0.65rem 1rem', borderRadius: '10px', border: '1px solid #f1f5f9', background: '#fff', color: '#0f172a', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <span style={{ fontSize: '0.8rem' }}>{l.icon}</span>{l.label}
             </div>
           ))}
 
-          {/* Lead form */}
-          <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Get in touch</div>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '6px', padding: '0.35rem 0.5rem', marginBottom: '0.4rem', fontSize: '0.68rem', color: '#94a3b8' }}>Your Name</div>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '6px', padding: '0.35rem 0.5rem', marginBottom: '0.5rem', fontSize: '0.68rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <span>🇮🇳 +91</span>
-            </div>
-            <button 
-              onClick={() => alert('Demo: In a real page, this would capture the lead and notify you instantly!')}
-              style={{ width: '100%', border: 'none', background: '#6d28d9', borderRadius: '6px', padding: '0.4rem', textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: 'white', cursor: 'pointer' }}
-            >
-              Send Message
-            </button>
+          {/* Newsletter */}
+          <div style={{ marginTop: '1.25rem', padding: '1rem', background: '#fafafa', borderRadius: '14px', border: '1px solid #f1f5f9' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Join my newsletter</div>
+            <div style={{ fontSize: '0.65rem', color: '#64748b', marginBottom: '0.75rem' }}>Get tips to grow on WhatsApp</div>
+            <input type="email" placeholder="Enter your email" style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '0.7rem', marginBottom: '0.5rem', outline: 'none' }} />
+            <button style={{ width: '100%', background: '#ff4d00', color: 'white', border: 'none', borderRadius: '8px', padding: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}>Join Now</button>
           </div>
         </div>
       </div>
 
       {/* Lead notification badge */}
-      <div style={{ position: 'absolute', top: '15%', right: '-40%', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.6rem 0.8rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 3, minWidth: '160px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'linear-gradient(135deg, #6d28d9, #7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <span style={{ fontSize: '0.75rem' }}>😊</span>
-          </div>
+      <div style={{ position: 'absolute', top: '10%', right: '-45%', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '0.75rem 1rem', boxShadow: '0 12px 32px rgba(0,0,0,0.1)', zIndex: 3, minWidth: '180px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 600, color: '#22c55e' }}>✓ New Lead Captured!</div>
-            <div style={{ fontSize: '0.6rem', color: '#374151', fontWeight: 500 }}>Rohit Kumar</div>
-            <div style={{ fontSize: '0.58rem', color: '#64748b' }}>+91 98765 43210</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f172a' }}>New Lead Captured!</span>
+              <Zap size={10} fill="#ff4d00" color="#ff4d00" />
+            </div>
+            <div style={{ fontSize: '0.65rem', color: '#64748b', fontWeight: 500 }}>Rohit Kumar</div>
+            <div style={{ fontSize: '0.6rem', color: '#94a3b8', marginTop: '0.1rem' }}>+91 98765 43210</div>
           </div>
         </div>
       </div>
 
       {/* Stats badge */}
-      <div style={{ position: 'absolute', bottom: '15%', right: '-35%', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.75rem 1rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 3, textAlign: 'center' }}>
-        <div style={{ fontSize: '0.65rem', color: '#64748b', fontWeight: 500, marginBottom: '0.2rem' }}>Total Leads</div>
-        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>2,350</div>
-        <div style={{ fontSize: '0.6rem', color: '#22c55e', fontWeight: 600, marginTop: '0.2rem' }}>+32.5% this month</div>
+      <div style={{ position: 'absolute', bottom: '15%', left: '-40%', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1rem', boxShadow: '0 12px 32px rgba(0,0,0,0.1)', zIndex: 3, textAlign: 'left', minWidth: '160px' }}>
+        <div style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 600, marginBottom: '0.25rem' }}>Total Leads</div>
+        <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#0f172a', lineHeight: 1 }}>2,350</div>
+        <div style={{ fontSize: '0.65rem', color: '#22c55e', fontWeight: 700, marginTop: '0.25rem' }}>↑ 32.5% <span style={{ color: '#94a3b8', fontWeight: 500 }}>this month</span></div>
+        {/* Simple SVG Chart Sparkline */}
+        <svg width="120" height="30" style={{ marginTop: '0.75rem' }}>
+          <path d="M0 25 Q 20 20, 40 22 T 80 10 T 120 5" fill="none" stroke="#ff4d00" strokeWidth="2" />
+          <path d="M0 25 Q 20 20, 40 22 T 80 10 T 120 5 V 30 H 0 Z" fill="rgba(255,77,0,0.05)" />
+        </svg>
+      </div>
+
+      {/* Arrow decoration */}
+      <div style={{ position: 'absolute', top: '25%', left: '-20%', zIndex: 1 }}>
+         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <path d="M10 10 Q 30 5, 50 25" stroke="#ff4d00" strokeWidth="2" strokeDasharray="4 4" fill="none" />
+            <path d="M45 25 L 50 25 L 50 20" stroke="#ff4d00" strokeWidth="2" fill="none" />
+         </svg>
       </div>
     </div>
   )
@@ -79,6 +96,15 @@ function PhoneMockup() {
 
 /* ─── Main LandingPage ─── */
 export default function LandingPage() {
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    const ref = searchParams.get('ref')
+    if (ref) {
+      sessionStorage.setItem('referred_by', ref)
+    }
+  }, [searchParams])
+
   return (
     <div style={{ background: '#ffffff', color: '#0f172a', minHeight: '100vh', overflowX: 'hidden' }}>
       <Navbar variant="landing" />
@@ -86,143 +112,116 @@ export default function LandingPage() {
       {/* ── HERO ── */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #faf5ff 0%, #f0f9ff 50%, #faf5ff 100%)',
-          padding: 'calc(64px + clamp(2rem, 5vw, 4rem)) 1.25rem clamp(3rem, 8vw, 6rem)',
+          background: 'radial-gradient(circle at 90% 10%, rgba(255,77,0,0.03) 0%, transparent 40%), radial-gradient(circle at 10% 90%, rgba(255,77,0,0.03) 0%, transparent 40%)',
+          padding: 'calc(64px + clamp(3rem, 8vw, 6rem)) 1.25rem clamp(4rem, 10vw, 8rem)',
           overflow: 'hidden',
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '3rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4rem' }}>
           {/* Left */}
-          <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+          <div style={{ flex: '1 1 450px', minWidth: 0 }}>
             {/* Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: '#ede9fe', border: '1px solid #ddd6fe', borderRadius: '100px', padding: '0.4rem 1rem', marginBottom: '1.5rem', fontSize: '0.82rem', color: '#6d28d9', fontWeight: 600 }}>
-              <Zap size={13} fill="#6d28d9" /> Turn followers into customers
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#fff7f2', border: '1px solid #ffe2d1', borderRadius: '100px', padding: '0.5rem 1.25rem', marginBottom: '2rem', fontSize: '0.85rem', color: '#ff4d00', fontWeight: 700 }}>
+              <Zap size={14} fill="#ff4d00" /> Turn followers into customers
             </div>
 
-            <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', lineHeight: 1.15, color: '#0f172a', marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>
-              Turn Your Instagram Bio<br />
-              Into a <span className="gradient-text">Lead Machine</span>
+            <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, color: '#0f172a', marginBottom: '1.5rem', letterSpacing: '-0.04em' }}>
+              Turn Your Bio Link<br />
+              Into a <span style={{ color: '#ff4d00' }}>Lead Machine</span>
             </h1>
 
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: '#64748b', maxWidth: '480px', marginBottom: '2rem', lineHeight: 1.65 }}>
-              Capture leads and start WhatsApp conversations instantly.
+            <p style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)', color: '#64748b', maxWidth: '540px', marginBottom: '2.5rem', lineHeight: 1.6 }}>
+              Create a beautiful bio link page, capture leads and start WhatsApp conversations instantly.
             </p>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.875rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
               <Link
                 to="/auth?mode=signup"
                 className="btn-primary"
-                style={{ padding: '0.875rem 1.75rem', fontSize: '0.95rem', borderRadius: '12px', boxShadow: '0 8px 24px rgba(109,40,217,0.3)' }}
+                style={{ padding: '1rem 2rem', fontSize: '1.05rem', borderRadius: '12px' }}
               >
-                Create Your Page Free <ArrowRight size={18} />
+                Get Started Free <ArrowRight size={20} />
               </Link>
               <a
                 href="#demo"
                 className="btn-outline"
-                style={{ padding: '0.875rem 1.5rem', fontSize: '0.95rem', borderRadius: '12px' }}
+                style={{ padding: '1rem 2rem', fontSize: '1.05rem', borderRadius: '12px', background: '#fff' }}
               >
+                <div style={{ width: '20px', height: '20px', borderRadius: '50%', border: '2.5px solid #0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: '0', height: '0', borderTop: '4px solid transparent', borderBottom: '4px solid transparent', borderLeft: '6px solid #0f172a', marginLeft: '2px' }} />
+                </div>
                 View Demo
               </a>
             </div>
 
             {/* Trust bar */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', color: '#64748b', fontSize: '0.82rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', color: '#64748b', fontSize: '0.9rem', fontWeight: 500 }}>
               {[
-                { icon: '💳', label: 'No credit card required' },
-                { icon: '⚡', label: 'Setup in 2 minutes' },
-                { icon: '👥', label: 'Trusted by 10,000+ creators' },
-              ].map(item => (
-                <span key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <span>{item.icon}</span> {item.label}
+                { icon: <Mail size={16} />, label: 'No credit card required' },
+                { icon: <Clock size={16} />, label: 'Setup in 2 minutes' },
+                { icon: <Shield size={16} />, label: 'Trusted by 100k+ users' },
+              ].map((item, i) => (
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ color: '#ff4d00' }}>{item.icon}</span> {item.label}
                 </span>
               ))}
             </div>
           </div>
 
           {/* Right — phone */}
-          <div id="demo" style={{ flex: '0 1 340px', display: 'flex', justifyContent: 'center', minWidth: 0, paddingRight: '80px' }}>
+          <div id="demo" style={{ flex: '0 1 400px', display: 'flex', justifyContent: 'center', minWidth: 0, paddingRight: '40px' }}>
             <PhoneMockup />
           </div>
         </div>
       </section>
 
-      {/* ── LOSING CUSTOMERS SECTION ── */}
-      <section style={{ padding: '5rem 1.25rem', background: '#fff', borderBottom: '1px solid #f1f5f9' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: '1rem', color: '#ef4444', letterSpacing: '-0.02em' }}>
-            You're losing customers daily
-          </h2>
-          <p style={{ fontSize: '1.1rem', color: '#64748b', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
-            If you only have a basic bio link, you are missing out on potential sales and leads.
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', textAlign: 'left' }}>
-            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
-              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>🙈</div>
-              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>Visitors Don't Message</h3>
-              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>People click your link but find it too hard to start a conversation with you.</p>
-            </div>
-            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
-              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>📉</div>
-              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>No Lead Capture</h3>
-              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>Without a form, you have no way to collect phone numbers and follow up.</p>
-            </div>
-            <div style={{ padding: '2rem', background: '#fef2f2', borderRadius: '16px', border: '1px solid #fee2e2' }}>
-              <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>💸</div>
-              <h3 style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.5rem' }}>Lost Opportunities</h3>
-              <p style={{ color: '#b91c1c', fontSize: '0.9rem', lineHeight: 1.6 }}>Every uncaptured lead is potential revenue walking out the door.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURES BAR ── */}
-      <section id="features" style={{ padding: '4rem 1.25rem', borderBottom: '1px solid #f1f5f9' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem' }}>
+      {/* ── FEATURES ── */}
+      <section style={{ padding: '6rem 1.25rem', borderBottom: '1px solid #f1f5f9' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
           {[
-            { icon: '👥', color: '#6d28d9', bg: '#ede9fe', title: 'Lead Capture', desc: 'Collect leads with a simple form and grow your audience.' },
-            { icon: '💬', color: '#25d366', bg: '#dcfce7', title: 'WhatsApp Integration', desc: 'Start WhatsApp conversations with one tap.' },
-            { icon: '🔗', color: '#0ea5e9', bg: '#e0f2fe', title: 'Custom Bio Page', desc: 'Beautiful, fast and mobile friendly bio link pages.' },
-            { icon: '⚡', color: '#f59e0b', bg: '#fef3c7', title: 'Instant Setup', desc: 'Create your page in less than 2 minutes. No coding.' },
+            { icon: <Users size={24} />, title: 'Lead Capture', desc: 'Collect leads with a simple form and grow your audience.' },
+            { icon: <MessageCircle size={24} />, title: 'WhatsApp Integration', desc: 'Start WhatsApp conversations with one tap.' },
+            { icon: <Link2 size={24} />, title: 'Custom Bio Page', desc: 'Beautiful, fast and mobile friendly bio link pages.' },
+            { icon: <Zap size={24} />, title: 'Instant Setup', desc: 'Create your page in less than 2 minutes. No coding.' },
           ].map(f => (
-            <div key={f.title} style={{ padding: '1.5rem', borderRadius: '16px', border: '1px solid #f1f5f9', background: '#fafafa' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: f.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.875rem', fontSize: '1.25rem' }}>
+            <div key={f.title} style={{ padding: '2.5rem 2rem', borderRadius: '24px', border: '1px solid #f1f5f9', background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+              <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: '#fff7f2', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: '#ff4d00' }}>
                 {f.icon}
               </div>
-              <h3 style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.4rem', color: '#0f172a' }}>{f.title}</h3>
-              <p style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: 1.6 }}>{f.desc}</p>
+              <h3 style={{ fontWeight: 800, fontSize: '1.25rem', marginBottom: '0.75rem', color: '#0f172a' }}>{f.title}</h3>
+              <p style={{ color: '#64748b', fontSize: '1rem', lineHeight: 1.6 }}>{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="how-it-works" style={{ padding: '6rem 1.25rem', background: '#fafafa' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'inline-block', background: '#ede9fe', color: '#6d28d9', fontSize: '0.8rem', fontWeight: 700, padding: '0.35rem 1rem', borderRadius: '100px', marginBottom: '1.25rem', letterSpacing: '0.05em' }}>
+      <section style={{ padding: '8rem 1.25rem', background: '#fafafa' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', background: '#fff7f2', color: '#ff4d00', fontSize: '0.85rem', fontWeight: 800, padding: '0.4rem 1.25rem', borderRadius: '100px', marginBottom: '1.5rem', letterSpacing: '0.05em' }}>
             HOW IT WORKS
           </div>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: '4rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '5rem', letterSpacing: '-0.03em' }}>
             3 Simple Steps to More Leads
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1.5rem', textAlign: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', textAlign: 'center', position: 'relative' }}>
             {[
-              { num: '1', icon: '✏️', title: 'Create Your Page', desc: 'Add your details, links and customize your bio link page.' },
-              { num: '2', icon: '🔗', title: 'Share Your Link', desc: 'Share the link in your bio, stories, posts or anywhere.' },
-              { num: '3', icon: '💬', title: 'Get WhatsApp Leads', desc: 'Visitors contact you and you get real leads on WhatsApp.' },
+              { num: '1', icon: <div style={{ fontSize: '2rem' }}>✏️</div>, title: 'Create Your Page', desc: 'Add your details, links and customize your bio link page.' },
+              { num: '2', icon: <div style={{ fontSize: '2rem' }}>🔗</div>, title: 'Share Your Link', desc: 'Share the link in your bio, stories, posts or anywhere.' },
+              { num: '3', icon: <div style={{ fontSize: '2rem' }}>💬</div>, title: 'Get WhatsApp Leads', desc: 'Visitors contact you and you get real leads on WhatsApp.' },
             ].map((s, i) => (
-              <div key={s.num} style={{ position: 'relative', padding: '2rem 1.5rem', background: '#fff', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                {/* Connector dot (desktop) */}
+              <div key={s.num} style={{ position: 'relative', padding: '3rem 2rem', background: '#fff', borderRadius: '32px', border: '1px solid #e2e8f0', zIndex: 1 }}>
+                {/* Connector line */}
                 {i < 2 && (
-                  <div style={{ position: 'absolute', top: '2rem', right: '-1.5rem', color: '#e2e8f0', fontSize: '1.2rem', zIndex: 2 }}>···</div>
+                  <div className="hide-mobile" style={{ position: 'absolute', top: '50%', right: '-1.5rem', width: '3rem', borderTop: '2px dashed #e2e8f0', zIndex: -1 }} />
                 )}
-                <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: '#ede9fe', border: '2px dashed #c4b5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: '0.9rem', color: '#6d28d9', fontWeight: 800 }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#ff4d00', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontSize: '1.1rem', fontWeight: 900 }}>
                   {s.num}
                 </div>
-                <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{s.icon}</div>
-                <h3 style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.5rem', color: '#0f172a' }}>{s.title}</h3>
-                <p style={{ color: '#64748b', fontSize: '0.875rem', lineHeight: 1.6 }}>{s.desc}</p>
+                <div style={{ marginBottom: '1.25rem' }}>{s.icon}</div>
+                <h3 style={{ fontWeight: 800, fontSize: '1.25rem', marginBottom: '0.75rem', color: '#0f172a' }}>{s.title}</h3>
+                <p style={{ color: '#64748b', fontSize: '1rem', lineHeight: 1.6 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -230,121 +229,86 @@ export default function LandingPage() {
       </section>
 
       {/* ── PRICING ── */}
-      <section id="pricing" style={{ padding: '6rem 1.25rem', background: '#fff' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ display: 'inline-block', background: '#ede9fe', color: '#6d28d9', fontSize: '0.8rem', fontWeight: 700, padding: '0.35rem 1rem', borderRadius: '100px', marginBottom: '1rem', letterSpacing: '0.05em' }}>
+      <section style={{ padding: '8rem 1.25rem', background: '#fff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <div style={{ display: 'inline-block', background: '#fff7f2', color: '#ff4d00', fontSize: '0.85rem', fontWeight: 800, padding: '0.4rem 1.25rem', borderRadius: '100px', marginBottom: '1.5rem', letterSpacing: '0.05em' }}>
               PRICING
             </div>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
               Simple, Transparent Pricing
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
             {/* FREE */}
-            <div style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem 2rem' }}>
-              <div style={{ fontWeight: 700, color: '#374151', marginBottom: '0.4rem', fontSize: '1.1rem' }}>Free</div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>Perfect for testing</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹0<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {[
-                  '1 Bio Link Page',
-                  '3 Links Limit',
-                  'LinkSync Branding',
-                  'Basic Analytics'
-                ].map(f => (
-                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
-                    • {f}
-                  </li>
-                ))}
-                {[
-                  'WhatsApp Button',
-                  'Lead Capture Form'
-                ].map(f => (
-                  <li key={f} style={{ fontSize: '0.9rem', color: '#94a3b8', opacity: 0.6, paddingLeft: '0.5rem' }}>
-                    • {f}
+            <div style={{ background: '#fff', border: '1.5px solid #f1f5f9', borderRadius: '32px', padding: '3.5rem 2.5rem', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', fontSize: '1.5rem' }}>Free</div>
+              <div style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '2rem' }}>Perfect for testing</div>
+              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#0f172a', marginBottom: '2.5rem' }}>₹0<span style={{ fontSize: '1.15rem', fontWeight: 600, color: '#94a3b8' }}>/month</span></div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
+                {['1 Bio Link Page', '3 Links Limit', 'LinkSync Branding', 'Basic Analytics'].map(f => (
+                  <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link to="/auth?mode=signup" style={{ display: 'block', textAlign: 'center', padding: '0.85rem', borderRadius: '12px', border: '1.5px solid #e2e8f0', color: '#374151', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'all 0.2s' }}>
-                Create Your Page Free
+              <Link to="/auth?mode=signup" className="btn-outline" style={{ marginTop: 'auto', padding: '1rem', borderRadius: '12px' }}>
+                Get Started Free
               </Link>
             </div>
 
             {/* BASIC */}
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem 2rem' }}>
-              <div style={{ fontWeight: 700, color: '#374151', marginBottom: '0.4rem', fontSize: '1.1rem' }}>Basic</div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>For active creators</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹99<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {[
-                  '10 Links Limit',
-                  'WhatsApp Button',
-                  'LinkSync Branding',
-                  'Basic Analytics',
-                  '7-Day Free Trial'
-                ].map(f => (
-                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
-                    • {f}
-                  </li>
-                ))}
-                {[
-                  'Remove Branding',
-                  'Lead Capture Form'
-                ].map(f => (
-                  <li key={f} style={{ fontSize: '0.9rem', color: '#94a3b8', opacity: 0.6, paddingLeft: '0.5rem' }}>
-                    • {f}
+            <div style={{ background: '#fff', border: '1.5px solid #f1f5f9', borderRadius: '32px', padding: '3.5rem 2.5rem', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', fontSize: '1.5rem' }}>Basic</div>
+              <div style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '2rem' }}>Perfect for individuals</div>
+              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#0f172a', marginBottom: '2.5rem' }}>₹99<span style={{ fontSize: '1.15rem', fontWeight: 600, color: '#94a3b8' }}>/month</span></div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
+                {['10 Links Limit', 'Remove Branding', 'WhatsApp Button', 'Lead Capture Form'].map(f => (
+                  <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link to="/auth?mode=signup" style={{ display: 'block', textAlign: 'center', padding: '0.85rem', borderRadius: '12px', border: '1.5px solid #e2e8f0', color: '#374151', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'all 0.2s' }}>
-                Start 7-Day Trial
+              <Link to="/auth?mode=signup" className="btn-outline" style={{ marginTop: 'auto', padding: '1rem', borderRadius: '12px' }}>
+                Start 7-Day Free Trial
               </Link>
             </div>
 
             {/* PRO */}
-            <div style={{ background: '#fff', border: '2px solid #6d28d9', borderRadius: '20px', padding: '2.5rem 2rem', position: 'relative', boxShadow: '0 8px 32px rgba(109,40,217,0.15)' }}>
-              <div style={{ position: 'absolute', top: '0', right: '1.5rem', transform: 'translateY(-50%)', background: '#6d28d9', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
+            <div style={{ background: '#fff', border: '2px solid #ff4d00', borderRadius: '32px', padding: '3.5rem 2.5rem', position: 'relative', boxShadow: '0 20px 40px rgba(255,77,0,0.1)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ position: 'absolute', top: '0', left: '50%', transform: 'translate(-50%, -50%)', background: '#ff4d00', color: 'white', fontSize: '0.85rem', fontWeight: 800, padding: '0.5rem 1.5rem', borderRadius: '100px', whiteSpace: 'nowrap' }}>
                 MOST POPULAR
               </div>
-              <div style={{ fontWeight: 700, color: '#374151', marginBottom: '0.4rem', fontSize: '1.1rem' }}>Pro</div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>For growing businesses</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹299<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {[
-                  'Unlimited Links',
-                  'Remove Branding',
-                  'Lead Capture Form',
-                  'Leads Dashboard',
-                  'WhatsApp Integration',
-                  'Priority Support',
-                  'Full Analytics Dashboard'
-                ].map(f => (
-                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
-                    • {f}
+              <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', fontSize: '1.5rem' }}>Pro</div>
+              <div style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '2rem' }}>For growing businesses</div>
+              <div style={{ fontSize: '3rem', fontWeight: 900, color: '#0f172a', marginBottom: '2.5rem' }}>₹299<span style={{ fontSize: '1.15rem', fontWeight: 600, color: '#94a3b8' }}>/month</span></div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
+                {['Unlimited Links', 'Lead Capture Form', 'Leads Dashboard', 'WhatsApp Integration', 'Priority Support'].map(f => (
+                  <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link to="/auth?mode=signup" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', borderRadius: '12px', fontSize: '0.95rem', boxShadow: '0 6px 20px rgba(109,40,217,0.3)' }}>
-                Start 7-Day Trial
+              <Link to="/auth?mode=signup" className="btn-primary" style={{ marginTop: 'auto', padding: '1rem', borderRadius: '12px' }}>
+                Start 7-Day Free Trial
               </Link>
             </div>
           </div>
 
-          {/* Comparison Table */}
-          <div style={{ marginTop: '5rem', overflowX: 'auto' }}>
-            <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', textAlign: 'center', marginBottom: '3rem', color: '#0f172a' }}>
+          {/* Detailed Plan Comparison Table */}
+          <div style={{ marginTop: '6rem', overflowX: 'auto' }}>
+            <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '1.75rem', textAlign: 'center', marginBottom: '3rem', color: '#0f172a', letterSpacing: '-0.02em' }}>
               Detailed Plan Comparison
             </h3>
-            <div style={{ minWidth: '800px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+            <div style={{ minWidth: '800px', background: '#fff', border: '1px solid #f1f5f9', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.02)' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Features</th>
-                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', textAlign: 'center' }}>Free</th>
-                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', textAlign: 'center' }}>Basic</th>
-                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#6d28d9', textAlign: 'center' }}>Pro</th>
+                  <tr style={{ background: '#fafafa', borderBottom: '1px solid #f1f5f9' }}>
+                    <th style={{ padding: '1.75rem 2.5rem', fontSize: '0.85rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Features</th>
+                    <th style={{ padding: '1.75rem 2rem', fontSize: '1rem', fontWeight: 900, color: '#0f172a', textAlign: 'center' }}>Free</th>
+                    <th style={{ padding: '1.75rem 2rem', fontSize: '1rem', fontWeight: 900, color: '#0f172a', textAlign: 'center' }}>Basic</th>
+                    <th style={{ padding: '1.75rem 2rem', fontSize: '1rem', fontWeight: 900, color: '#ff4d00', textAlign: 'center' }}>Pro</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -360,95 +324,100 @@ export default function LandingPage() {
                     { f: 'Free Trial', free: 'No', basic: '7 Days', basicColor: '#22c55e', pro: '7 Days', proColor: '#22c55e' },
                   ].map((row, i) => (
                     <tr key={row.f} style={{ borderBottom: i === 8 ? 'none' : '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#fafafa' }}>
-                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.95rem', fontWeight: 600, color: '#374151' }}>{row.f}</td>
-                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.9rem', color: '#64748b', textAlign: 'center' }}>{row.free}</td>
-                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.9rem', color: row.basicColor || '#64748b', textAlign: 'center', fontWeight: row.basicColor ? 700 : 500 }}>{row.basic}</td>
-                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.95rem', color: row.proColor || '#6d28d9', textAlign: 'center', fontWeight: 700 }}>{row.pro}</td>
+                      <td style={{ padding: '1.5rem 2.5rem', fontSize: '1rem', fontWeight: 600, color: '#374151' }}>{row.f}</td>
+                      <td style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', color: '#64748b', textAlign: 'center' }}>{row.free}</td>
+                      <td style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', color: row.basicColor || '#64748b', textAlign: 'center', fontWeight: row.basicColor ? 800 : 500 }}>{row.basic}</td>
+                      <td style={{ padding: '1.5rem 2rem', fontSize: '1rem', color: row.proColor || '#ff4d00', textAlign: 'center', fontWeight: 800 }}>{row.pro}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p style={{ textAlign: 'center', marginTop: '2rem', color: '#94a3b8', fontSize: '0.85rem' }}>
+            <p style={{ textAlign: 'center', marginTop: '2.5rem', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 500 }}>
               All prices are in INR (₹). Subscription can be cancelled anytime.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section id="faq" style={{ padding: '6rem 1.25rem', background: '#fff' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div style={{ display: 'inline-block', background: '#ede9fe', color: '#6d28d9', fontSize: '0.8rem', fontWeight: 700, padding: '0.35rem 1rem', borderRadius: '100px', marginBottom: '1rem', letterSpacing: '0.05em' }}>
-              FAQ
-            </div>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', letterSpacing: '-0.02em' }}>
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {[
-              { q: 'Is LinkSync free?', a: 'Yes, we offer a free plan with basic features. Paid plans unlock advanced tools.' },
-              { q: 'How long does it take to set up?', a: 'You can create your page in less than 2 minutes.' },
-              { q: 'Does it work with WhatsApp?', a: 'Yes, users can directly message you via WhatsApp from your bio page.' },
-              { q: 'Can I collect leads?', a: 'Yes, our Pro plan allows you to collect and manage leads easily.' },
-              { q: 'Can I cancel anytime?', a: 'Yes, you can cancel your subscription anytime.' },
-              { q: 'Do I need coding skills?', a: 'No, LinkSync is designed to be simple and easy to use.' },
-            ].map((faq, i) => (
-              <div key={i} style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ fontWeight: 700, color: '#0f172a', fontSize: '1rem', marginBottom: '0.5rem' }}>{faq.q}</h3>
-                <p style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── FINAL CTA ── */}
-      <section style={{ padding: '5rem 1.25rem', background: 'linear-gradient(135deg, #faf5ff, #f0f9ff)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '2.5rem', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: '1 1 300px' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1.75rem' }}>
+      <section style={{ padding: '8rem 1.25rem', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle at 90% 90%, rgba(255,77,0,0.05) 0%, transparent 50%)', zIndex: 0 }} />
+        <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#fff', borderRadius: '40px', padding: '4rem 3rem', border: '1px solid #f1f5f9', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '3rem', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flex: '1 1 400px' }}>
+            <div style={{ width: '88px', height: '88px', borderRadius: '50%', background: '#fff7f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '2.5rem' }}>
               🚀
             </div>
             <div>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(1.25rem, 3vw, 1.75rem)', color: '#0f172a', marginBottom: '0.5rem', lineHeight: 1.25 }}>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: '#0f172a', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.03em' }}>
                 Start Getting Customers<br />From Your Bio Today
               </h2>
-              <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
-                Join 10,000+ creators and businesses who are<br />
-                growing their business with LinkSync.
+              <p style={{ color: '#64748b', fontSize: '1.1rem', maxWidth: '440px' }}>
+                Join 100,000+ users who are growing their business with LinkSync.
               </p>
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem', flex: '0 0 auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
             <Link
               to="/auth?mode=signup"
               className="btn-primary"
-              style={{ padding: '0.9rem 2rem', fontSize: '1rem', borderRadius: '12px', boxShadow: '0 8px 24px rgba(109,40,217,0.3)', whiteSpace: 'nowrap' }}
+              style={{ padding: '1.25rem 2.5rem', fontSize: '1.1rem', borderRadius: '16px', boxShadow: '0 12px 32px rgba(255,77,0,0.3)' }}
             >
-              Create Your Page Free <ArrowRight size={18} />
+              Create Your LinkSync Page <ArrowRight size={20} />
             </Link>
-            <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
-              No credit card required • Setup in 2 minutes
-            </span>
+            <div style={{ display: 'flex', gap: '1.5rem', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 500 }}>
+               <span>✓ No credit card required</span>
+               <span>✓ Setup in 2 minutes</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ borderTop: '1px solid #f1f5f9', padding: '2.5rem 1.25rem', background: '#fff' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
-          <Logo size={28} />
-          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            <Link to="/privacy" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem' }}>Privacy Policy</Link>
-            <Link to="/terms" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem' }}>Terms of Service</Link>
-            <Link to="/refund" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem' }}>Refund Policy</Link>
-            <a href="mailto:support@linksync.in" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem' }}>Support</a>
+      <footer style={{ borderTop: '1px solid #f1f5f9', padding: '6rem 1.25rem 3rem', background: '#fff' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '4rem', marginBottom: '6rem' }}>
+            <div style={{ gridColumn: 'span 2' }}>
+              <Logo size={32} />
+              <p style={{ color: '#64748b', fontSize: '1rem', marginTop: '1.5rem', maxWidth: '280px', lineHeight: 1.6 }}>
+                The all-in-one bio link tool to capture leads and grow your business on WhatsApp.
+              </p>
+            </div>
+            
+            {[
+              { title: 'Product', links: ['Features', 'Templates', 'Integrations', 'Pricing'] },
+              { title: 'Company', links: ['About Us', 'Blog', 'Careers', 'Contact'] },
+              { title: 'Resources', links: ['Help Center', 'Guides', 'Privacy Policy', 'Terms of Service'] },
+            ].map(col => (
+              <div key={col.title}>
+                <h4 style={{ fontWeight: 800, color: '#0f172a', marginBottom: '1.75rem', fontSize: '1.1rem' }}>{col.title}</h4>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {col.links.map(l => (
+                    <li key={l}><Link to="#" style={{ color: '#64748b', textDecoration: 'none', fontSize: '1rem', transition: 'color 0.2s' }}>{l}</Link></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            <div style={{ gridColumn: 'span 2' }}>
+              <h4 style={{ fontWeight: 800, color: '#0f172a', marginBottom: '1.75rem', fontSize: '1.1rem' }}>Stay Updated</h4>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem' }}>Subscribe to get the latest updates and tips.</p>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input type="email" placeholder="Enter your email" style={{ flex: 1, padding: '0.85rem 1.25rem', borderRadius: '12px', border: '1.5px solid #e2e8f0', outline: 'none', fontSize: '1rem' }} />
+                <button style={{ width: '52px', height: '52px', borderRadius: '12px', background: '#ff4d00', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', cursor: 'pointer' }}>
+                  <Send size={20} />
+                </button>
+              </div>
+            </div>
           </div>
-          <p style={{ color: '#94a3b8', fontSize: '0.8rem' }}>© 2026 Developed by XenFirm Technologies</p>
+          
+          <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '2.5rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>© 2026 LinkSync. All rights reserved. Developed by XenFirm Technologies</p>
+            <div style={{ display: 'flex', gap: '2rem' }}>
+               <Link to="/privacy" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy</Link>
+               <Link to="/terms" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem' }}>Terms</Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

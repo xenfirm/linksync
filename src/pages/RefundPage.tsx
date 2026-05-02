@@ -37,7 +37,7 @@ export default function RefundPage() {
           <section>
             <h2 style={{ fontWeight: 700, fontSize: '1.25rem', color: '#0f172a', marginBottom: '0.75rem' }}>Contact</h2>
             <p>If you have any questions about our refund or cancellation policy, please contact us at:</p>
-            <p style={{ fontWeight: 600, color: '#6d28d9', marginTop: '0.5rem' }}>📧 support@linksync.in</p>
+            <p style={{ fontWeight: 600, color: '#ff4d00', marginTop: '0.5rem' }}>📧 support@linksync.in</p>
           </section>
         </div>
       </div>

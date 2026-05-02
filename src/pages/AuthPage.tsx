@@ -41,7 +41,10 @@ export default function AuthPage() {
 
     try {
       if (mode === 'signup') {
-        const { error } = await signUp(email, password)
+        const referredBy = sessionStorage.getItem('referred_by')
+        const { error } = await signUp(email, password, {
+          referred_by: referredBy || undefined
+        })
         if (error) setError(getErrorMessage(error.message))
         else {
           setSuccessMsg('Account created! Check your email to confirm, then sign in.')
@@ -60,7 +63,7 @@ export default function AuthPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #faf5ff, #f0f9ff)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem' }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #fff7f2, #f0f9ff)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem' }}>
       {/* Logo */}
       <Link to="/" style={{ textDecoration: 'none', marginBottom: '2rem' }}>
         <Logo size={34} />
@@ -84,9 +87,9 @@ export default function AuthPage() {
               style={{
                 flex: 1, padding: '0.55rem', borderRadius: '10px', border: 'none', cursor: 'pointer',
                 fontSize: '0.875rem', fontWeight: 600, transition: 'all 0.2s',
-                background: mode === m ? '#6d28d9' : 'transparent',
+                background: mode === m ? '#ff4d00' : 'transparent',
                 color: mode === m ? 'white' : '#64748b',
-                boxShadow: mode === m ? '0 2px 8px rgba(109,40,217,0.25)' : 'none',
+                boxShadow: mode === m ? '0 2px 8px rgba(255, 77, 0,0.25)' : 'none',
               }}
             >
               {m === 'signin' ? 'Sign In' : 'Sign Up'}
@@ -132,7 +135,7 @@ export default function AuthPage() {
               {mode === 'signin' && (
                 <Link 
                   to="/forgot-password"
-                  style={{ color: '#6d28d9', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none' }}
+                  style={{ color: '#ff4d00', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none' }}
                 >
                   Forgot Password?
                 </Link>
@@ -166,8 +169,8 @@ export default function AuthPage() {
       </div>
 
       <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem', marginTop: '1.5rem' }}>
-        By continuing, you agree to our <Link to="/terms" style={{ color: '#6d28d9', textDecoration: 'none' }}>Terms</Link> and{' '}
-        <Link to="/privacy" style={{ color: '#6d28d9', textDecoration: 'none' }}>Privacy Policy</Link>
+        By continuing, you agree to our <Link to="/terms" style={{ color: '#ff4d00', textDecoration: 'none' }}>Terms</Link> and{' '}
+        <Link to="/privacy" style={{ color: '#ff4d00', textDecoration: 'none' }}>Privacy Policy</Link>
       </p>
     </div>
   )

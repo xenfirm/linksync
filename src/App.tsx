@@ -19,10 +19,11 @@ const TermsPage = lazy(() => import('./pages/TermsPage'))
 const RefundPage = lazy(() => import('./pages/RefundPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
+const ReferralPage = lazy(() => import('./pages/dashboard/ReferralPage'))
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand"></div>
   </div>
 )
 
@@ -54,6 +55,7 @@ function App() {
               <Route path="links" element={<LinksManager />} />
               <Route path="leads" element={<LeadsPage />} />
               <Route path="analytics" element={<AnalyticsPage />} />
+              <Route path="referral" element={<ReferralPage />} />
             </Route>
 
             {/* Public bio pages — must be LAST to avoid catching /dashboard, /auth */}

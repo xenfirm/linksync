@@ -10,7 +10,7 @@ export default function Logo({ size = 32, showText = true, dark = false }: LogoP
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
       {/* Star/asterisk icon matching the reference image */}
       <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="10" fill="#6d28d9" />
+        <rect width="40" height="40" rx="10" fill="#ff4d00" />
         {/* Asterisk / snowflake shape */}
         <g stroke="white" strokeWidth="3" strokeLinecap="round">
           <line x1="20" y1="8" x2="20" y2="32" />

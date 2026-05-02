@@ -54,11 +54,11 @@ export default function LeadsPage() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.75rem',
-          background: '#ede9fe',
+          background: '#fff7f2',
           border: '1px solid #ddd6fe',
           borderRadius: '14px',
           padding: '1.5rem',
-          color: '#6d28d9',
+          color: '#ff4d00',
           fontSize: '0.9rem',
           fontWeight: 500,
         }}
@@ -90,7 +90,7 @@ export default function LeadsPage() {
 
       {!isPro ? (
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '4rem 2rem', textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}>
-          <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#6d28d9' }}>
+          <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#fff7f2', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#ff4d00' }}>
             <Users size={32} />
           </div>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', color: '#0f172a', marginBottom: '0.5rem' }}>
@@ -157,7 +157,7 @@ export default function LeadsPage() {
       {/* Leads List/Table */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
-          <Loader2 size={28} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+          <Loader2 size={28} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
         </div>
       ) : leads.length === 0 ? (
         <div
@@ -251,8 +251,8 @@ export default function LeadsPage() {
                         borderRadius: '100px',
                         fontSize: '0.72rem',
                         fontWeight: 700,
-                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#ede9fe',
-                        color: lead.source === 'whatsapp' ? '#16a34a' : '#6d28d9',
+                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#fff7f2',
+                        color: lead.source === 'whatsapp' ? '#16a34a' : '#ff4d00',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -284,8 +284,8 @@ export default function LeadsPage() {
                         borderRadius: '100px',
                         fontSize: '0.65rem',
                         fontWeight: 800,
-                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#ede9fe',
-                        color: lead.source === 'whatsapp' ? '#16a34a' : '#6d28d9',
+                        background: lead.source === 'whatsapp' ? '#dcfce7' : '#fff7f2',
+                        color: lead.source === 'whatsapp' ? '#16a34a' : '#ff4d00',
                         textTransform: 'uppercase',
                       }}
                     >

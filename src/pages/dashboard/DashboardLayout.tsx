@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { User, Link2, Users, BarChart2, ExternalLink, Menu, X } from 'lucide-react'
+import { User, Link2, Users, BarChart2, ExternalLink, Menu, X, Gift } from 'lucide-react'
 import Navbar from '../../components/Navbar'
 import CopyButton from '../../components/CopyButton'
 import { useProfile } from '../../hooks/useProfile'
@@ -10,6 +10,7 @@ const navItems = [
   { to: '/dashboard/links', label: 'Links', icon: <Link2 size={16} />, end: false },
   { to: '/dashboard/leads', label: 'Leads', icon: <Users size={16} />, end: false },
   { to: '/dashboard/analytics', label: 'Analytics', icon: <BarChart2 size={16} />, end: false },
+  { to: '/dashboard/referral', label: 'Refer & Earn', icon: <Gift size={16} />, end: false },
 ]
 
 export default function DashboardLayout() {
@@ -25,7 +26,7 @@ export default function DashboardLayout() {
             <img src={profile.profile_image} alt={profile.name}
               style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', margin: '0 auto 0.6rem', display: 'block' }} />
           ) : (
-            <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, #6d28d9, #7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.6rem', fontWeight: 800, color: 'white', fontSize: '1.2rem' }}>
+            <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff4d00, #ff6a26)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 0.6rem', fontWeight: 800, color: 'white', fontSize: '1.2rem' }}>
               {profile.name?.charAt(0).toUpperCase()}
             </div>
           )}
@@ -46,7 +47,7 @@ export default function DashboardLayout() {
 
           <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center', marginTop: '0.75rem' }}>
             <a href={`/${profile.username}`} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: '#ede9fe', border: '1px solid #ddd6fe', color: '#6d28d9', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 600, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: '#fff7f2', border: '1px solid #ddd6fe', color: '#ff4d00', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 600, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
               <ExternalLink size={11} /> View
             </a>
             <CopyButton text={`${window.location.origin}/${profile.username}`} />
@@ -69,8 +70,8 @@ export default function DashboardLayout() {
                 display: 'flex', alignItems: 'center', gap: '0.6rem',
                 padding: '0.7rem 0.875rem', borderRadius: '10px', textDecoration: 'none',
                 fontSize: '0.875rem', fontWeight: isActive ? 700 : 500,
-                color: isActive ? '#6d28d9' : '#374151',
-                background: isActive ? '#ede9fe' : 'transparent',
+                color: isActive ? '#ff4d00' : '#374151',
+                background: isActive ? '#fff7f2' : 'transparent',
                 transition: 'all 0.15s',
               })}
             >
@@ -86,12 +87,12 @@ export default function DashboardLayout() {
 
       {/* Upgrade Banner */}
       {profile && profile.plan !== 'pro' && !profile.is_admin && (
-        <div style={{ marginTop: '1rem', background: 'linear-gradient(135deg, #6d28d9, #4f46e5)', borderRadius: '16px', padding: '1.25rem', color: 'white' }}>
+        <div style={{ marginTop: '1rem', background: 'linear-gradient(135deg, #ff4d00, #4f46e5)', borderRadius: '16px', padding: '1.25rem', color: 'white' }}>
           <p style={{ fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Upgrade to Pro</p>
           <p style={{ fontSize: '0.75rem', opacity: 0.9, marginBottom: '1rem', lineHeight: 1.4 }}>Unlock lead capture, unlimited links, and advanced analytics.</p>
           <NavLink 
             to="/dashboard/leads" // Direct them to leads page where the upgrade UI is clear
-            style={{ display: 'block', background: 'white', color: '#6d28d9', textAlign: 'center', padding: '0.5rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
+            style={{ display: 'block', background: 'white', color: '#ff4d00', textAlign: 'center', padding: '0.5rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
           >
             Learn More
           </NavLink>

@@ -50,7 +50,7 @@ export default function AnalyticsPage() {
   if (loading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem' }}>
-        <Loader2 size={28} style={{ color: '#6d28d9', animation: 'spin 1s linear infinite' }} />
+        <Loader2 size={28} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
       </div>
     )
   }
@@ -71,7 +71,7 @@ export default function AnalyticsPage() {
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase' }}>Total Views</span>
-            <TrendingUp size={16} color="#6d28d9" />
+            <TrendingUp size={16} color="#ff4d00" />
           </div>
           <span style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a' }}>{stats.clicks}</span>
           {stats.recentClicks > 0 && isPro && (
@@ -85,7 +85,7 @@ export default function AnalyticsPage() {
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase' }}>Total Leads</span>
-            <BarChart2 size={16} color="#6d28d9" />
+            <BarChart2 size={16} color="#ff4d00" />
           </div>
           <span style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a' }}>{stats.leads}</span>
         </div>
@@ -93,7 +93,7 @@ export default function AnalyticsPage() {
         {/* Conversion Rate */}
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
           {!isPro && (
-            <div style={{ position: 'absolute', top: '12px', right: '12px', background: '#ede9fe', color: '#6d28d9', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px' }}>
+            <div style={{ position: 'absolute', top: '12px', right: '12px', background: '#fff7f2', color: '#ff4d00', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px' }}>
               PRO
             </div>
           )}
@@ -115,20 +115,20 @@ export default function AnalyticsPage() {
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a' }}>Traffic Sources</h3>
-            {!isPro && <span style={{ fontSize: '0.75rem', color: '#6d28d9', fontWeight: 700, background: '#ede9fe', padding: '2px 8px', borderRadius: '4px' }}>PRO</span>}
+            {!isPro && <span style={{ fontSize: '0.75rem', color: '#ff4d00', fontWeight: 700, background: '#fff7f2', padding: '2px 8px', borderRadius: '4px' }}>PRO</span>}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', filter: !isPro ? 'blur(4px)' : 'none', pointerEvents: !isPro ? 'none' : 'auto' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Link2 size={16} color="#6d28d9" />
+                  <Link2 size={16} color="#ff4d00" />
                   <span style={{ fontSize: '0.9rem', color: '#475569', fontWeight: 500 }}>Direct Link Clicks</span>
                 </div>
                 <span style={{ fontWeight: 800, color: '#0f172a' }}>{stats.linkClicks}</span>
               </div>
               <div style={{ height: '10px', background: '#f1f5f9', borderRadius: '100px', overflow: 'hidden' }}>
-                <div style={{ width: `${stats.clicks > 0 ? (stats.linkClicks / stats.clicks) * 100 : 0}%`, height: '100%', background: '#6d28d9', borderRadius: '100px' }} />
+                <div style={{ width: `${stats.clicks > 0 ? (stats.linkClicks / stats.clicks) * 100 : 0}%`, height: '100%', background: '#ff4d00', borderRadius: '100px' }} />
               </div>
             </div>
 
@@ -150,7 +150,7 @@ export default function AnalyticsPage() {
             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
               <button 
                 onClick={() => handleUpgrade(profile?.user_id || '', profile?.name || '', 'pro')}
-                style={{ background: '#6d28d9', color: 'white', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
+                style={{ background: '#ff4d00', color: 'white', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
               >
                 Unlock Full Analytics
               </button>
@@ -160,7 +160,7 @@ export default function AnalyticsPage() {
 
         {/* Engagement Insights */}
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
-          <div style={{ width: '50px', height: '50px', background: '#f5f3ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', color: '#6d28d9' }}>
+          <div style={{ width: '50px', height: '50px', background: '#f5f3ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', color: '#ff4d00' }}>
             <TrendingUp size={24} />
           </div>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Performance Insight</h3>
