@@ -102,7 +102,11 @@ export default function PublicBioPage() {
     )
   }
 
-  const isPro = profile?.plan === 'pro' || profile?.is_admin;
+  const isTrialActive = profile?.trial_ends_at 
+    ? new Date(profile.trial_ends_at) > new Date() 
+    : false;
+
+  const isPro = profile?.plan === 'pro' || profile?.is_admin || isTrialActive;
   const isBasic = profile?.plan === 'basic' || isPro;
 
   return (
@@ -179,9 +183,11 @@ export default function PublicBioPage() {
         </div>
 
         {/* Powered by */}
-        <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.75rem', marginTop: '2.5rem' }}>
-          Powered by{' '}<a href="/" style={{ color: '#6d28d9', textDecoration: 'none', fontWeight: 600 }}>LinkSync</a>
-        </p>
+        {!isPro && (
+          <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.75rem', marginTop: '2.5rem' }}>
+            Powered by{' '}<a href="/" style={{ color: '#6d28d9', textDecoration: 'none', fontWeight: 600 }}>LinkSync</a>
+          </p>
+        )}
       </div>
 
       {/* Sticky WhatsApp Button (Basic & Pro only) */}

@@ -43,10 +43,9 @@ function formatDate(iso: string) {
 }
 
 export default function LeadsPage() {
-  const { profile } = useProfile()
-  const hasProAccess = profile?.plan === 'pro' || profile?.is_admin;
-  const { leads, loading } = useLeads(profile?.id, hasProAccess)
-  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
+  const { profile, isPro } = useProfile()
+  const { leads, loading } = useLeads(profile?.id, isPro)
+  const { handleUpgrade, loading: paymentLoading, error: paymentError } = usePayments()
 
   if (!profile) {
     return (
@@ -89,7 +88,7 @@ export default function LeadsPage() {
         </p>
       </div>
 
-      {!hasProAccess ? (
+      {!isPro ? (
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '4rem 2rem', textAlign: 'center', maxWidth: '500px', margin: '0 auto' }}>
           <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#6d28d9' }}>
             <Users size={32} />
@@ -101,7 +100,7 @@ export default function LeadsPage() {
             Upgrade to Pro to add a lead capture form to your bio page, collect phone numbers, and manage your leads here.
           </p>
           <button 
-            onClick={() => upgradeToPro(profile.user_id, profile.name)}
+            onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
             disabled={paymentLoading}
             className="btn-primary" 
             style={{ padding: '0.8rem 2rem', opacity: paymentLoading ? 0.7 : 1 }}

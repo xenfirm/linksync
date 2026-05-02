@@ -9,6 +9,7 @@ export interface Profile {
   whatsapp_message?: string
   plan: 'free' | 'basic' | 'pro'
   is_admin: boolean
+  trial_ends_at?: string
   created_at: string
 }
 

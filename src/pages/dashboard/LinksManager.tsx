@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {
   Plus, Trash2, Edit3, Check, X, GripVertical,
   Link2, Loader2, ExternalLink, AlertCircle
@@ -6,6 +6,7 @@ import {
 import { useProfile } from '../../hooks/useProfile'
 import { useLinks } from '../../hooks/useLinks'
 import { usePayments } from '../../hooks/usePayments'
+import CopyButton from '../../components/CopyButton'
 import type { Link } from '../../lib/types'
 
 function LinkCard({
@@ -102,12 +103,9 @@ function LinkCard({
 }
 
 export default function LinksManager() {
-  const { profile } = useProfile()
+  const { profile, isPro, isBasic } = useProfile()
   const { links, loading, addLink, updateLink, deleteLink, reorderLinks } = useLinks(profile?.id)
-  const { upgradeToPro, loading: paymentLoading, error: paymentError } = usePayments()
-
-  const hasProAccess = profile?.plan === 'pro' || profile?.is_admin;
-  const hasBasicAccess = profile?.plan === 'basic' || hasProAccess;
+  const { handleUpgrade, loading: paymentLoading, error: paymentError } = usePayments()
 
   const [editingLink, setEditingLink] = useState<Link | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
@@ -120,8 +118,8 @@ export default function LinksManager() {
   const [formError, setFormError] = useState<string | null>(null)
 
   // Drag & drop
-  const dragId = { current: '' }
-  const dragOverId = { current: '' }
+  const dragId = useRef<string>('')
+  const dragOverId = useRef<string>('')
   const [dragOverLinkId, setDragOverLinkId] = useState<string>('')
 
   const handleDragStart = (_e: React.DragEvent, id: string) => {
@@ -233,24 +231,27 @@ export default function LinksManager() {
           </p>
         </div>
 
-        {links.length < (hasProAccess ? Infinity : hasBasicAccess ? 10 : 3) && (
-          <button
-            id="btn-add-link"
-            onClick={() => { setShowAddForm(!showAddForm); setFormError(null) }}
-            className="btn-primary"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.6rem 1.25rem',
-              borderRadius: '10px',
-              fontSize: '0.875rem',
-              flexShrink: 0,
-            }}
-          >
-            <Plus size={16} /> Add Link
-          </button>
-        )}
+        <div style={{ display: 'flex', gap: '0.6rem' }}>
+          <CopyButton text={`${window.location.origin}/${profile.username}`} label="Copy My Page" />
+          {links.length < (isPro ? Infinity : isBasic ? 10 : 3) && (
+            <button
+              id="btn-add-link"
+              onClick={() => { setShowAddForm(!showAddForm); setFormError(null) }}
+              className="btn-primary"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.6rem 1.25rem',
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                flexShrink: 0,
+              }}
+            >
+              <Plus size={16} /> Add Link
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Add Form */}
@@ -413,13 +414,13 @@ export default function LinksManager() {
         </div>
       )}
 
-      {links.length >= (hasProAccess ? Infinity : hasBasicAccess ? 10 : 3) && !hasProAccess && (
+      {links.length >= (isPro ? Infinity : isBasic ? 10 : 3) && !isPro && (
         <div style={{ marginTop: '1.5rem', background: '#faf5ff', border: '1px solid #ddd6fe', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#6d28d9', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.5rem' }}>
-            You've reached your link limit ({hasBasicAccess ? 10 : 3} links)
+            You've reached your link limit ({isBasic ? 10 : 3} links)
           </p>
           <button 
-            onClick={() => upgradeToPro(profile.user_id, profile.name)}
+            onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
             disabled={paymentLoading}
             className="btn-primary" 
             style={{ padding: '0.6rem 1.5rem', fontSize: '0.85rem', opacity: paymentLoading ? 0.7 : 1 }}

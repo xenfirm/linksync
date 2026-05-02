@@ -5,11 +5,28 @@ LinkSync is a high-conversion "Link in Bio" platform designed specifically for c
 ## 🌟 Key Features
 
 - **Dynamic Bio Page**: A premium, responsive landing page for all your important links.
-- **Lead Capture System (Pro)**: Integrated form to collect name and phone number before redirecting to WhatsApp.
-- **WhatsApp Integration**: Sticky primary CTA to start instant conversations.
-- **Analytics Dashboard**: Track total leads, link clicks, and conversion rates.
+- **7-Day Free Trial**: Automatic Pro feature trial for every new user.
+- **Multi-Plan Payments**: Secure Razorpay integration for Basic (₹99) and Pro (₹299) tiers.
+- **Lead Capture System (Pro)**: Integrated form to collect name and phone number.
+- **WhatsApp Integration**: Direct messaging support and analytics tracking.
+- **Drag & Drop Management**: Intuitive reordering of links with persistent state management.
+- **Analytics Dashboard**: Track total leads, link clicks, and conversion rates (Pro).
 - **Secure Authentication**: Robust system with centralized `useAuth`, password recovery, and protected routes.
 - **Internal Admin Bypass**: Built-in developer mode to test Pro features without active payments.
+
+---
+
+## 💰 Pricing Tiers
+
+| Feature | Free | Basic | Pro |
+| :--- | :--- | :--- | :--- |
+| **Price** | ₹0/mo | ₹99/mo | ₹299/mo |
+| **Link Limit** | 3 Links | 10 Links | Unlimited |
+| **Branding** | Visible | Visible | **Removed** |
+| **WhatsApp Button**| No | Yes | Yes |
+| **Lead Capture** | No | No | Yes |
+| **Analytics** | Basic | Basic | **Full Dashboard** |
+| **Free Trial** | No | 7 Days | 7 Days |
 
 ---
 
@@ -59,6 +76,11 @@ npx supabase secrets set RESEND_API_KEY=xxx
 
 ### 3. Database Schema
 Run the contents of `supabase-schema.sql` in your Supabase SQL Editor to initialize tables, indexes, and RLS policies.
+
+**Note**: If you are updating an existing database, ensure you run:
+```sql
+ALTER TABLE public.profiles ADD COLUMN trial_ends_at timestamptz;
+```
 
 ---
 

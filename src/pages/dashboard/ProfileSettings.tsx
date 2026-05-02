@@ -3,10 +3,13 @@ import { Camera, Save, Loader2, CheckCircle2, AlertCircle, User, ExternalLink } 
 import { useProfile } from '../../hooks/useProfile'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
+import { usePayments } from '../../hooks/usePayments'
+import CopyButton from '../../components/CopyButton'
 
 export default function ProfileSettings() {
   const { user } = useAuth()
-  const { profile, loading, updateProfile, createProfile } = useProfile()
+  const { profile, loading, updateProfile, createProfile, isPro } = useProfile()
+  const { handleUpgrade, error: paymentError } = usePayments()
   const isNew = !profile
 
   const [name, setName] = useState('')
@@ -21,7 +24,6 @@ export default function ProfileSettings() {
   const [uploading, setUploading] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
   const [initialized, setInitialized] = useState(false)
-  const [stats, setStats] = useState({ leads: 0, clicks: 0 })
 
   useEffect(() => {
     if (profile && !initialized) {
@@ -32,14 +34,6 @@ export default function ProfileSettings() {
       setWhatsappMessage(profile.whatsapp_message || '')
       setProfileImage(profile.profile_image || '')
       setInitialized(true)
-      
-      // Fetch stats
-      const fetchStats = async () => {
-        const { count: leadsCount } = await supabase.from('leads').select('*', { count: 'exact', head: true }).eq('profile_id', profile.id)
-        const { count: clicksCount } = await supabase.from('clicks').select('*', { count: 'exact', head: true }).eq('profile_id', profile.id)
-        setStats({ leads: leadsCount || 0, clicks: clicksCount || 0 })
-      }
-      fetchStats()
     }
   }, [profile, initialized])
 
@@ -82,7 +76,6 @@ export default function ProfileSettings() {
       profile_image: profileImage,
       plan: profile?.plan || 'free',
     }
-
     const { error: err } = isNew
       ? await createProfile(payload)
       : await updateProfile(payload)
@@ -134,24 +127,43 @@ export default function ProfileSettings() {
       </div>
 
       {!isNew && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Total Leads</span>
-            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>{stats.leads}</span>
+        <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.25rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <div>
+              <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Account Plan</h3>
+              <p style={{ color: '#64748b', fontSize: '0.8rem' }}>Current Plan: <span style={{ color: '#6d28d9', fontWeight: 700, textTransform: 'capitalize' }}>{profile.plan}</span></p>
+            </div>
+            {profile.plan === 'free' && (
+              <div style={{ display: 'flex', gap: '0.6rem' }}>
+                <button 
+                  type="button"
+                  onClick={() => handleUpgrade(profile.user_id, profile.name, 'basic')}
+                  style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  Upgrade to Basic (₹99)
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
+                  style={{ background: '#6d28d9', border: '1px solid #6d28d9', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  Upgrade to Pro (₹299)
+                </button>
+              </div>
+            )}
+            {profile.plan === 'basic' && (
+              <button 
+                type="button"
+                onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
+                style={{ background: '#6d28d9', border: '1px solid #6d28d9', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+              >
+                Upgrade to Pro (₹299)
+              </button>
+            )}
           </div>
-          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Total Clicks</span>
-            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>{stats.clicks}</span>
-          </div>
-          <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600, marginBottom: '0.5rem' }}>Conversion Rate</span>
-            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>
-              {stats.clicks > 0 ? Math.round((stats.leads / stats.clicks) * 100) : 0}%
-            </span>
-          </div>
+          {paymentError && <p style={{ color: '#e11d48', fontSize: '0.75rem', marginTop: '0.5rem' }}>{paymentError}</p>}
         </div>
       )}
-
       <form onSubmit={handleSave}>
         {/* Avatar */}
         <div
@@ -271,17 +283,33 @@ export default function ProfileSettings() {
               />
             </div>
             {username && (
-              <p style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.3rem' }}>
-                Your page: <span style={{ color: '#6d28d9' }}>/{username}</span>
-                <a
-                  href={`/${username}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#6d28d9', marginLeft: '0.3rem' }}
-                >
-                  <ExternalLink size={12} style={{ display: 'inline', verticalAlign: 'middle' }} />
-                </a>
-              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.4rem' }}>
+                <p style={{ color: '#64748b', fontSize: '0.75rem' }}>
+                  Your page: <span style={{ color: '#6d28d9' }}>/{username}</span>
+                </p>
+                <div style={{ display: 'flex', gap: '0.25rem' }}>
+                  <a
+                    href={`/${username}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ 
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      color: '#0f172a',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: '6px',
+                      textDecoration: 'none',
+                      fontSize: '0.7rem',
+                      fontWeight: 600
+                    }}
+                  >
+                    <ExternalLink size={11} style={{ marginRight: '0.25rem' }} /> View
+                  </a>
+                  <CopyButton text={`${window.location.origin}/${username}`} label="Copy Link" />
+                </div>
+              </div>
             )}
           </div>
 
@@ -380,19 +408,23 @@ export default function ProfileSettings() {
           <div
             style={{
               display: 'flex',
-              gap: '0.5rem',
-              alignItems: 'center',
+              flexDirection: 'column',
+              gap: '0.75rem',
               background: '#f0fdf4',
               border: '1px solid #bbf7d0',
-              borderRadius: '10px',
-              padding: '0.75rem 1rem',
+              borderRadius: '12px',
+              padding: '1rem',
               marginTop: '1rem',
-              color: '#16a34a',
-              fontSize: '0.875rem',
             }}
           >
-            <CheckCircle2 size={16} />
-            Profile saved successfully!
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', color: '#16a34a', fontSize: '0.875rem', fontWeight: 600 }}>
+              <CheckCircle2 size={16} />
+              Profile saved successfully!
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'white', padding: '0.75rem', borderRadius: '10px', border: '1px solid #dcfce7' }}>
+              <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500, flex: 1 }}>{window.location.origin}/{username}</span>
+              <CopyButton text={`${window.location.origin}/${username}`} label="Copy Live Link" />
+            </div>
           </div>
         )}
 

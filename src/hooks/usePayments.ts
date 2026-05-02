@@ -11,14 +11,17 @@ export function usePayments() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const upgradeToPro = async (userId: string, email: string) => {
+  const handleUpgrade = async (userId: string, email: string, plan: 'basic' | 'pro') => {
     setLoading(true)
     setError(null)
+
+    const amount = plan === 'pro' ? 299 : 99
+    const planName = plan === 'pro' ? 'LinkSync Pro' : 'LinkSync Basic'
 
     try {
       // 1. Create order via Edge Function
       const { data: order, error: orderError } = await supabase.functions.invoke('create-order', {
-        body: { amount: 999 } // Pro plan price in INR
+        body: { amount, plan } 
       })
 
       if (orderError) throw new Error(orderError.message)
@@ -28,8 +31,8 @@ export function usePayments() {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "LinkSync Pro",
-        description: "Unlimited Links & Lead Capture",
+        name: planName,
+        description: plan === 'pro' ? "Unlimited Links & Lead Capture" : "10 Links & WhatsApp Button",
         order_id: order.id,
         prefill: {
           email: email,
@@ -45,7 +48,8 @@ export function usePayments() {
               body: {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
+                razorpay_signature: response.razorpay_signature,
+                plan: plan // Pass plan to verification so backend knows which plan to set
               }
             })
 
@@ -74,5 +78,5 @@ export function usePayments() {
     }
   }
 
-  return { upgradeToPro, loading, error }
+  return { handleUpgrade, loading, error }
 }

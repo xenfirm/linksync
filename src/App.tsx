@@ -13,6 +13,7 @@ const DashboardLayout = lazy(() => import('./pages/dashboard/DashboardLayout'))
 const ProfileSettings = lazy(() => import('./pages/dashboard/ProfileSettings'))
 const LinksManager = lazy(() => import('./pages/dashboard/LinksManager'))
 const LeadsPage = lazy(() => import('./pages/dashboard/LeadsPage'))
+const AnalyticsPage = lazy(() => import('./pages/dashboard/AnalyticsPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const RefundPage = lazy(() => import('./pages/RefundPage'))
@@ -52,6 +53,7 @@ function App() {
               <Route index element={<ProfileSettings />} />
               <Route path="links" element={<LinksManager />} />
               <Route path="leads" element={<LeadsPage />} />
+              <Route path="analytics" element={<AnalyticsPage />} />
             </Route>
 
             {/* Public bio pages — must be LAST to avoid catching /dashboard, /auth */}

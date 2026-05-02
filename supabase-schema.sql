@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   whatsapp_message text DEFAULT '',
   plan text DEFAULT 'free' CHECK (plan IN ('free', 'basic', 'pro')),
   is_admin boolean DEFAULT false,
+  trial_ends_at timestamptz,
   created_at timestamptz DEFAULT now()
 );
 

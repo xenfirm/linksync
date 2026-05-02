@@ -240,12 +240,25 @@ export default function LandingPage() {
             {/* FREE */}
             <div style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem 2rem' }}>
               <div style={{ fontWeight: 700, color: '#374151', marginBottom: '0.4rem', fontSize: '1.1rem' }}>Free</div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>Get started for free</div>
+              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>Perfect for testing</div>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹0<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {['1 Bio Link Page', '3 Links', 'LinkSync Branding', 'Basic Analytics'].map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.9rem', color: '#374151' }}>
-                    <CheckCircle2 size={16} color="#22c55e" /> {f}
+                {[
+                  '1 Bio Link Page',
+                  '3 Links Limit',
+                  'LinkSync Branding',
+                  'Basic Analytics'
+                ].map(f => (
+                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
+                    • {f}
+                  </li>
+                ))}
+                {[
+                  'WhatsApp Button',
+                  'Lead Capture Form'
+                ].map(f => (
+                  <li key={f} style={{ fontSize: '0.9rem', color: '#94a3b8', opacity: 0.6, paddingLeft: '0.5rem' }}>
+                    • {f}
                   </li>
                 ))}
               </ul>
@@ -255,19 +268,33 @@ export default function LandingPage() {
             </div>
 
             {/* BASIC */}
-            <div style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem 2rem' }}>
+            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '2.5rem 2rem' }}>
               <div style={{ fontWeight: 700, color: '#374151', marginBottom: '0.4rem', fontSize: '1.1rem' }}>Basic</div>
-              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>Perfect for individuals</div>
+              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>For active creators</div>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹99<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {['10 Links', 'Remove Branding', 'WhatsApp Button', 'Lead Capture Form'].map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.9rem', color: '#374151' }}>
-                    <CheckCircle2 size={16} color="#22c55e" /> {f}
+                {[
+                  '10 Links Limit',
+                  'WhatsApp Button',
+                  'LinkSync Branding',
+                  'Basic Analytics',
+                  '7-Day Free Trial'
+                ].map(f => (
+                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
+                    • {f}
+                  </li>
+                ))}
+                {[
+                  'Remove Branding',
+                  'Lead Capture Form'
+                ].map(f => (
+                  <li key={f} style={{ fontSize: '0.9rem', color: '#94a3b8', opacity: 0.6, paddingLeft: '0.5rem' }}>
+                    • {f}
                   </li>
                 ))}
               </ul>
               <Link to="/auth?mode=signup" style={{ display: 'block', textAlign: 'center', padding: '0.85rem', borderRadius: '12px', border: '1.5px solid #e2e8f0', color: '#374151', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'all 0.2s' }}>
-                Start 7-Day Free Trial
+                Start 7-Day Trial
               </Link>
             </div>
 
@@ -280,16 +307,66 @@ export default function LandingPage() {
               <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>For growing businesses</div>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0f172a', marginBottom: '2rem' }}>₹299<span style={{ fontSize: '1rem', fontWeight: 500, color: '#94a3b8' }}>/month</span></div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2.5rem' }}>
-                {['Unlimited Links', 'Lead Capture Form', 'Leads Dashboard', 'WhatsApp Integration', 'Priority Support'].map(f => (
-                  <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.9rem', color: '#374151' }}>
-                    <CheckCircle2 size={16} color="#6d28d9" /> {f}
+                {[
+                  'Unlimited Links',
+                  'Remove Branding',
+                  'Lead Capture Form',
+                  'Leads Dashboard',
+                  'WhatsApp Integration',
+                  'Priority Support',
+                  'Full Analytics Dashboard'
+                ].map(f => (
+                  <li key={f} style={{ fontSize: '0.9rem', color: '#374151', paddingLeft: '0.5rem' }}>
+                    • {f}
                   </li>
                 ))}
               </ul>
               <Link to="/auth?mode=signup" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', borderRadius: '12px', fontSize: '0.95rem', boxShadow: '0 6px 20px rgba(109,40,217,0.3)' }}>
-                Start 7-Day Free Trial
+                Start 7-Day Trial
               </Link>
             </div>
+          </div>
+
+          {/* Comparison Table */}
+          <div style={{ marginTop: '5rem', overflowX: 'auto' }}>
+            <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.5rem', textAlign: 'center', marginBottom: '3rem', color: '#0f172a' }}>
+              Detailed Plan Comparison
+            </h3>
+            <div style={{ minWidth: '800px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                <thead>
+                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Features</th>
+                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', textAlign: 'center' }}>Free</th>
+                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', textAlign: 'center' }}>Basic</th>
+                    <th style={{ padding: '1.5rem 2rem', fontSize: '0.95rem', fontWeight: 800, color: '#6d28d9', textAlign: 'center' }}>Pro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { f: 'Link Limit', free: '3 Links', basic: '10 Links', pro: 'Unlimited' },
+                    { f: 'Bio Pages', free: '1 Page', basic: '1 Page', pro: '1 Page' },
+                    { f: 'LinkSync Branding', free: 'Visible', basic: 'Visible', pro: 'Removed' },
+                    { f: 'WhatsApp Button', free: 'No', basic: 'Yes', pro: 'Yes' },
+                    { f: 'Lead Capture Form', free: 'No', basic: 'No', pro: 'Yes' },
+                    { f: 'Leads Dashboard', free: 'No', basic: 'No', pro: 'Yes' },
+                    { f: 'Analytics', free: 'Basic', basic: 'Basic', pro: 'Full Dashboard' },
+                    { f: 'Priority Support', free: 'No', basic: 'No', pro: 'Yes' },
+                    { f: 'Free Trial', free: 'No', basic: '7 Days', basicColor: '#22c55e', pro: '7 Days', proColor: '#22c55e' },
+                  ].map((row, i) => (
+                    <tr key={row.f} style={{ borderBottom: i === 8 ? 'none' : '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#fafafa' }}>
+                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.95rem', fontWeight: 600, color: '#374151' }}>{row.f}</td>
+                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.9rem', color: '#64748b', textAlign: 'center' }}>{row.free}</td>
+                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.9rem', color: row.basicColor || '#64748b', textAlign: 'center', fontWeight: row.basicColor ? 700 : 500 }}>{row.basic}</td>
+                      <td style={{ padding: '1.25rem 2rem', fontSize: '0.95rem', color: row.proColor || '#6d28d9', textAlign: 'center', fontWeight: 700 }}>{row.pro}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '2rem', color: '#94a3b8', fontSize: '0.85rem' }}>
+              All prices are in INR (₹). Subscription can be cancelled anytime.
+            </p>
           </div>
         </div>
       </section>

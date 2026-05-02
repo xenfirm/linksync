@@ -48,12 +48,26 @@ export function useProfile() {
 
   const createProfile = async (profileData: Omit<Profile, 'id' | 'user_id' | 'created_at' | 'is_admin'>) => {
     if (!user) return { error: 'Not authenticated' }
+    const trialEndsAt = new Date()
+    trialEndsAt.setDate(trialEndsAt.getDate() + 7)
+
     const { error } = await supabase
       .from('profiles')
-      .insert({ ...profileData, user_id: user.id })
+      .insert({ 
+        ...profileData, 
+        user_id: user.id,
+        trial_ends_at: trialEndsAt.toISOString()
+      })
     if (!error) fetchProfile()
     return { error: error?.message || null }
   }
 
-  return { profile, loading, error, fetchProfile, updateProfile, createProfile }
+  const isTrialActive = profile?.trial_ends_at 
+    ? new Date(profile.trial_ends_at) > new Date() 
+    : false
+
+  const isPro = profile?.plan === 'pro' || profile?.is_admin || isTrialActive
+  const isBasic = profile?.plan === 'basic' || isPro
+
+  return { profile, loading, error, fetchProfile, updateProfile, createProfile, isPro, isBasic, isTrialActive }
 }

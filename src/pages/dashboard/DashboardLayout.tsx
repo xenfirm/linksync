@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { User, Link2, Users, ExternalLink, Menu, X } from 'lucide-react'
+import { User, Link2, Users, BarChart2, ExternalLink, Menu, X } from 'lucide-react'
 import Navbar from '../../components/Navbar'
+import CopyButton from '../../components/CopyButton'
 import { useProfile } from '../../hooks/useProfile'
 
 const navItems = [
   { to: '/dashboard', label: 'Profile', icon: <User size={16} />, end: true },
   { to: '/dashboard/links', label: 'Links', icon: <Link2 size={16} />, end: false },
   { to: '/dashboard/leads', label: 'Leads', icon: <Users size={16} />, end: false },
+  { to: '/dashboard/analytics', label: 'Analytics', icon: <BarChart2 size={16} />, end: false },
 ]
 
 export default function DashboardLayout() {
@@ -35,34 +37,51 @@ export default function DashboardLayout() {
               Admin Mode
             </div>
           )}
+          
+          {profile.trial_ends_at && new Date(profile.trial_ends_at) > new Date() && profile.plan === 'free' && (
+            <div style={{ marginTop: '0.5rem', display: 'inline-block', background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', letterSpacing: '0.01em' }}>
+              7-Day Trial Active
+            </div>
+          )}
 
-          <a href={`/${profile.username}`} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.75rem', background: '#ede9fe', border: '1px solid #ddd6fe', color: '#6d28d9', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 600, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
-            <ExternalLink size={11} /> View Page
-          </a>
+          <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center', marginTop: '0.75rem' }}>
+            <a href={`/${profile.username}`} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: '#ede9fe', border: '1px solid #ddd6fe', color: '#6d28d9', textDecoration: 'none', fontSize: '0.75rem', fontWeight: 600, padding: '0.35rem 0.875rem', borderRadius: '100px' }}>
+              <ExternalLink size={11} /> View
+            </a>
+            <CopyButton text={`${window.location.origin}/${profile.username}`} />
+          </div>
         </div>
       )}
 
       {/* Nav */}
       <nav style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        {navItems.map(item => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            onClick={() => setSidebarOpen(false)}
-            style={({ isActive }) => ({
-              display: 'flex', alignItems: 'center', gap: '0.6rem',
-              padding: '0.7rem 0.875rem', borderRadius: '10px', textDecoration: 'none',
-              fontSize: '0.875rem', fontWeight: isActive ? 700 : 500,
-              color: isActive ? '#6d28d9' : '#374151',
-              background: isActive ? '#ede9fe' : 'transparent',
-              transition: 'all 0.15s',
-            })}
-          >
-            {item.icon} {item.label}
-          </NavLink>
-        ))}
+        {navItems.map(item => {
+          const isLeads = item.to === '/dashboard/leads';
+          const isPro = profile?.plan === 'pro' || profile?.is_admin;
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.end}
+              onClick={() => setSidebarOpen(false)}
+              style={({ isActive }) => ({
+                display: 'flex', alignItems: 'center', gap: '0.6rem',
+                padding: '0.7rem 0.875rem', borderRadius: '10px', textDecoration: 'none',
+                fontSize: '0.875rem', fontWeight: isActive ? 700 : 500,
+                color: isActive ? '#6d28d9' : '#374151',
+                background: isActive ? '#ede9fe' : 'transparent',
+                transition: 'all 0.15s',
+              })}
+            >
+              {item.icon} 
+              <span style={{ flex: 1 }}>{item.label}</span>
+              {isLeads && !isPro && (
+                <span style={{ background: '#f1f5f9', color: '#64748b', fontSize: '10px', fontWeight: 700, padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase' }}>Pro</span>
+              )}
+            </NavLink>
+          );
+        })}
       </nav>
 
       {/* Upgrade Banner */}
