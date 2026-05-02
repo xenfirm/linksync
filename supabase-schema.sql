@@ -120,7 +120,7 @@ CREATE POLICY "Anyone can submit a lead for Pro profiles"
     EXISTS (
       SELECT 1 FROM public.profiles 
       WHERE id = profile_id 
-      AND (plan = 'pro' OR is_admin = true)
+      AND (plan = 'pro' OR is_admin = true OR (trial_ends_at IS NOT NULL AND trial_ends_at > now()))
     )
   );
 
@@ -186,3 +186,27 @@ CREATE INDEX IF NOT EXISTS idx_leads_profile_id ON public.leads(profile_id);
 CREATE INDEX IF NOT EXISTS idx_leads_created_at ON public.leads(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_clicks_profile_id ON public.clicks(profile_id);
 CREATE INDEX IF NOT EXISTS idx_clicks_type ON public.clicks(type);
+
+-- =========================================
+-- AUTOMATIC PROFILE CREATION TRIGGER
+-- =========================================
+-- This function creates a profile automatically when a new user signs up in auth.users
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO public.profiles (user_id, username, name, trial_ends_at, plan)
+  VALUES (
+    new.id,
+    LOWER(SPLIT_PART(new.email, '@', 1)) || '_' || floor(random() * 1000)::text, -- unique username
+    COALESCE(new.raw_user_meta_data->>'full_name', SPLIT_PART(new.email, '@', 1)),
+    now() + interval '7 days', -- 7-day trial
+    'basic' -- Start on basic with trial features unlocked
+  );
+  RETURN new;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger the function on signup
+CREATE OR REPLACE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();

@@ -43,7 +43,12 @@ function PhoneMockup() {
             <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '6px', padding: '0.35rem 0.5rem', marginBottom: '0.5rem', fontSize: '0.68rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
               <span>🇮🇳 +91</span>
             </div>
-            <div style={{ background: '#6d28d9', borderRadius: '6px', padding: '0.4rem', textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: 'white' }}>Send Message</div>
+            <button 
+              onClick={() => alert('Demo: In a real page, this would capture the lead and notify you instantly!')}
+              style={{ width: '100%', border: 'none', background: '#6d28d9', borderRadius: '6px', padding: '0.4rem', textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: 'white', cursor: 'pointer' }}
+            >
+              Send Message
+            </button>
           </div>
         </div>
       </div>
@@ -135,7 +140,7 @@ export default function LandingPage() {
           </div>
 
           {/* Right — phone */}
-          <div style={{ flex: '0 1 340px', display: 'flex', justifyContent: 'center', minWidth: 0, paddingRight: '80px' }}>
+          <div id="demo" style={{ flex: '0 1 340px', display: 'flex', justifyContent: 'center', minWidth: 0, paddingRight: '80px' }}>
             <PhoneMockup />
           </div>
         </div>
