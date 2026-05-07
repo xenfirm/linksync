@@ -45,7 +45,7 @@ export default function ImportLinktreePage() {
   
   const { user } = useAuth()
   const { updateProfile, profile } = useProfile()
-  const { addLink } = useLinks()
+  const { addLink } = useLinks(profile?.id)
   const navigate = useNavigate()
 
   // Handle URL Submission
