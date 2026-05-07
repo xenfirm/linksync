@@ -174,9 +174,9 @@ export default function PublicBioPage() {
               onClick={() => handleLinkClick(link.id, link.url)}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '0.9rem 1.25rem', borderRadius: '14px', background: '#fff', border: '1px solid #e2e8f0', color: '#0f172a', textDecoration: 'none', fontWeight: 600, fontSize: '0.925rem', transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', boxSizing: 'border-box' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', padding: '0.9rem 1.25rem', borderRadius: '14px', background: '#fff', border: '1px solid #e2e8f0', color: '#0f172a', textDecoration: 'none', fontWeight: 600, fontSize: '0.925rem', transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', boxSizing: 'border-box', gap: '1rem' }}
             >
-              {link.title}
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{link.title}</span>
               <ExternalLink size={15} style={{ color: '#94a3b8', flexShrink: 0 }} />
             </a>
           ))}

@@ -60,8 +60,8 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
             >
               {[
                 { label: 'Features', href: '#features' },
-                { label: 'How It Works', href: '#how-it-works' },
                 { label: 'Pricing', href: '#pricing' },
+                { label: 'FAQ', href: '#faq' },
               ].map(link => (
                 <a
                   key={link.label}
@@ -89,7 +89,7 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
                   className="btn-primary"
                   style={{ padding: '0.55rem 1.25rem', fontSize: '0.9rem', borderRadius: '10px' }}
                 >
-                  Get Started Free
+                  Start free
                 </Link>
               </>
             )}
@@ -157,8 +157,8 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
               <>
                 {[
                   { label: 'Features', href: '#features' },
-                  { label: 'How It Works', href: '#how-it-works' },
                   { label: 'Pricing', href: '#pricing' },
+                  { label: 'FAQ', href: '#faq' },
                 ].map(link => (
                   <a
                     key={link.label}
@@ -176,7 +176,7 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
                         Login
                       </Link>
                       <Link to="/auth?mode=signup" onClick={() => setMobileOpen(false)} className="btn-primary" style={{ justifyContent: 'center', padding: '0.75rem', borderRadius: '10px' }}>
-                        Get Started Free
+                        Start free
                       </Link>
                     </>
                   ) : (

@@ -20,6 +20,7 @@ const RefundPage = lazy(() => import('./pages/RefundPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
 const ReferralPage = lazy(() => import('./pages/dashboard/ReferralPage'))
+const ImportLinktreePage = lazy(() => import('./pages/ImportLinktreePage'))
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -41,6 +42,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/refund" element={<RefundPage />} />
+            <Route path="/import-linktree" element={<ImportLinktreePage />} />
 
             {/* Dashboard (protected) */}
             <Route

@@ -106,7 +106,6 @@ export default function DashboardLayout() {
       <Navbar variant="dashboard" />
 
       {/* Mobile sidebar toggle */}
-      <div style={{ display: 'none' }} className="hide-desktop" />
       <div
         style={{
           display: 'flex',
@@ -134,18 +133,38 @@ export default function DashboardLayout() {
         </div>
       )}
 
-      {/* Desktop layout */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.25rem', display: 'flex', gap: '2rem', alignItems: 'start' }}>
+      {/* Main container */}
+      <div 
+        style={{ 
+          maxWidth: '1200px', 
+          margin: '0 auto', 
+          padding: '2rem 1.25rem', 
+          display: 'flex', 
+          gap: '2rem', 
+          alignItems: 'start',
+          // Adjust padding on mobile since we have the Dashboard title bar
+        }}
+        className="dashboard-container"
+      >
         {/* Desktop sidebar */}
         <div className="hide-mobile" style={{ width: '220px', flexShrink: 0 }}>
           <Sidebar />
         </div>
 
         {/* Main content */}
-        <main style={{ flex: 1, minWidth: 0 }}>
+        <main style={{ flex: 1, minWidth: 0, width: '100%' }}>
           <Outlet />
         </main>
       </div>
+
+      {/* Mobile Padding Helper */}
+      <style>{`
+        @media (max-width: 768px) {
+          .dashboard-container {
+            padding-top: 1.5rem !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }

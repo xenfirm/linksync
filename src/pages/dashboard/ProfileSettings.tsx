@@ -128,24 +128,32 @@ export default function ProfileSettings() {
 
       {!isNew && (
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <div 
+            style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              gap: '1rem',
+              flexWrap: 'wrap'
+            }}
+          >
             <div>
               <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Account Plan</h3>
               <p style={{ color: '#64748b', fontSize: '0.8rem' }}>Current Plan: <span style={{ color: '#ff4d00', fontWeight: 700, textTransform: 'capitalize' }}>{profile.plan}</span></p>
             </div>
             {profile.plan === 'free' && (
-              <div style={{ display: 'flex', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
                 <button 
                   type="button"
                   onClick={() => handleUpgrade(profile.user_id, profile.name, 'basic')}
-                  style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}
                 >
                   Upgrade to Basic (₹99)
                 </button>
                 <button 
                   type="button"
                   onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
-                  style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}
                 >
                   Upgrade to Pro (₹299)
                 </button>
@@ -155,7 +163,7 @@ export default function ProfileSettings() {
               <button 
                 type="button"
                 onClick={() => handleUpgrade(profile.user_id, profile.name, 'pro')}
-                style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                style={{ background: '#ff4d00', border: '1px solid #ff4d00', color: 'white', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}
               >
                 Upgrade to Pro (₹299)
               </button>
@@ -179,7 +187,7 @@ export default function ProfileSettings() {
           <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '1rem' }}>
             Profile Photo
           </label>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative' }}>
               {profileImage ? (
                 <img
@@ -203,7 +211,7 @@ export default function ProfileSettings() {
                 </div>
               )}
             </div>
-            <div>
+            <div style={{ flex: 1, minWidth: '200px' }}>
               <input
                 type="file"
                 ref={fileRef}
