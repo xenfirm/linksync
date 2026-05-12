@@ -77,8 +77,7 @@ npx supabase secrets set RESEND_API_KEY=xxx
 ### 3. Database Schema
 Run the contents of `supabase-schema.sql` in your Supabase SQL Editor to initialize tables, indexes, and RLS policies.
 
-**Note**: If you are updating an existing database, ensure you run:
-```sql
+f```sql
 ALTER TABLE public.profiles ADD COLUMN trial_ends_at timestamptz;
 ```
 

@@ -136,8 +136,8 @@ export default function ImportLinktreePage() {
           {/* STEP 1: INPUT */}
           {step === 'input' && (
             <div style={{ background: '#fff', borderRadius: '32px', padding: '3rem 2rem', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-              <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: '#fff7f2', color: '#ff4d00', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
-                <Sparkles size={32} fill="#ff4d00" />
+              <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: '#fff7f2', color: '#8133C2', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
+                <Sparkles size={32} fill="#8133C2" />
               </div>
               <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '2rem', color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
                 Import from Linktree
@@ -157,7 +157,7 @@ export default function ImportLinktreePage() {
                       onChange={(e) => setUrl(e.target.value)}
                       required
                       style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', borderRadius: '14px', border: '2px solid #f1f5f9', fontSize: '1.05rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'Inter, sans-serif' }}
-                      onFocus={(e) => e.target.style.borderColor = '#ff4d00'}
+                      onFocus={(e) => e.target.style.borderColor = '#8133C2'}
                       onBlur={(e) => e.target.style.borderColor = '#f1f5f9'}
                     />
                   </div>
@@ -167,7 +167,7 @@ export default function ImportLinktreePage() {
                 <button 
                   type="submit" 
                   className="btn-primary" 
-                  style={{ padding: '1rem', borderRadius: '14px', fontSize: '1.1rem', fontWeight: 800, justifyContent: 'center', gap: '0.75rem', boxShadow: '0 8px 24px rgba(255,77,0,0.2)' }}
+                  style={{ padding: '1rem', borderRadius: '14px', fontSize: '1.1rem', fontWeight: 800, justifyContent: 'center', gap: '0.75rem', boxShadow: '0 8px 24px rgba(129,51,194,0.2)' }}
                 >
                   Import my Linktree <ArrowRight size={20} />
                 </button>
@@ -191,7 +191,7 @@ export default function ImportLinktreePage() {
                   <svg style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
                     <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" strokeWidth="8" />
                     <circle 
-                      cx="50" cy="50" r="45" fill="none" stroke="#ff4d00" strokeWidth="8" 
+                      cx="50" cy="50" r="45" fill="none" stroke="#8133C2" strokeWidth="8" 
                       strokeDasharray="282.7" 
                       strokeDashoffset={282.7 - (282.7 * progress) / 100} 
                       strokeLinecap="round"
@@ -279,7 +279,7 @@ export default function ImportLinktreePage() {
                                   newLinks[idx].active = !newLinks[idx].active
                                   setImportedData({...importedData, links: newLinks})
                                 }}
-                                style={{ background: link.active ? '#ff4d00' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'pointer', transition: 'background 0.2s' }}
+                                style={{ background: link.active ? '#8133C2' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'pointer', transition: 'background 0.2s' }}
                               >
                                 <div style={{ position: 'absolute', top: '2px', left: link.active ? '18px' : '2px', width: '16px', height: '16px', borderRadius: '50%', background: '#fff', transition: 'left 0.2s' }} />
                               </button>
@@ -327,8 +327,8 @@ export default function ImportLinktreePage() {
           {step === 'upgrades' && importedData && (
             <div style={{ background: '#fff', borderRadius: '32px', padding: '3.5rem', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0' }}>
                <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-                 <div style={{ display: 'inline-flex', padding: '0.5rem 1rem', background: '#fff7f2', color: '#ff4d00', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 800, marginBottom: '1.5rem', gap: '0.4rem' }}>
-                    <Zap size={14} fill="#ff4d00" /> One last step
+                 <div style={{ display: 'inline-flex', padding: '0.5rem 1rem', background: '#fff7f2', color: '#8133C2', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 800, marginBottom: '1.5rem', gap: '0.4rem' }}>
+                    <Zap size={14} fill="#8133C2" /> One last step
                  </div>
                  <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '2.25rem', color: '#0f172a', letterSpacing: '-0.04em' }}>
                    Boost your conversion path
@@ -338,8 +338,8 @@ export default function ImportLinktreePage() {
 
                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
                   {/* Upgrade 1: WhatsApp */}
-                  <div style={{ padding: '2rem', border: '2px solid #ff4d00', background: '#fff7f2', borderRadius: '24px', position: 'relative' }}>
-                     <div style={{ position: 'absolute', top: '-12px', right: '20px', background: '#ff4d00', color: 'white', fontSize: '0.7rem', fontWeight: 900, padding: '4px 10px', borderRadius: '6px' }}>RECOMMENDED</div>
+                  <div style={{ padding: '2rem', border: '2px solid #8133C2', background: '#fff7f2', borderRadius: '24px', position: 'relative' }}>
+                     <div style={{ position: 'absolute', top: '-12px', right: '20px', background: '#8133C2', color: 'white', fontSize: '0.7rem', fontWeight: 900, padding: '4px 10px', borderRadius: '6px' }}>RECOMMENDED</div>
                      <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#22c55e', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                         <MessageCircle size={22} fill="white" />
                      </div>
@@ -352,12 +352,12 @@ export default function ImportLinktreePage() {
 
                   {/* Upgrade 2: Featured Offer */}
                   <div style={{ padding: '2rem', border: '1px solid #e2e8f0', borderRadius: '24px' }}>
-                     <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#fff', border: '1px solid #e2e8f0', color: '#ff4d00', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                     <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#fff', border: '1px solid #e2e8f0', color: '#8133C2', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                         <Sparkles size={22} />
                      </div>
                      <h3 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#0f172a', marginBottom: '0.75rem' }}>Featured Offer Block</h3>
                      <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5, marginBottom: '1.5rem' }}>Highlight your top service or product at the very top of your list.</p>
-                     <button style={{ background: '#fff', border: '1.5px solid #ff4d00', color: '#ff4d00', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer' }}>Enable Block</button>
+                     <button style={{ background: '#fff', border: '1.5px solid #8133C2', color: '#8133C2', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer' }}>Enable Block</button>
                   </div>
                </div>
 
@@ -366,7 +366,7 @@ export default function ImportLinktreePage() {
                     onClick={handlePublish}
                     disabled={saving}
                     className="btn-primary" 
-                    style={{ padding: '1.25rem 4rem', borderRadius: '16px', fontSize: '1.25rem', fontWeight: 900, justifyContent: 'center', gap: '0.75rem', boxShadow: '0 12px 32px rgba(255,77,0,0.3)', width: '100%', maxWidth: '400px' }}
+                    style={{ padding: '1.25rem 4rem', borderRadius: '16px', fontSize: '1.25rem', fontWeight: 900, justifyContent: 'center', gap: '0.75rem', boxShadow: '0 12px 32px rgba(129,51,194,0.3)', width: '100%', maxWidth: '400px' }}
                   >
                     {saving ? <Loader2 size={24} style={{ animation: 'spin 1s linear infinite' }} /> : <Sparkles size={24} fill="white" />}
                     {saving ? 'Publishing...' : 'Publish my LinkSync page'}
@@ -393,7 +393,7 @@ export default function ImportLinktreePage() {
 
                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '1.5rem', marginBottom: '3rem' }}>
                   <div style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>Your Live URL</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ff4d00', marginBottom: '1.5rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#8133C2', marginBottom: '1.5rem' }}>
                     {window.location.origin}/{profile?.username || 'yourname'}
                   </div>
                   <div style={{ display: 'flex', gap: '1rem' }}>
@@ -406,7 +406,7 @@ export default function ImportLinktreePage() {
                   </div>
                </div>
 
-               <Link to="/dashboard" style={{ color: '#ff4d00', fontWeight: 800, textDecoration: 'none', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+               <Link to="/dashboard" style={{ color: '#8133C2', fontWeight: 800, textDecoration: 'none', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
                   Go to Dashboard <ChevronRight size={18} />
                </Link>
             </div>

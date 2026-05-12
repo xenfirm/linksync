@@ -87,7 +87,7 @@ export default function AuthPage() {
               style={{
                 flex: 1, padding: '0.55rem', borderRadius: '10px', border: 'none', cursor: 'pointer',
                 fontSize: '0.875rem', fontWeight: 600, transition: 'all 0.2s',
-                background: mode === m ? '#ff4d00' : 'transparent',
+                background: mode === m ? '#8133C2' : 'transparent',
                 color: mode === m ? 'white' : '#64748b',
                 boxShadow: mode === m ? '0 2px 8px rgba(255, 77, 0,0.25)' : 'none',
               }}
@@ -135,7 +135,7 @@ export default function AuthPage() {
               {mode === 'signin' && (
                 <Link 
                   to="/forgot-password"
-                  style={{ color: '#ff4d00', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none' }}
+                  style={{ color: '#8133C2', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none' }}
                 >
                   Forgot Password?
                 </Link>
@@ -169,8 +169,8 @@ export default function AuthPage() {
       </div>
 
       <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.8rem', marginTop: '1.5rem' }}>
-        By continuing, you agree to our <Link to="/terms" style={{ color: '#ff4d00', textDecoration: 'none' }}>Terms</Link> and{' '}
-        <Link to="/privacy" style={{ color: '#ff4d00', textDecoration: 'none' }}>Privacy Policy</Link>
+        By continuing, you agree to our <Link to="/terms" style={{ color: '#8133C2', textDecoration: 'none' }}>Terms</Link> and{' '}
+        <Link to="/privacy" style={{ color: '#8133C2', textDecoration: 'none' }}>Privacy Policy</Link>
       </p>
     </div>
   )

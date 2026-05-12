@@ -14,6 +14,7 @@ export interface Profile {
   referred_by?: string
   referral_count?: number
   reward_unlocked?: boolean
+  theme?: string
   created_at: string
 }
 

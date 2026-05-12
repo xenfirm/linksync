@@ -7,7 +7,7 @@ export default function ReferralPage() {
   const { profile, loading } = useProfile()
 
   if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center', color: '#64748b' }}>Loading referral data...</div>
+    return <div style={{ padding: '2rem', textAlign: 'center', color: '#7c5a9e' }}>Loading referral data...</div>
   }
 
   if (!profile) return null
@@ -17,10 +17,10 @@ export default function ReferralPage() {
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
       <div style={{ marginBottom: '2.5rem' }}>
-        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.8rem', color: '#0f172a', marginBottom: '0.5rem' }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.8rem', color: '#f5f0ff', marginBottom: '0.5rem' }}>
           Refer & Earn Pro 🎁
         </h1>
-        <p style={{ color: '#64748b', fontSize: '1rem' }}>
+        <p style={{ color: '#7c5a9e', fontSize: '1rem' }}>
           Invite your friends to LinkSync and unlock premium features for free.
         </p>
       </div>
@@ -29,17 +29,17 @@ export default function ReferralPage() {
         {/* Main Card */}
         <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fff7f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff4d00' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(129,51,194,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8133C2' }}>
               <Users size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a' }}>Spread the Word</h3>
-              <p style={{ color: '#64748b', fontSize: '0.85rem' }}>Your unique referral link</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f5f0ff' }}>Spread the Word</h3>
+              <p style={{ color: '#7c5a9e', fontSize: '0.85rem' }}>Your unique referral link</p>
             </div>
           </div>
 
           <div style={{ background: '#fafafa', border: '1.5px dashed #e2e8f0', borderRadius: '16px', padding: '1.25rem', marginBottom: '2rem' }}>
-            <code style={{ display: 'block', fontSize: '0.95rem', color: '#0f172a', fontWeight: 700, marginBottom: '1rem', wordBreak: 'break-all', textAlign: 'center' }}>
+            <code style={{ display: 'block', fontSize: '0.95rem', color: '#f5f0ff', fontWeight: 700, marginBottom: '1rem', wordBreak: 'break-all', textAlign: 'center' }}>
               {referralLink}
             </code>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -62,7 +62,7 @@ export default function ReferralPage() {
 
         {/* Progress Card */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div style={{ background: 'linear-gradient(135deg, #ff4d00 0%, #ff8c00 100%)', borderRadius: '24px', padding: '2rem', color: 'white' }}>
+          <div style={{ background: 'linear-gradient(135deg, #8133C2 0%, #BFCF1A 100%)', borderRadius: '24px', padding: '2rem', color: 'white' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
               <div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 600, opacity: 0.9, marginBottom: '0.25rem' }}>Referral Progress</p>
@@ -92,7 +92,7 @@ export default function ReferralPage() {
           </div>
 
           <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '1.5rem' }}>
-            <h4 style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a', marginBottom: '1rem' }}>How it works:</h4>
+            <h4 style={{ fontSize: '0.9rem', fontWeight: 800, color: '#f5f0ff', marginBottom: '1rem' }}>How it works:</h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
                 'Share your link with fellow creators.',
@@ -100,8 +100,8 @@ export default function ReferralPage() {
                 'You get 1 point for every signup.',
                 'Get 3 points to unlock Pro for FREE!'
               ].map((step, i) => (
-                <li key={i} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.85rem', color: '#64748b', alignItems: 'flex-start' }}>
-                  <CheckCircle2 size={16} style={{ color: '#ff4d00', flexShrink: 0, marginTop: '2px' }} />
+                <li key={i} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.85rem', color: '#7c5a9e', alignItems: 'flex-start' }}>
+                  <CheckCircle2 size={16} style={{ color: '#8133C2', flexShrink: 0, marginTop: '2px' }} />
                   {step}
                 </li>
               ))}

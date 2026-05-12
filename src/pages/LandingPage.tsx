@@ -15,7 +15,7 @@ function PhoneMockup() {
   return (
     <div style={{ position: 'relative', width: '280px', margin: '0 auto', flexShrink: 0 }}>
       {/* Soft background glow */}
-      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '320px', height: '320px', background: 'radial-gradient(circle, rgba(255,77,0,0.08) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
+      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '320px', height: '320px', background: 'radial-gradient(circle, rgba(129,51,194,0.1) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 0 }} />
 
       {/* Phone frame */}
       <div style={{ position: 'relative', zIndex: 1, background: '#000', borderRadius: '44px', padding: '10px', boxShadow: '0 40px 80px rgba(0,0,0,0.2)' }}>
@@ -30,7 +30,7 @@ function PhoneMockup() {
                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}>
-              Anjali Sharma <CheckCircle2 size={14} fill="#ff4d00" color="white" />
+              Anjali Sharma <CheckCircle2 size={14} fill="#8133C2" color="white" />
             </div>
             <div style={{ color: '#64748b', fontSize: '0.7rem', marginTop: '0.25rem', lineHeight: 1.4 }}>Helping creators grow their<br />brand & revenue online ✨</div>
           </div>
@@ -41,7 +41,7 @@ function PhoneMockup() {
           </button>
 
           {/* Featured Link */}
-          <div style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '12px', border: '2px solid #ff4d00', background: '#fff7f2', color: '#ff4d00', fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '12px', border: '2px solid #8133C2', background: 'rgba(129,51,194,0.05)', color: '#8133C2', fontSize: '0.8rem', fontWeight: 800, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             Book My 1:1 Consultation 📅
           </div>
 
@@ -59,7 +59,7 @@ function PhoneMockup() {
           <div style={{ marginTop: '1.25rem', padding: '1rem', background: '#fafafa', borderRadius: '14px', border: '1px solid #f1f5f9' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.25rem' }}>Leave an inquiry</div>
             <input type="text" placeholder="Your Name" style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '0.7rem', marginBottom: '0.5rem', outline: 'none' }} />
-            <button style={{ width: '100%', background: '#ff4d00', color: 'white', border: 'none', borderRadius: '8px', padding: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}>Submit</button>
+            <button style={{ width: '100%', background: '#8133C2', color: 'white', border: 'none', borderRadius: '8px', padding: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}>Submit</button>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ function PhoneMockup() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#0f172a' }}>New Inquiry!</span>
-              <Zap size={10} fill="#ff4d00" color="#ff4d00" />
+              <Zap size={10} fill="#BFCF1A" color="#BFCF1A" />
             </div>
             <div style={{ fontSize: '0.65rem', color: '#64748b', fontWeight: 500 }}>Rohit Kumar</div>
           </div>
@@ -126,7 +126,7 @@ export default function LandingPage() {
       {/* ── HERO ── */}
       <section
         style={{
-          background: 'radial-gradient(circle at 90% 10%, rgba(255,77,0,0.03) 0%, transparent 40%), radial-gradient(circle at 10% 90%, rgba(255,77,0,0.03) 0%, transparent 40%)',
+          background: 'radial-gradient(circle at 90% 10%, rgba(129,51,194,0.04) 0%, transparent 40%), radial-gradient(circle at 10% 90%, rgba(191,207,26,0.04) 0%, transparent 40%)',
           padding: 'calc(64px + clamp(2rem, 8vw, 4rem)) 1.25rem clamp(3rem, 10vw, 6rem)',
           overflow: 'hidden',
         }}
@@ -134,11 +134,11 @@ export default function LandingPage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'clamp(2rem, 5vw, 4rem)' }}>
           {/* Left */}
           <div style={{ flex: '1 1 500px', minWidth: 0 }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.6rem 1.25rem', background: 'rgba(255,77,0,0.05)', borderRadius: '100px', color: '#ff4d00', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1.5rem', border: '1px solid rgba(255,77,0,0.1)' }}>
-                <Zap size={14} fill="#ff4d00" /> Trusted by 12,000+ Indian creators
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.6rem 1.25rem', background: 'rgba(129,51,194,0.08)', borderRadius: '100px', color: '#8133C2', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1.5rem', border: '1px solid rgba(129,51,194,0.15)' }}>
+                <Zap size={14} fill="#8133C2" /> Trusted by 12,000+ Indian creators
               </div>
               <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: '#0f172a', lineHeight: 1.05, letterSpacing: '-0.04em', marginBottom: '1.5rem' }}>
-                Turn your Instagram bio into <span style={{ color: '#ff4d00' }}>WhatsApp leads</span> and sales.
+                Turn your Instagram bio into <span style={{ color: '#8133C2' }}>WhatsApp leads</span> and sales.
               </h1>
               <p style={{ color: '#64748b', fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)', lineHeight: 1.6, marginBottom: '2.5rem', maxWidth: '600px' }}>
                 LinkSync helps creators, freelancers, and small businesses turn profile visits into real conversations, bookings, and payments from one branded bio page.
@@ -148,7 +148,7 @@ export default function LandingPage() {
                 <Link
                   to="/auth?mode=signup"
                   className="btn-primary"
-                  style={{ padding: '1.1rem 2.5rem', fontSize: '1.05rem', borderRadius: '14px', boxShadow: '0 10px 25px rgba(255,77,0,0.25)' }}
+                  style={{ padding: '1.1rem 2.5rem', fontSize: '1.05rem', borderRadius: '14px', boxShadow: '0 10px 25px rgba(129,51,194,0.2)' }}
                 >
                   Start free
                 </Link>
@@ -230,7 +230,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fff' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-0.04em' }}>
-            LinkSync turns one bio link into a <span style={{ color: '#ff4d00' }}>conversion funnel</span>.
+            LinkSync turns one bio link into a <span style={{ color: '#8133C2' }}>conversion funnel</span>.
           </h2>
           <p style={{ fontSize: '1.25rem', color: '#64748b', marginBottom: '5rem', lineHeight: 1.6, maxWidth: '800px', margin: '0 auto 5rem' }}>
             Instead of a plain list of links, LinkSync gives you a focused page that helps people take action. Capture leads, start WhatsApp chats, and highlight offers.
@@ -243,7 +243,7 @@ export default function LandingPage() {
               { num: '3', title: 'Start Getting Leads', desc: 'Share one bio link and start getting more inquiries and conversations.' },
             ].map((s, i) => (
               <div key={s.num} style={{ textAlign: 'left', padding: '2.5rem', background: '#fff', borderRadius: '24px', border: '1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#ff4d00', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, marginBottom: '1.5rem' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#8133C2', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, marginBottom: '1.5rem' }}>
                   {s.num}
                 </div>
                 <h3 style={{ fontWeight: 800, fontSize: '1.4rem', marginBottom: '1rem', color: '#0f172a' }}>{s.title}</h3>
@@ -279,7 +279,7 @@ export default function LandingPage() {
                 { icon: <Zap size={18} />, label: 'Instant Updates' },
               ].map(item => (
                 <div key={item.label} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: '#0f172a', fontWeight: 700 }}>
-                  <span style={{ color: '#ff4d00' }}>{item.icon}</span> {item.label}
+                  <span style={{ color: '#8133C2' }}>{item.icon}</span> {item.label}
                 </div>
               ))}
             </div>
@@ -307,7 +307,7 @@ export default function LandingPage() {
               { icon: <TrendingUp size={28} />, title: 'Track what gets clicks', copy: 'See which buttons, offers, and pages bring results so you can improve what you promote.' },
             ].map(b => (
               <div key={b.title} style={{ padding: '2.5rem', background: '#fff', borderRadius: '24px', border: '1px solid #f1f5f9' }}>
-                <div style={{ color: '#ff4d00', marginBottom: '1.5rem' }}>{b.icon}</div>
+                <div style={{ color: '#8133C2', marginBottom: '1.5rem' }}>{b.icon}</div>
                 <h3 style={{ fontWeight: 800, fontSize: '1.25rem', marginBottom: '1rem', color: '#0f172a' }}>{b.title}</h3>
                 <p style={{ color: '#64748b', lineHeight: 1.6 }}>{b.copy}</p>
               </div>
@@ -339,18 +339,17 @@ export default function LandingPage() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#fff7f2', color: '#ff4d00', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+               <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(129,51,194,0.05)', color: '#8133C2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <ArrowRight size={24} />
                </div>
             </div>
 
             {/* After */}
             <div style={{ flex: '0 1 340px' }}>
-               <div style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#ff4d00', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase' }}>LinkSync</div>
-               <div style={{ border: '2px solid #ff4d00', borderRadius: '32px', padding: '2rem 1.5rem', background: '#fff', boxShadow: '0 20px 40px rgba(255,77,0,0.1)' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff4d00, #ff8c00)', margin: '0 auto 1.5rem' }} />
-                  <div style={{ height: '44px', background: '#22c55e', borderRadius: '10px', marginBottom: '0.75rem' }} />
-                  <div style={{ height: '44px', border: '1.5px solid #ff4d00', background: '#fff7f2', borderRadius: '10px', marginBottom: '1.5rem' }} />
+               <div style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#8133C2', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase' }}>LinkSync</div>
+               <div style={{ border: '2px solid #8133C2', borderRadius: '32px', padding: '2rem 1.5rem', background: '#fff', boxShadow: '0 20px 40px rgba(129,51,194,0.15)' }}>
+                  <div style={{ height: '44px', background: '#8133C2', borderRadius: '10px', marginBottom: '0.75rem' }} />
+                  <div style={{ height: '44px', border: '1.5px solid #8133C2', background: 'rgba(129,51,194,0.05)', borderRadius: '100px', marginBottom: '1.5rem' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {[1,2].map(i => <div key={i} style={{ height: '44px', background: '#f1f5f9', borderRadius: '10px' }} />)}
                   </div>
@@ -445,7 +444,7 @@ export default function LandingPage() {
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
                 {['Create your page', 'Add your key links', 'Publish fast', 'Basic customization'].map(f => (
                   <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
+                    <CheckCircle2 size={18} color="#8133C2" /> {f}
                   </li>
                 ))}
               </ul>
@@ -455,8 +454,8 @@ export default function LandingPage() {
             </div>
 
             {/* CREATOR */}
-            <div style={{ background: '#fff', border: '2px solid #ff4d00', borderRadius: '32px', padding: '3.5rem 2.5rem', position: 'relative', boxShadow: '0 20px 40px rgba(255,77,0,0.1)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ position: 'absolute', top: '0', left: '50%', transform: 'translate(-50%, -50%)', background: '#ff4d00', color: 'white', fontSize: '0.85rem', fontWeight: 800, padding: '0.5rem 1.5rem', borderRadius: '100px', whiteSpace: 'nowrap' }}>
+            <div style={{ background: '#fff', border: '2px solid #8133C2', borderRadius: '32px', padding: '3.5rem 2.5rem', position: 'relative', boxShadow: '0 20px 40px rgba(129,51,194,0.1)', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ position: 'absolute', top: '0', left: '50%', transform: 'translate(-50%, -50%)', background: '#8133C2', color: 'white', fontSize: '0.85rem', fontWeight: 800, padding: '0.5rem 1.5rem', borderRadius: '100px', whiteSpace: 'nowrap' }}>
                 BEST VALUE
               </div>
               <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', fontSize: '1.5rem' }}>Creator</div>
@@ -465,7 +464,7 @@ export default function LandingPage() {
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
                 {['Everything in Free', 'Better customization', 'Featured CTA blocks', 'Click insights', 'Higher conversion setup'].map(f => (
                   <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
+                    <CheckCircle2 size={18} color="#8133C2" /> {f}
                   </li>
                 ))}
               </ul>
@@ -482,7 +481,7 @@ export default function LandingPage() {
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
                 {['Everything in Creator', 'Advanced blocks', 'Better tracking', 'Priority support', 'More flexibility'].map(f => (
                   <li key={f} style={{ fontSize: '1rem', color: '#374151', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <CheckCircle2 size={18} color="#ff4d00" /> {f}
+                    <CheckCircle2 size={18} color="#8133C2" /> {f}
                   </li>
                 ))}
               </ul>
@@ -529,10 +528,10 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <section style={{ padding: '8rem 1.25rem', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle at 90% 90%, rgba(255,77,0,0.05) 0%, transparent 50%)', zIndex: 0 }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle at 90% 90%, rgba(129,51,194,0.06) 0%, transparent 50%)', zIndex: 0 }} />
         <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#fff', borderRadius: '40px', padding: '5rem 3rem', border: '1px solid #f1f5f9', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#0f172a', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.04em' }}>
-            Stop sending profile visitors to a <span style={{ color: '#ff4d00' }}>dead-end link page</span>.
+            Stop sending profile visitors to a <span style={{ color: '#8133C2' }}>dead-end link page</span>.
           </h2>
           <p style={{ color: '#64748b', fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto 3rem', lineHeight: 1.6 }}>
             Turn your bio into a page that gets more chats, more clicks, and more conversions.
@@ -541,7 +540,7 @@ export default function LandingPage() {
             <Link
               to="/auth?mode=signup"
               className="btn-primary"
-              style={{ padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '16px', boxShadow: '0 12px 32px rgba(255,77,0,0.3)' }}
+              style={{ padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '16px', boxShadow: '0 12px 32px rgba(129,51,194,0.3)' }}
             >
               Start free
             </Link>
@@ -605,7 +604,7 @@ export default function LandingPage() {
                         <a 
                           href={l.href} 
                           style={{ color: '#64748b', textDecoration: 'none', fontSize: '1rem', transition: 'color 0.2s' }}
-                          onMouseOver={(e) => e.currentTarget.style.color = '#ff4d00'}
+                          onMouseOver={(e) => e.currentTarget.style.color = '#8133C2'}
                           onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}
                         >
                           {l.label}
@@ -614,7 +613,7 @@ export default function LandingPage() {
                         <a 
                           href={l.href} 
                           style={{ color: '#64748b', textDecoration: 'none', fontSize: '1rem', transition: 'color 0.2s' }}
-                          onMouseOver={(e) => e.currentTarget.style.color = '#ff4d00'}
+                          onMouseOver={(e) => e.currentTarget.style.color = '#8133C2'}
                           onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}
                         >
                           {l.label}

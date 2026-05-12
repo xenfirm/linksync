@@ -38,7 +38,7 @@ export function usePayments() {
           email: email,
         },
         theme: {
-          color: "#ff4d00",
+          color: "#8133C2",
         },
         handler: async function (response: any) {
           try {

@@ -107,7 +107,7 @@ export default function ResetPasswordPage() {
 
         {sessionChecking ? (
           <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-            <Loader2 size={32} style={{ color: '#ff4d00', animation: 'spin 1s linear infinite' }} />
+            <Loader2 size={32} style={{ color: '#8133C2', animation: 'spin 1s linear infinite' }} />
           </div>
         ) : !success && hasValidSession ? (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
