@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { TrendingUp, Link2, MessageCircle, Users, Loader2, Lock } from 'lucide-react'
 import { useProfile } from '../../hooks/useProfile'
 import { supabase } from '../../lib/supabase'
 import { usePayments } from '../../hooks/usePayments'
 import { StatsCard, SectionHeader, GradientButton } from '../../components/ui'
 
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.07 } },
 }
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 14 },
   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
 }

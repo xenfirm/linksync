@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import {
   ExternalLink, Copy, Check, Plus, Share2,
   TrendingUp, Users, Link2, Eye, MessageCircle, Zap, Gift
@@ -25,8 +25,8 @@ function AnimatedCounter({ value }: { value: number }) {
   return <>{display}</>
 }
 
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
-const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } } }
+const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } }
+const fadeUp: Variants = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } } }
 
 export default function HomeScreen() {
   const { profile, loading, isPro, isTrialActive } = useProfile()
