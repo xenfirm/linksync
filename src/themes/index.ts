@@ -8,7 +8,7 @@ export type ThemeId =
   | 'business-conversion'
   | 'creator-gradient'
 
-export Poppinsface Theme {
+export interface Theme {
   id: ThemeId
   name: string
   description: string

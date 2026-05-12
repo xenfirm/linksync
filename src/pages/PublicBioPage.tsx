@@ -347,7 +347,7 @@ export default function PublicBioPage() {
     if (!profile?.whatsapp_number) return
     const number = profile.whatsapp_number.replace(/\D/g, '')
     const msg = encodeURIComponent(
-      profile.whatsapp_message || 'Hi, I found you on LinkSync and I am Poppinsested in your services!'
+      profile.whatsapp_message || 'Hi, I found you on LinkSync and I am interested in your services!'
     )
     supabase.from('clicks').insert({ profile_id: profile.id, type: 'whatsapp' }).then()
     window.open(`https://wa.me/${number}?text=${msg}`, '_blank')

@@ -14,14 +14,14 @@ import Logo from '../components/Logo'
 
 type Step = 'input' | 'progress' | 'review' | 'upgrades' | 'success'
 
-Poppinsface ImportedLink {
+interface ImportedLink {
   id: string
   title: string
   url: string
   active: boolean
 }
 
-Poppinsface ImportedData {
+interface ImportedData {
   name: string
   bio: string
   avatar: string
