@@ -23,6 +23,7 @@ export interface Link {
   profile_id: string
   title: string
   url: string
+  active: boolean
   order_index: number
 }
 

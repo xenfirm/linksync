@@ -51,7 +51,7 @@ function ThemedLinkButton({
     transition: theme.button.transition,
     boxShadow: hovered ? theme.button.hoverBoxShadow : theme.button.boxShadow,
     transform: hovered ? theme.button.hoverTransform : 'none',
-    cursor: 'poPoppins',
+    cursor: 'pointer',
     boxSizing: 'border-box',
     gap: '1rem',
     animation: `fadeUpIn 0.4s ease both`,
@@ -96,7 +96,7 @@ function ThemedWhatsAppButton({
     color: theme.whatsapp.color,
     fontWeight: 700,
     fontSize: '1.05rem',
-    cursor: 'poPoppins',
+    cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -133,13 +133,13 @@ function ThemedWhatsAppButton({
         display: 'flex',
         justifyContent: 'center',
         zIndex: 50,
-        poPoppinsEvents: 'none',
+        pointerEvents: 'none',
       }}
     >
       <button
         id="btn-whatsapp"
         onClick={onClick}
-        style={{ ...baseStyle, maxWidth: '420px', poPoppinsEvents: 'auto' }}
+        style={{ ...baseStyle, maxWidth: '420px', pointerEvents: 'auto' }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -276,7 +276,7 @@ function ThemedLeadForm({
               color: theme.leadForm.submitColor,
               fontWeight: 700,
               fontSize: '0.9rem',
-              cursor: formLoading ? 'not-allowed' : 'poPoppins',
+              cursor: formLoading ? 'not-allowed' : 'pointer',
               opacity: formLoading ? 0.7 : 1,
               display: 'flex',
               alignItems: 'center',
@@ -336,6 +336,7 @@ export default function PublicBioPage() {
       .from('links')
       .select('*')
       .eq('profile_id', profileData.id)
+      .eq('active', true)
       .order('order_index', { ascending: true })
 
     setLinks(linksData || [])
@@ -474,7 +475,7 @@ export default function PublicBioPage() {
             height: '280px',
             background: `radial-gradient(ellipse, ${theme.glow.color} 0%, transparent 70%)`,
             filter: 'blur(60px)',
-            poPoppinsEvents: 'none',
+            pointerEvents: 'none',
             zIndex: 0,
           }}
         />

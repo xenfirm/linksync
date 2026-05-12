@@ -36,7 +36,7 @@ function PhoneMockup() {
           </div>
 
           {/* WhatsApp CTA - Highlighted */}
-          <button style={{ width: '100%', padding: '0.75rem', borderRadius: '12px', border: 'none', background: '#22c55e', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'poPoppins', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', boxShadow: '0 4px 12px rgba(34,197,94,0.2)' }}>
+          <button style={{ width: '100%', padding: '0.75rem', borderRadius: '12px', border: 'none', background: '#22c55e', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', boxShadow: '0 4px 12px rgba(34,197,94,0.2)' }}>
             <MessageCircle size={16} fill="white" /> Chat on WhatsApp
           </button>
 
@@ -95,7 +95,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
     <div style={{ borderBottom: '1px solid #f1f5f9', padding: '1.5rem 0' }}>
       <button 
         onClick={() => setOpen(!open)}
-        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'poPoppins', textAlign: 'left', gap: '1rem' }}
+        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem' }}
       >
         <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>{question}</span>
         {open ? <ChevronUp size={20} color="#94a3b8" /> : <ChevronDown size={20} color="#94a3b8" />}

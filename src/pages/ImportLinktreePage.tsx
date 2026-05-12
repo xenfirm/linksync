@@ -279,14 +279,14 @@ export default function ImportLinktreePage() {
                                   newLinks[idx].active = !newLinks[idx].active
                                   setImportedData({...importedData, links: newLinks})
                                 }}
-                                style={{ background: link.active ? '#8133C2' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'poPoppins', transition: 'background 0.2s' }}
+                                style={{ background: link.active ? '#8133C2' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'pointer', transition: 'background 0.2s' }}
                               >
                                 <div style={{ position: 'absolute', top: '2px', left: link.active ? '18px' : '2px', width: '16px', height: '16px', borderRadius: '50%', background: '#fff', transition: 'left 0.2s' }} />
                               </button>
                            </div>
                          ))}
                       </div>
-                      <button style={{ marginTop: '1rem', width: '100%', padding: '0.875rem', background: '#fff', border: '1.5px dashed #e2e8f0', borderRadius: '16px', color: '#64748b', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'poPoppins' }}>
+                      <button style={{ marginTop: '1rem', width: '100%', padding: '0.875rem', background: '#fff', border: '1.5px dashed #e2e8f0', borderRadius: '16px', color: '#64748b', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                         <Plus size={16} /> Add Another Link
                       </button>
                    </div>
@@ -357,7 +357,7 @@ export default function ImportLinktreePage() {
                      </div>
                      <h3 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#0f172a', marginBottom: '0.75rem' }}>Featured Offer Block</h3>
                      <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5, marginBottom: '1.5rem' }}>Highlight your top service or product at the very top of your list.</p>
-                     <button style={{ background: '#fff', border: '1.5px solid #8133C2', color: '#8133C2', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'poPoppins' }}>Enable Block</button>
+                     <button style={{ background: '#fff', border: '1.5px solid #8133C2', color: '#8133C2', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer' }}>Enable Block</button>
                   </div>
                </div>
 

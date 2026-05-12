@@ -14,6 +14,7 @@ import type { Link } from '../../lib/types'
 function LinkCard({
   link,
   onEdit,
+  onUpdate,
   onDelete,
   onDragStart,
   onDragOver,
@@ -22,6 +23,7 @@ function LinkCard({
 }: {
   link: Link
   onEdit: (link: Link) => void
+  onUpdate: (id: string, updates: Partial<Link>) => void
   onDelete: (id: string) => void
   onDragStart: (e: React.DragEvent, id: string) => void
   onDragOver: (e: React.DragEvent, id: string) => void
@@ -29,12 +31,15 @@ function LinkCard({
   dragOver: boolean
 }) {
   const [deleting, setDeleting] = useState(false)
-  const [enabled, setEnabled] = useState(true)
 
   const handleDelete = async () => {
     setDeleting(true)
     await onDelete(link.id)
     setDeleting(false)
+  }
+
+  const handleToggle = async (active: boolean) => {
+    await onUpdate(link.id, { active })
   }
 
   const domain = (() => {
@@ -63,7 +68,7 @@ function LinkCard({
         cursor: 'grab',
         transition: 'all 0.2s ease',
         boxShadow: dragOver ? '0 0 20px rgba(191,207,26,0.12)' : 'none',
-        opacity: enabled ? 1 : 0.5,
+        opacity: link.active ? 1 : 0.5,
       }}
     >
       {/* Drag handle */}
@@ -100,8 +105,8 @@ function LinkCard({
       {/* Actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
         <ToggleSwitch
-          checked={enabled}
-          onChange={setEnabled}
+          checked={link.active}
+          onChange={handleToggle}
           id={`toggle-${link.id}`}
         />
         <motion.button
@@ -357,6 +362,7 @@ export default function LinksManager() {
                 key={link.id}
                 link={link}
                 onEdit={startEdit}
+                onUpdate={updateLink}
                 onDelete={deleteLink}
                 onDragStart={handleDragStart}
                 onDragOver={handleDragOver}
