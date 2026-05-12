@@ -103,9 +103,14 @@ function LinkCard({
       </div>
 
       {/* Actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}
+      >
         <ToggleSwitch
-          checked={link.active}
+          checked={!!link.active}
           onChange={handleToggle}
           id={`toggle-${link.id}`}
         />
