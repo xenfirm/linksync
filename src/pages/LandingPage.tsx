@@ -36,7 +36,7 @@ function PhoneMockup() {
           </div>
 
           {/* WhatsApp CTA - Highlighted */}
-          <button style={{ width: '100%', padding: '0.75rem', borderRadius: '12px', border: 'none', background: '#22c55e', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', boxShadow: '0 4px 12px rgba(34,197,94,0.2)' }}>
+          <button style={{ width: '100%', padding: '0.75rem', borderRadius: '12px', border: 'none', background: '#22c55e', color: 'white', fontWeight: 800, fontSize: '0.85rem', cursor: 'poPoppins', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', boxShadow: '0 4px 12px rgba(34,197,94,0.2)' }}>
             <MessageCircle size={16} fill="white" /> Chat on WhatsApp
           </button>
 
@@ -95,7 +95,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
     <div style={{ borderBottom: '1px solid #f1f5f9', padding: '1.5rem 0' }}>
       <button 
         onClick={() => setOpen(!open)}
-        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem' }}
+        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'none', border: 'none', cursor: 'poPoppins', textAlign: 'left', gap: '1rem' }}
       >
         <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>{question}</span>
         {open ? <ChevronUp size={20} color="#94a3b8" /> : <ChevronDown size={20} color="#94a3b8" />}
@@ -137,7 +137,7 @@ export default function LandingPage() {
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.6rem 1.25rem', background: 'rgba(129,51,194,0.08)', borderRadius: '100px', color: '#8133C2', fontWeight: 800, fontSize: '0.85rem', marginBottom: '1.5rem', border: '1px solid rgba(129,51,194,0.15)' }}>
                 <Zap size={14} fill="#8133C2" /> Trusted by 12,000+ Indian creators
               </div>
-              <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: '#0f172a', lineHeight: 1.05, letterSpacing: '-0.04em', marginBottom: '1.5rem' }}>
+              <h1 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: '#0f172a', lineHeight: 1.05, letterSpacing: '-0.04em', marginBottom: '1.5rem' }}>
                 Turn your Instagram bio into <span style={{ color: '#8133C2' }}>WhatsApp leads</span> and sales.
               </h1>
               <p style={{ color: '#64748b', fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)', lineHeight: 1.6, marginBottom: '2.5rem', maxWidth: '600px' }}>
@@ -196,7 +196,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fafafa' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
           <div style={{ flex: '1 1 400px' }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
               Your bio should do more than list links.
             </h2>
             <p style={{ fontSize: '1.15rem', color: '#64748b', marginBottom: '2.5rem', lineHeight: 1.6 }}>
@@ -229,7 +229,7 @@ export default function LandingPage() {
       {/* ── SOLUTION ── */}
       <section style={{ padding: '8rem 1.25rem', background: '#fff' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-0.04em' }}>
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-0.04em' }}>
             LinkSync turns one bio link into a <span style={{ color: '#8133C2' }}>conversion funnel</span>.
           </h2>
           <p style={{ fontSize: '1.25rem', color: '#64748b', marginBottom: '5rem', lineHeight: 1.6, maxWidth: '800px', margin: '0 auto 5rem' }}>
@@ -265,7 +265,7 @@ export default function LandingPage() {
              />
           </div>
           <div style={{ flex: '1 1 400px', order: 1 }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>
               Built for performance, not just looks.
             </h2>
             <p style={{ fontSize: '1.15rem', color: '#64748b', marginBottom: '2.5rem', lineHeight: 1.6 }}>
@@ -294,7 +294,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fafafa' }} id="features">
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
               Everything you need to convert profile visits
             </h2>
           </div>
@@ -320,7 +320,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
+             <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
               From “just links” to real actions
             </h2>
           </div>
@@ -378,7 +378,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fafafa' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
               Used by growth-focused creators
             </h2>
           </div>
@@ -429,7 +429,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fff' }} id="pricing">
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.04em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.04em' }}>
               Simple pricing for creators
             </h2>
             <p style={{ color: '#64748b', fontSize: '1.1rem', marginTop: '1rem' }}>Start free and upgrade when you are ready to grow.</p>
@@ -497,7 +497,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', background: '#fafafa' }} id="faq">
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', letterSpacing: '-0.03em' }}>
               Common Questions
             </h2>
           </div>
@@ -530,7 +530,7 @@ export default function LandingPage() {
       <section style={{ padding: '8rem 1.25rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle at 90% 90%, rgba(129,51,194,0.06) 0%, transparent 50%)', zIndex: 0 }} />
         <div style={{ maxWidth: '1000px', margin: '0 auto', background: '#fff', borderRadius: '40px', padding: '5rem 3rem', border: '1px solid #f1f5f9', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#0f172a', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.04em' }}>
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#0f172a', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.04em' }}>
             Stop sending profile visitors to a <span style={{ color: '#8133C2' }}>dead-end link page</span>.
           </h2>
           <p style={{ color: '#64748b', fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto 3rem', lineHeight: 1.6 }}>

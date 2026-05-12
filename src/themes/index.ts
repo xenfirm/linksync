@@ -8,7 +8,7 @@ export type ThemeId =
   | 'business-conversion'
   | 'creator-gradient'
 
-export interface Theme {
+export Poppinsface Theme {
   id: ThemeId
   name: string
   description: string
@@ -125,7 +125,7 @@ const minimalClean: Theme = {
   },
   page: {
     background: 'linear-gradient(160deg, #f5f0ff 0%, #f0f9ff 50%, #f5f0ff 100%)',
-    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontFamily: "'Poppins', 'Poppins', sans-serif",
     color: '#0f172a',
   },
   card: {
@@ -203,7 +203,7 @@ const darkNeon: Theme = {
   },
   page: {
     background: 'linear-gradient(135deg, #0d0d1a 0%, #0a001f 40%, #060010 100%)',
-    fontFamily: "'Inter', 'Plus Jakarta Sans', sans-serif",
+    fontFamily: "'Poppins', 'Poppins', sans-serif",
     color: '#e2d9f3',
   },
   card: {
@@ -281,7 +281,7 @@ const businessConversion: Theme = {
   },
   page: {
     background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f172a 100%)',
-    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontFamily: "'Poppins', 'Poppins', sans-serif",
     color: '#f1f5f9',
   },
   card: {
@@ -359,7 +359,7 @@ const creatorGradient: Theme = {
   },
   page: {
     background: 'linear-gradient(135deg, #fdf2f8 0%, #ede9fe 40%, #e0f2fe 100%)',
-    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontFamily: "'Poppins', 'Poppins', sans-serif",
     color: '#1e1b4b',
   },
   card: {

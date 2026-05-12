@@ -51,7 +51,7 @@ function ThemedLinkButton({
     transition: theme.button.transition,
     boxShadow: hovered ? theme.button.hoverBoxShadow : theme.button.boxShadow,
     transform: hovered ? theme.button.hoverTransform : 'none',
-    cursor: 'pointer',
+    cursor: 'poPoppins',
     boxSizing: 'border-box',
     gap: '1rem',
     animation: `fadeUpIn 0.4s ease both`,
@@ -96,7 +96,7 @@ function ThemedWhatsAppButton({
     color: theme.whatsapp.color,
     fontWeight: 700,
     fontSize: '1.05rem',
-    cursor: 'pointer',
+    cursor: 'poPoppins',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -133,13 +133,13 @@ function ThemedWhatsAppButton({
         display: 'flex',
         justifyContent: 'center',
         zIndex: 50,
-        pointerEvents: 'none',
+        poPoppinsEvents: 'none',
       }}
     >
       <button
         id="btn-whatsapp"
         onClick={onClick}
-        style={{ ...baseStyle, maxWidth: '420px', pointerEvents: 'auto' }}
+        style={{ ...baseStyle, maxWidth: '420px', poPoppinsEvents: 'auto' }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -276,7 +276,7 @@ function ThemedLeadForm({
               color: theme.leadForm.submitColor,
               fontWeight: 700,
               fontSize: '0.9rem',
-              cursor: formLoading ? 'not-allowed' : 'pointer',
+              cursor: formLoading ? 'not-allowed' : 'poPoppins',
               opacity: formLoading ? 0.7 : 1,
               display: 'flex',
               alignItems: 'center',
@@ -346,7 +346,7 @@ export default function PublicBioPage() {
     if (!profile?.whatsapp_number) return
     const number = profile.whatsapp_number.replace(/\D/g, '')
     const msg = encodeURIComponent(
-      profile.whatsapp_message || 'Hi, I found you on LinkSync and I am interested in your services!'
+      profile.whatsapp_message || 'Hi, I found you on LinkSync and I am Poppinsested in your services!'
     )
     supabase.from('clicks').insert({ profile_id: profile.id, type: 'whatsapp' }).then()
     window.open(`https://wa.me/${number}?text=${msg}`, '_blank')
@@ -404,7 +404,7 @@ export default function PublicBioPage() {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff7f2', padding: '2rem', gap: '1rem' }}>
         <AlertCircle size={48} style={{ color: '#94a3b8' }} />
-        <h1 style={{ fontWeight: 800, color: '#0f172a', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Profile not found</h1>
+        <h1 style={{ fontWeight: 800, color: '#0f172a', fontFamily: "'Poppins', sans-serif" }}>Profile not found</h1>
         <p style={{ color: '#64748b' }}>@{username} doesn't exist on LinkSync</p>
         <a href="/" style={{ marginTop: '0.5rem', background: '#8133C2', color: 'white', textDecoration: 'none', padding: '0.75rem 1.75rem', borderRadius: '12px', fontWeight: 700, fontSize: '0.95rem' }}>
           Create your own LinkSync
@@ -474,7 +474,7 @@ export default function PublicBioPage() {
             height: '280px',
             background: `radial-gradient(ellipse, ${theme.glow.color} 0%, transparent 70%)`,
             filter: 'blur(60px)',
-            pointerEvents: 'none',
+            poPoppinsEvents: 'none',
             zIndex: 0,
           }}
         />

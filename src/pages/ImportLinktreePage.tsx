@@ -14,14 +14,14 @@ import Logo from '../components/Logo'
 
 type Step = 'input' | 'progress' | 'review' | 'upgrades' | 'success'
 
-interface ImportedLink {
+Poppinsface ImportedLink {
   id: string
   title: string
   url: string
   active: boolean
 }
 
-interface ImportedData {
+Poppinsface ImportedData {
   name: string
   bio: string
   avatar: string
@@ -139,7 +139,7 @@ export default function ImportLinktreePage() {
               <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: '#fff7f2', color: '#8133C2', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
                 <Sparkles size={32} fill="#8133C2" />
               </div>
-              <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '2rem', color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
+              <h1 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: '2rem', color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
                 Import from Linktree
               </h1>
               <p style={{ color: '#64748b', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: 1.6 }}>
@@ -156,7 +156,7 @@ export default function ImportLinktreePage() {
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       required
-                      style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', borderRadius: '14px', border: '2px solid #f1f5f9', fontSize: '1.05rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                      style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', borderRadius: '14px', border: '2px solid #f1f5f9', fontSize: '1.05rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'Poppins, sans-serif' }}
                       onFocus={(e) => e.target.style.borderColor = '#8133C2'}
                       onBlur={(e) => e.target.style.borderColor = '#f1f5f9'}
                     />
@@ -203,7 +203,7 @@ export default function ImportLinktreePage() {
                   </div>
                </div>
 
-               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '1.75rem', color: '#0f172a', marginBottom: '1rem' }}>
+               <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 800, fontSize: '1.75rem', color: '#0f172a', marginBottom: '1rem' }}>
                  Analyzing your profile...
                </h2>
                
@@ -229,7 +229,7 @@ export default function ImportLinktreePage() {
               {/* Left: Editor */}
               <div style={{ flex: '1 1 500px', background: '#fff', borderRadius: '32px', padding: '2.5rem', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                   <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '1.75rem', color: '#0f172a' }}>Review & Edit</h2>
+                   <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: '1.75rem', color: '#0f172a' }}>Review & Edit</h2>
                    <div style={{ background: '#f0fdf4', color: '#16a34a', padding: '0.5rem 1rem', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <Check size={14} /> Data Fetched
                    </div>
@@ -279,14 +279,14 @@ export default function ImportLinktreePage() {
                                   newLinks[idx].active = !newLinks[idx].active
                                   setImportedData({...importedData, links: newLinks})
                                 }}
-                                style={{ background: link.active ? '#8133C2' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'pointer', transition: 'background 0.2s' }}
+                                style={{ background: link.active ? '#8133C2' : '#e2e8f0', border: 'none', width: '36px', height: '20px', borderRadius: '20px', position: 'relative', cursor: 'poPoppins', transition: 'background 0.2s' }}
                               >
                                 <div style={{ position: 'absolute', top: '2px', left: link.active ? '18px' : '2px', width: '16px', height: '16px', borderRadius: '50%', background: '#fff', transition: 'left 0.2s' }} />
                               </button>
                            </div>
                          ))}
                       </div>
-                      <button style={{ marginTop: '1rem', width: '100%', padding: '0.875rem', background: '#fff', border: '1.5px dashed #e2e8f0', borderRadius: '16px', color: '#64748b', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                      <button style={{ marginTop: '1rem', width: '100%', padding: '0.875rem', background: '#fff', border: '1.5px dashed #e2e8f0', borderRadius: '16px', color: '#64748b', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'poPoppins' }}>
                         <Plus size={16} /> Add Another Link
                       </button>
                    </div>
@@ -330,7 +330,7 @@ export default function ImportLinktreePage() {
                  <div style={{ display: 'inline-flex', padding: '0.5rem 1rem', background: '#fff7f2', color: '#8133C2', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 800, marginBottom: '1.5rem', gap: '0.4rem' }}>
                     <Zap size={14} fill="#8133C2" /> One last step
                  </div>
-                 <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '2.25rem', color: '#0f172a', letterSpacing: '-0.04em' }}>
+                 <h2 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: '2.25rem', color: '#0f172a', letterSpacing: '-0.04em' }}>
                    Boost your conversion path
                  </h2>
                  <p style={{ color: '#64748b', fontSize: '1.1rem', marginTop: '0.75rem' }}>Add these conversion-focused blocks to your new LinkSync page.</p>
@@ -357,7 +357,7 @@ export default function ImportLinktreePage() {
                      </div>
                      <h3 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#0f172a', marginBottom: '0.75rem' }}>Featured Offer Block</h3>
                      <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5, marginBottom: '1.5rem' }}>Highlight your top service or product at the very top of your list.</p>
-                     <button style={{ background: '#fff', border: '1.5px solid #8133C2', color: '#8133C2', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer' }}>Enable Block</button>
+                     <button style={{ background: '#fff', border: '1.5px solid #8133C2', color: '#8133C2', padding: '0.6rem 1rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, cursor: 'poPoppins' }}>Enable Block</button>
                   </div>
                </div>
 
@@ -384,7 +384,7 @@ export default function ImportLinktreePage() {
                <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#f0fdf4', color: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2.5rem' }}>
                   <Check size={40} strokeWidth={3} />
                </div>
-               <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: '2.25rem', color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.04em' }}>
+               <h1 style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: '2.25rem', color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.04em' }}>
                  Your page is live! 🚀
                </h1>
                <p style={{ color: '#64748b', fontSize: '1.15rem', marginBottom: '3rem', lineHeight: 1.6, maxWidth: '400px', margin: '0 auto 3rem' }}>
